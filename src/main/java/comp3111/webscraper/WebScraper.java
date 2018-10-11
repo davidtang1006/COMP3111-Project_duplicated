@@ -119,5 +119,4 @@ public class WebScraper {
 		}
 		return null;
 	}
-
 }
