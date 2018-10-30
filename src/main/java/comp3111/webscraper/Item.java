@@ -1,7 +1,5 @@
 package comp3111.webscraper;
 
-
-
 public class Item {
 	private String title ; 
 	private double price ;
@@ -25,6 +23,4 @@ public class Item {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	
-
 }
