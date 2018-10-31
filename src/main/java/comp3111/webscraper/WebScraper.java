@@ -60,10 +60,9 @@ import java.util.Vector;
  * }
  * </pre>
  * extracts all result-row and stores the corresponding HTML elements to a list called items. Later in the loop it extracts the anchor tag 
- * &lsaquo; a &rsaquo; to retrieve the display text (by .asText()) and the link (by .getHrefAttribute()). It also extracts  
+ * &lsaquo; a &rsaquo; to retrieve the display text (by .asText()) and the link (by .getHrefAttribute()).
  */
 public class WebScraper {
-
 	private static final String DEFAULT_URL = "https://newyork.craigslist.org/";
 	private WebClient client;
 
@@ -83,7 +82,6 @@ public class WebScraper {
 	 * @return A list of Item that has found. A zero size list is return if nothing is found. Null if any exception (e.g. no connectivity)
 	 */
 	public List<Item> scrape(String keyword) {
-
 		try {
 			String searchUrl = DEFAULT_URL + "search/sss?sort=rel&query=" + URLEncoder.encode(keyword, "UTF-8");
 			HtmlPage page = client.getPage(searchUrl);

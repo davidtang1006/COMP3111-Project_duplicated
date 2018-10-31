@@ -16,7 +16,6 @@ import java.util.List;
  * Controller class that manage GUI interaction. Please see document about JavaFX for details.
  */
 public class Controller {
-
 	@FXML 
 	private Label labelCount; 
 
@@ -78,14 +77,13 @@ public class Controller {
 				if (item.getPrice() < min_price) {
 					min_price = item.getPrice();
 					// Set the URL for labelMin_url
-					labelMin_url = item.getUrl();
+					labelMin_url = item.getUrlText();
 				}
 			}
 			textAreaConsole.setText(output);
 			labelCount.setText(Integer.toString(item_count));
 			labelPrice.setText(Double.toString(price_sum/item_count));
 			labelMin.setText(Double.toString(min_price));
-			System.out.println(labelMin_url);
 			labelLatest.setText("-");
 		} else { // We cannot find a result
 			textAreaConsole.setText(output);
