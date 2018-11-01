@@ -12,7 +12,9 @@ import javafx.scene.Scene;
 
 /**
  * @author kevinw
- * 
+ */
+
+/* 
  * The entry point of the entire program. It is quite unlikely you need to change this file. But you can change it if you want :)
  * 
  * GUI
@@ -49,7 +51,7 @@ public class WebScraperApplication extends Application {
 		VBox root = (VBox) loader.load();
 		Scene scene =  new Scene(root);
 		stage.setScene(scene);
-		stage.setTitle("WebScrapper");
+		stage.setTitle("WebScraper");
 		stage.show();
 	}
 

@@ -10,12 +10,12 @@ public class Item {
 	private String title; 
 	private double price;
 	private Hyperlink url; // modified by ckchuad, from String to Hyperlink
-	private Date date; // added by ckchuad
+	private Date date = null; // added by ckchuad
 	private DateFormat format; // added by ckchaud
 	
 	/**
 	 * to initialize url object
-	 * @author imc4kmacpro
+	 * @author ckchuad
 	 */
 	public Item() {
 		url = new Hyperlink();
@@ -38,9 +38,8 @@ public class Item {
 	}
 	
 	/**
-	 *
-	 * return value: changed from String to Hyperlink
-	 * @author imc4kmacpro
+	 * return value is changed from String to Hyperlink
+	 * @author ckchuad
 	 * @return Hyperlink
 	 * 
 	 */
@@ -48,9 +47,9 @@ public class Item {
 		return url;
 	}
 	
-	/** Task 4
-	 * for adding event handler
-	 * @author imc4kmacpro
+	/**
+	 * for adding event handler (Task 4)
+	 * @author ckchuad
 	 * @return: String
 	 */
 	public String getUrlText() { 
@@ -58,18 +57,17 @@ public class Item {
 	}
 	
 	/**
-	 * @param String url 
-	 * @author imc4kmacpro
+	 * @param url the url to be set
+	 * @author ckchuad
 	 */
 	public void setUrl(String url) {
 		this.url.setText(url);
 	}
 	
 	/**
-	 * @param String date
-	 * @param DateFormat format
-	 * @exception cannot convert, set date obj to null
-	 * @author imc4kmacpro
+	 * @param date the date to be set
+	 * @param format the format of the date
+	 * @author ckchuad
 	 */
 	public void setDate(String date, DateFormat format){
 		try{
@@ -83,7 +81,7 @@ public class Item {
 
 	/**
 	 * if date is null, then return "No Date"
-	 * @author imc4kmacpro
+	 * @author ckchuad
 	 * @return String
 	 */
 	public String getDate() {
@@ -91,5 +89,13 @@ public class Item {
 			return format.format(date);
 		}
 		return "No Date";
+	}
+	
+	/**
+	 * @author awtang
+	 * @return A "Date" object
+	 */
+	public Date getDate_raw() {
+		return this.date;
 	}
 }
