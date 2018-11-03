@@ -1,6 +1,3 @@
-/**
- * 
- */
 package comp3111.webscraper;
 
 import javafx.application.Application;
@@ -36,7 +33,6 @@ import javafx.scene.Scene;
  * Controller". Let's trace the function void start which will be called by the framework shortly after the program start.  
  */
 public class WebScraperApplication extends Application {
-
 	private static final String UI_FILE = "/ui.fxml";  //It is very important that you put the file under folder src/main/resources/
 	
 	/* 

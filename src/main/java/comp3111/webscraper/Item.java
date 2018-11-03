@@ -1,13 +1,15 @@
 package comp3111.webscraper;
 
+import javafx.scene.control.Hyperlink;
+
+// New imports
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
 
-import javafx.scene.control.Hyperlink;
-
 public class Item {
-	private String title; 
+	private String portal; // added by awtang
+	private String title;
 	private double price;
 	private Hyperlink url; // modified by ckchuad, from String to Hyperlink
 	private Date date = null; // added by ckchuad
@@ -19,6 +21,24 @@ public class Item {
 	 */
 	public Item() {
 		url = new Hyperlink();
+	}
+	
+	/**
+	 * to get the portal name
+	 * @author awtang
+	 * @return the name of the portal
+	 */
+	public String getPortal() {
+		return portal;
+	}
+	
+	/**
+	 * to set the portal
+	 * @author awtang
+	 * @param portal the name of the portal
+	 */
+	public void setPortal(String portal) {
+		this.portal = portal;
 	}
 	
 	public String getTitle() {
@@ -93,7 +113,7 @@ public class Item {
 	
 	/**
 	 * @author awtang
-	 * @return A "Date" object
+	 * @return a "Date" object
 	 */
 	public Date getDate_raw() {
 		return this.date;

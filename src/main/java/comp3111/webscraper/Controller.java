@@ -1,6 +1,3 @@
-/**
- * 
- */
 package comp3111.webscraper;
 
 import javafx.fxml.FXML;
@@ -9,6 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Hyperlink;
 
+// New imports
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -73,7 +71,6 @@ public class Controller extends Application {
 	
 	/**
 	 * Called when the search button is pressed.
-	 *
 	 * @author awtang
 	 */
     
@@ -83,33 +80,41 @@ public class Controller extends Application {
 		if (textFieldKeyword.getText().isEmpty()) {
 			return; // Do nothing and return
 		}
-		
+				
 		// Fetch the result by the scraper
 		System.out.println("actionSearch: " + textFieldKeyword.getText());
 		List<Item> result = scraper.scrape(textFieldKeyword.getText());
 		
 		String output = "";
 		int item_count = result.size();
+		int item_count_nonzero = 0;
 		double price_sum = 0;
 		double min_price = Double.POSITIVE_INFINITY;
 		String labelLatest_title = "";
-		Date max_date = null;
+		Date max_date = new Date(0L); // "0L" means the number zero of type "long"
 
 		if(item_count >= 1) {
 			labelLatest_title = result.get(0).getTitle(); // The first result
 			labelLatest_url = result.get(0).getUrlText(); // The first result
 			
 			for (Item item : result) {
-				output += item.getTitle() + "\t" + item.getPrice() + "\t" + item.getUrl() + "\n";
-				price_sum += item.getPrice(); // To calculate the average selling price
+				output += item.getPortal() + "\t" // The name of the portal is recorded
+						+ item.getTitle() + "\t" + item.getPrice() + "\t" + item.getUrl() + "\n";
 				
-				// Find the item with lowest selling price
-				if (item.getPrice() < min_price) {
-					min_price = item.getPrice();
-					// Set the URL for labelMin_url
-					labelMin_url = item.getUrlText();
+				if (item.getPrice() != 0.0) {
+					// Items with zero selling price is excluded in the calculations
+					item_count_nonzero += 1;
+					price_sum += item.getPrice(); // To calculate the average selling price
+					
+					// Find the item with lowest selling price
+					if (item.getPrice() < min_price) {
+						min_price = item.getPrice();
+						// Set the URL for labelMin_url
+						labelMin_url = item.getUrlText();
+					}
 				}
 				
+				// Find the latest post
 				if (item.getDate_raw() != null) {
 					if (item.getDate_raw().compareTo(max_date) > 0) {
 						max_date = item.getDate_raw();
@@ -121,8 +126,14 @@ public class Controller extends Application {
 			
 			textAreaConsole.setText(output);
 			labelCount.setText(Integer.toString(item_count));
-			labelPrice.setText(Double.toString(price_sum/item_count));
-			labelMin.setText(Double.toString(min_price));
+			if (item_count_nonzero != 0) {
+				labelPrice.setText(Double.toString(price_sum/item_count_nonzero));
+				labelMin.setText(Double.toString(min_price));
+			} else {
+				labelMin_url = "";
+				labelPrice.setText("-");
+				labelMin.setText("-");
+			}
 			labelMin.setOnAction(labelMin_clickHandler);
 			labelLatest.setText(labelLatest_title);
 			labelLatest.setOnAction(labelLatest_clickHandler);
@@ -157,7 +168,7 @@ public class Controller extends Application {
 	EventHandler<ActionEvent> labelLatest_clickHandler = new EventHandler<ActionEvent>() {  
 		@Override
 		public void handle(ActionEvent event) {
-			if (labelMin_url != "") {
+			if (labelLatest_url != "") {
 				getHostServices().showDocument(labelLatest_url);
 			}
 		}
