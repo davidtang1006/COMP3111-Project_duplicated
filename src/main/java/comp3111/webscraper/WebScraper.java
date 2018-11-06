@@ -1,6 +1,7 @@
 package comp3111.webscraper;
 
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -89,7 +90,7 @@ public class WebScraper {
 		try {
 			String searchUrl = DEFAULT_URL + "search/sss?sort=rel&query=" + URLEncoder.encode(keyword, "UTF-8");
 			HtmlPage page = client.getPage(searchUrl);
-
+			
 			
 			List<?> items = (List<?>) page.getByXPath("//li[@class='result-row']");
 			
@@ -119,4 +120,44 @@ public class WebScraper {
 		}
 		return null;
 	}
+	
+	/**
+	 * This function suppose to return lists of urls
+	 * 
+	 * @author Benker
+	 * @param defaultUrl - the first page
+	 * @return A list of string starting with the first page
+	 */
+	public List<String> getPages(String defaultUrl, String keyword)
+	{
+		List<String> pages = new ArrayList<String>();
+		try {
+			int pageNum = 1;
+			String defaultURL = "https://newyork.craigslist.org";
+			String searchUrl = DEFAULT_URL + "/search/sss?sort=rel&query=" + URLEncoder.encode(keyword, "UTF-8");
+			HtmlPage page = client.getPage(defaultUrl);
+			while(true) {
+				// scrape multi pages
+				HtmlAnchor nextUrlObject = ((HtmlAnchor) page.getFirstByXPath(".//span/a[@class='button next']"));
+				String nextUrl = nextUrlObject.getHrefAttribute().trim();
+				System.out.println("Getting page " + (pageNum++));
+				System.out.println("Page Url:" + nextUrl);
+				if(!nextUrl.equals("")) {
+					pages.add(nextUrl);
+					searchUrl = DEFAULT_URL + nextUrl;
+					page = client.getPage(searchUrl);
+					System.out.println("Get Next Page: " + nextUrl);
+				}
+				else {
+					break;
+				}
+			}
+			return pages;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			// just return null
+			return null;
+		}
+	}
+	
 }
