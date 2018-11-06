@@ -90,7 +90,7 @@ public class WebScraper {
 		try {
 			String searchUrl = DEFAULT_URL + "search/sss?sort=rel&query=" + URLEncoder.encode(keyword, "UTF-8");
 			HtmlPage page = client.getPage(searchUrl);
-			
+
 			
 			List<?> items = (List<?>) page.getByXPath("//li[@class='result-row']");
 			
@@ -128,25 +128,24 @@ public class WebScraper {
 	 * @param defaultUrl - the first page
 	 * @return A list of string starting with the first page
 	 */
-	public List<String> getPages(String defaultUrl, String keyword)
+	public List<String> getPagesCraigslist(String defaultUrl)
 	{
 		List<String> pages = new ArrayList<String>();
 		try {
 			int pageNum = 1;
-			String defaultURL = "https://newyork.craigslist.org";
-			String searchUrl = DEFAULT_URL + "/search/sss?sort=rel&query=" + URLEncoder.encode(keyword, "UTF-8");
+			String baseURL = "https://newyork.craigslist.org";
+			String searchUrl = defaultUrl;
 			HtmlPage page = client.getPage(defaultUrl);
 			while(true) {
 				// scrape multi pages
 				HtmlAnchor nextUrlObject = ((HtmlAnchor) page.getFirstByXPath(".//span/a[@class='button next']"));
 				String nextUrl = nextUrlObject.getHrefAttribute().trim();
 				System.out.println("Getting page " + (pageNum++));
-				System.out.println("Page Url:" + nextUrl);
+				System.out.println("Page Url:" + searchUrl);
 				if(!nextUrl.equals("")) {
 					pages.add(nextUrl);
-					searchUrl = DEFAULT_URL + nextUrl;
+					searchUrl = baseURL + nextUrl;
 					page = client.getPage(searchUrl);
-					System.out.println("Get Next Page: " + nextUrl);
 				}
 				else {
 					break;
@@ -154,10 +153,50 @@ public class WebScraper {
 			}
 			return pages;
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("No pages");
 			// just return null
 			return null;
 		}
 	}
+	
+	
+	/**
+	 * This function suppose to return lists of urls
+	 * 
+	 * @author Benker
+	 * @param defaultUrl - the first page
+	 * @return A list of string starting with the first page
+	 */
+	public List<String> getPagesAmazon(String defaultUrl)
+	{
+		List<String> pages = new ArrayList<String>();
+		try {
+			int pageNum = 1;
+			String baseURL = "https://www.amazon.com";
+			String searchUrl = defaultUrl;
+			HtmlPage page = client.getPage(defaultUrl);
+			while(true) {
+				// scrape multi pages
+				HtmlAnchor nextUrlObject = ((HtmlAnchor) page.getFirstByXPath(".//span/a[@class='pagnNext']"));
+				String nextUrl = nextUrlObject.getHrefAttribute().trim();
+				System.out.println("Getting page " + (pageNum++));
+				System.out.println("Page Url:" + searchUrl);
+				if(!nextUrl.equals("")) {
+					pages.add(nextUrl);
+					searchUrl = baseURL + nextUrl;
+					page = client.getPage(searchUrl);
+				}
+				else {
+					break;
+				}
+			}
+			return pages;
+		} catch (Exception e) {
+			System.out.println("No pages");
+			// just return null
+			return null;
+		}
+	}
+	
 	
 }
