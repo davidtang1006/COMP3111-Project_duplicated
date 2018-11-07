@@ -109,7 +109,7 @@ public class Controller {
      * @author imc4kmacpro
      * @param items
      */
-    void updateSearchLists(List<Item> items) {
+    public void updateSearchLists(List<Item> items) {
     	if(currSearch != null) { // not first search, enable lastSearch function
     		labelMenuLastSearch.setDisable(false);
     	}
@@ -122,7 +122,7 @@ public class Controller {
      * @author imc4kmacpro
      */
     @FXML
-    void showAboutTeam(ActionEvent event) {
+    public void showAboutTeam(ActionEvent event) {
     	Alert alert = new Alert(AlertType.INFORMATION);
     	alert.setTitle("About our team");
     	alert.setHeaderText("Information about our team");
@@ -138,7 +138,7 @@ public class Controller {
      * @author imc4kmacpro
      */
     @FXML
-    void terminateWindow(ActionEvent event) throws Exception {
+    public void terminateWindow(ActionEvent event) throws Exception {
     	Platform.exit();
     }
     
