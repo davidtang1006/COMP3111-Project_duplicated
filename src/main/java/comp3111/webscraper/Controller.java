@@ -103,6 +103,7 @@ public class Controller {
     	System.out.println("actionNew");
     }
     
+    // by Calvin, task 6
     /**
      * task 6, update the searched lists upon new searches
      * @author imc4kmacpro
@@ -127,7 +128,7 @@ public class Controller {
     	alert.setHeaderText("Information about our team");
     	alert.setContentText("Team member 1: Chu Cheuk Kiu\tckchuad\tImC4k\n"
     			+ "Team member 2: Leung Lai Yung\tlyleungad\tBenker-Leung\n"
-    			+ "Team member 3: David\'sname\tawtang\tdavidtang1006\n");
+    			+ "Team member 3: Tang Au Wa\tawtang\tdavidtang1006\n");
     	alert.setResizable(true);
     	alert.showAndWait();
     }
@@ -152,7 +153,7 @@ public class Controller {
     	labelMenuLastSearch.setDisable(false); // enable last search
 
     	// Console tab
-    	textAreaConsole.setText("");
+    	textAreaConsole.setText(""); // resets console
 
     	// Summary tab
     	labelPrice.setText("<AvgPrice>");
@@ -183,4 +184,5 @@ public class Controller {
 //    	insertSummary(lastSearch);
 //    	createTable(lastSearch);
     }
+    // end by Calvin, task 6
 }
