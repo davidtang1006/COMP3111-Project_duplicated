@@ -2,43 +2,37 @@ package comp3111.webscraper;
 
 
 import org.junit.Test;
+
+import javafx.collections.ObservableList;
+
 import static org.junit.Assert.*;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 import java.util.Vector;
 
 public class ControllerTest {
 	
 	@Test
-	public void testGetList() {
+	public void testCreation() {
 		Controller c = new Controller();
-		Vector<Item> items = new Vector<Item>();
-		for(int i = 0; i < 2; i++) {
-			Item item = new Item();
-			item.setTitle("item" + i);
-			item.setDate(null, null);
-			item.setPrice(i + 30);
-			item.setUrl("https://google.com.hk");
-			items.add(item);
-		}
-		List<Item> items_list = items;
-		assertNotNull(c.getList(items_list));
+		assertNotNull(c);
 	}
 	
 	@Test
-	public void testCreateTable() {
+	public void testGetList() {
 		Controller c = new Controller();
 		Vector<Item> items = new Vector<Item>();
-		for(int i = 0; i < 2; i++) {
-			Item item = new Item();
-			item.setTitle("item" + i);
-			item.setDate(null, null);
-			item.setPrice(i + 30);
-			item.setUrl("https://google.com.hk");
-			items.add(item);
-		}
+		Item item = new Item();
+		item.setTitle("haha");
+		item.setPrice(3.333);
+//		item.setUrl("https://google.com.hk");
+						//Nov 8 new SimpleDateFormat("MMM dd", Locale.ENGLISH)
+		item.setDate("Nov 8", new SimpleDateFormat("MMM dd", Locale.ENGLISH));
+		items.add(item);
 		List<Item> items_list = items;
-		c.createTable(items_list);
-		// ???
+		ObservableList<Item> oList = c.getListTest(items_list);
+		assertNotNull(oList);
 	}
 }

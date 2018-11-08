@@ -140,12 +140,22 @@ public class Controller extends WebScraperApplication{
      * @param List<Item> items
      * @return ObservableList<Item>
      */
-    public ObservableList<Item> getList(List<Item> items){
+    private ObservableList<Item> getList(List<Item> items){
     	ObservableList<Item> list = FXCollections.observableArrayList();
     	for(Item item: items) {
     		list.add(item);
     	}
     	return list;
+    }
+    
+    /**
+     * public test method for getList()
+     * @author imc4kmacpro
+     * @param items
+     * @return
+     */
+    public ObservableList<Item> getListTest(List<Item> items){
+    	return getList(items);
     }
     
     /**
