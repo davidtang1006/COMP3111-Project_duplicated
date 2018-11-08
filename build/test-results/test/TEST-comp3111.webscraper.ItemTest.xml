@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="comp3111.webscraper.ItemTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2018-11-08T13:12:03" hostname="Benker" time="0.26">
+<testsuite name="comp3111.webscraper.ItemTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2018-11-08T14:05:25" hostname="Benker" time="0.342">
   <properties/>
-  <testcase name="testSetTitle" classname="comp3111.webscraper.ItemTest" time="0.26">
+  <testcase name="testSetTitle" classname="comp3111.webscraper.ItemTest" time="0.342">
     <failure message="java.lang.ExceptionInInitializerError" type="java.lang.ExceptionInInitializerError">java.lang.ExceptionInInitializerError
 	at comp3111.webscraper.Item.&lt;init&gt;(Item.java:21)
 	at comp3111.webscraper.ItemTest.testSetTitle(ItemTest.java:12)
