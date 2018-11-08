@@ -6,3 +6,5 @@ bin
 bin/*
 /.gradle/
 /build/
+build/*
+.gradle/*
