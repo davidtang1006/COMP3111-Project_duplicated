@@ -6,11 +6,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Hyperlink;
 
-// New imports
-import javafx.application.Application;
+// New imports, by ckchaud
+import javafx.application.HostServices;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.stage.Stage;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +23,7 @@ import java.util.List;
  */
 
 // Controller class that manage GUI interaction. Please see document about JavaFX for details.
-public class Controller extends Application {
+public class Controller extends WebScraperApplication {
 	@FXML 
 	private Label labelCount;
 
@@ -34,22 +38,43 @@ public class Controller extends Application {
 
 	@FXML
 	private TextField textFieldKeyword;
-	
+
 	@FXML
 	private TextArea textAreaConsole;
-	
+
 	private WebScraper scraper;
 
-	String labelMin_url = ""; // added by awtang
-	
-	String labelLatest_url = ""; // added by awtang
+	private String labelMin_url = ""; // added by awtang
 
-	
+	private String labelLatest_url = ""; // added by awtang
+
+	// by ckchaud, task 4
+	@FXML
+	private TableView<Item> table;
+
+	@FXML
+	private TableColumn<Item, String> labelTableTitle;
+
+	@FXML
+	private TableColumn<Item, Double> labelTablePrice;
+
+	@FXML
+	private TableColumn<Item, Hyperlink> labelTableURL;
+
+	@FXML
+	private TableColumn<Item, String> labelTableDate;
+
+	private final HostServices host;
+	// end by ckchaud, task 4
+
 	/**
 	 * Default controller
 	 */
 	public Controller() {
 		scraper = new WebScraper();
+		// by ckchaud, task 4
+		host = this.getHostServices();
+		// end by ckchaud, task 4
 	}
 
 	/**
@@ -59,22 +84,13 @@ public class Controller extends Application {
 	private void initialize() {
 	
 	}
-	
-	/**
-	 * @author awtang
-	 * @see javafx.application.Application#start(javafx.stage.Stage)
-	 */
-    @Override
-    public void start(Stage Stage) {
-    	
-    };
-	
+
 	/**
 	 * Called when the search button is pressed.
 	 * @author awtang
 	 */
-    
-    // (There is no @param, @return or @exception)
+
+	// (There is no @param, @return or @exception)
 	@FXML
 	private void actionSearch() {
 		if (textFieldKeyword.getText().isEmpty()) {
@@ -92,14 +108,22 @@ public class Controller extends Application {
 		double min_price = Double.POSITIVE_INFINITY;
 		String labelLatest_title = "";
 		Date max_date = new Date(0L); // "0L" means the number zero of type "long"
-
+		
+		getItemsAndDisplay(item_count, result, output, item_count_nonzero,
+				price_sum, min_price, max_date, labelLatest_title);
+	}
+	
+	/**
+	 * @author awtang
+	 */
+	public void getItemsAndDisplay(int item_count, List<Item> result, String output, int item_count_nonzero,
+			double price_sum, double min_price, Date max_date, String labelLatest_title) {
 		if(item_count >= 1) {
 			labelLatest_title = result.get(0).getTitle(); // The first result
 			labelLatest_url = result.get(0).getUrlText(); // The first result
 			
 			for (Item item : result) {
-				output += item.getPortal() + "\t" // The name of the portal is recorded
-						+ item.getTitle() + "\t" + item.getPrice() + "\t" + item.getUrl() + "\n";
+				output += item.getTitle() + "\t" + item.getPrice() + "\t" + item.getUrl() + "\n";
 				
 				if (item.getPrice() != 0.0) {
 					// Items with zero selling price is excluded in the calculations
@@ -134,9 +158,9 @@ public class Controller extends Application {
 				labelPrice.setText("-");
 				labelMin.setText("-");
 			}
-			labelMin.setOnAction(labelMin_clickHandler);
+			labelMin.addEventHandler(ActionEvent.ACTION, (e) -> openDoc(labelMin_url));
 			labelLatest.setText(labelLatest_title);
-			labelLatest.setOnAction(labelLatest_clickHandler);
+			labelLatest.addEventHandler(ActionEvent.ACTION, (e) -> openDoc(labelLatest_url));
 		} else { // We cannot find a result
 			// We refresh the contents for another search
 			labelMin_url = "";
@@ -149,30 +173,24 @@ public class Controller extends Application {
 			labelLatest.setText("-");
 		}
 	}
-
+	
+	// by ckchaud, hyperlink helper function
 	/**
-	 * @author awtang
+	 * opens the url specified in url in a new browser window
+	 * <br>
+	 * call method:
+	 * <br>
+	 * item.getUrl().addEventHandler(ActionEvent.ACTION, (e) -> openDoc(item.getUrlText()));
+	 * <br>
+	 * or
+	 * <br>
+	 * openDoc(label.getText());
+	 * @author ckchaud
+	 * @param url
 	 */
-	EventHandler<ActionEvent> labelMin_clickHandler = new EventHandler<ActionEvent>() {  
-		@Override
-		public void handle(ActionEvent event) {
-			if (labelMin_url != "") {
-				getHostServices().showDocument(labelMin_url);
-			}
-		}
-	};
-
-	/**
-	 * @author awtang
-	 */
-	EventHandler<ActionEvent> labelLatest_clickHandler = new EventHandler<ActionEvent>() {  
-		@Override
-		public void handle(ActionEvent event) {
-			if (labelLatest_url != "") {
-				getHostServices().showDocument(labelLatest_url);
-			}
-		}
-	};
+	private void openDoc(String url) {
+		host.showDocument(url);
+	}
 	
 	/**
 	 * Called when the new button is pressed. Very dummy action - print something in the command prompt.

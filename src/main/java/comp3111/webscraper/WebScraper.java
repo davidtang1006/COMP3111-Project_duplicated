@@ -9,7 +9,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import java.util.Vector;
 
-// New imports
+// New imports, by awtang
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
