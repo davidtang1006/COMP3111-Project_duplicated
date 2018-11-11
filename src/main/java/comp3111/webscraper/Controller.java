@@ -109,12 +109,39 @@ public class Controller {
      * @author imc4kmacpro
      * @param items
      */
-    public void updateSearchLists(List<Item> items) {
+    private void updateSearchLists(List<Item> items) {
     	if(currSearch != null) { // not first search, enable lastSearch function
     		labelMenuLastSearch.setDisable(false);
     	}
     	lastSearch = currSearch;
     	currSearch = items;
+    }
+    
+    /**
+     * for testing
+     * @author imc4kmacpro
+     * @return void
+     */
+    public void updateSearchListsTest(List<Item> items) {
+    	updateSearchLists(items);
+    }
+    
+    /**
+     * for testing
+     * @author imc4kmacpro
+     * @return currSearch
+     */
+    public List<Item> getCurrSearch() {
+    	return currSearch;
+    }
+    
+    /**
+     * for testing
+     * @author imc4kmacpro
+     * @return lastSearch
+     */
+    public List<Item> getLastSearch() {
+    	return lastSearch;
     }
     
     /**
@@ -181,6 +208,7 @@ public class Controller {
     		output += item.getTitle() + "\t" + item.getPrice() + "\t" + item.getUrlText() + "\n";
     	}
     	textAreaConsole.setText(output);
+//    	updateSearchLists(lastSearch);
 //    	insertSummary(lastSearch);
 //    	createTable(lastSearch);
     }
