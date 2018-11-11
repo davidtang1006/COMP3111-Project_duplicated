@@ -7,13 +7,18 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
 
+/**
+ * This class stores the details for scraped items
+ * @author awtang
+ */
 public class Item {
-	private String portal; // added by awtang
 	private String title;
 	private double price;
 	private Hyperlink url; // modified by ckchuad, from String to Hyperlink
+	
+	private String portal; // added by awtang
 	private Date date = null; // added by ckchuad
-	private DateFormat format; // added by ckchaud
+	private DateFormat format; // added by ckchuad
 	
 	/**
 	 * to initialize url object
@@ -24,7 +29,19 @@ public class Item {
 	}
 	
 	/**
-	 * to get the portal name
+	 * the default constructor is overloaded
+	 * @author awtang
+	 * @param test_mode set this value to true when performing the unit test
+	 */
+	public Item(boolean test_mode) {
+		if (test_mode == false) {
+			url = new Hyperlink();
+		}
+	}
+	
+	/**
+	 * to get the portal name<br>
+	 * used in task 1
 	 * @author awtang
 	 * @return the name of the portal
 	 */
@@ -61,14 +78,14 @@ public class Item {
 	 * return value is changed from String to Hyperlink
 	 * @author ckchuad
 	 * @return Hyperlink
-	 * 
 	 */
 	public Hyperlink getUrl() {
 		return url;
 	}
 	
 	/**
-	 * for adding event handler (Task 4)
+	 * for adding event handler (task 4)<br>
+	 * used in task 1 as well
 	 * @author ckchuad
 	 * @return: String
 	 */
@@ -112,6 +129,7 @@ public class Item {
 	}
 	
 	/**
+	 * used in task 1
 	 * @author awtang
 	 * @return a "Date" object
 	 */

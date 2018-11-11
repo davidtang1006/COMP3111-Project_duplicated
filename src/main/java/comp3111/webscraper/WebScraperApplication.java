@@ -35,11 +35,11 @@ import javafx.scene.Scene;
 public class WebScraperApplication extends Application {
 	private static final String UI_FILE = "/ui.fxml";  //It is very important that you put the file under folder src/main/resources/
 	
-	/* 
+	/** 
 	 * @see javafx.application.Application#start(javafx.stage.Stage)
-	 * 
-	 * This function will be called by the framework shortly after the program started. You are not required to touch any part of this.
 	 */
+	
+	// This function will be called by the framework shortly after the program started. You are not required to touch any part of this.
 	@Override
 	public void start(Stage stage) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
@@ -53,7 +53,7 @@ public class WebScraperApplication extends Application {
 
 	/**
 	 * Entry point of the program. No argument should be supplied
-	 * @param args - not used.
+	 * @param args not used
 	 */
 	public static void main(String args[]) {
 		Application.launch(args);
