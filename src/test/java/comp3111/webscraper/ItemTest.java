@@ -10,12 +10,19 @@ import java.util.Locale;
 
 public class ItemTest {
 
+	/**
+	 * Test initialization of Item
+	 * @author imc4kmacpro
+	 */
 	@Test
 	public void testCreation() {
 		Item i = new Item();
 		assertNotNull(i);
 	}
 
+	/**
+	 * test set/get title
+	 */
 	@Test
 	public void testSetTitle() {
 		Item i = new Item();
@@ -23,6 +30,10 @@ public class ItemTest {
 		assertEquals(i.getTitle(), "ABCDE");
 	}
 	
+	/**
+	 * test set/get price
+	 * @author imc4kmacpro
+	 */
 	@Test
 	public void testSetPrice() {
 		Item i = new Item();
@@ -30,13 +41,10 @@ public class ItemTest {
 		assertEquals(i.getPrice(), 3, 0.001);
 	}
 	
-//	@Test
-//	public void testSetUrl() {
-//		Item i = new Item();
-//		i.setUrl("https://google.com.hk");
-//		assertEquals(i.getUrl(), "https://google.com.hk");
-//	}
-	
+	/**
+	 * test set/get date
+	 * @author imc4kmacpro
+	 */
 	@Test
 	public void testSetDate() {
 		Item i = new Item();
