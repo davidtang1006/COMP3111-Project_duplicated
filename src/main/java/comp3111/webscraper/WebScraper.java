@@ -66,6 +66,7 @@ import java.util.Locale;
  * </pre>
  * extracts all result-row and stores the corresponding HTML elements to a list called items. Later in the loop it extracts the anchor tag 
  * &lsaquo; a &rsaquo; to retrieve the display text (by .asText()) and the link (by .getHrefAttribute()).
+ * @author awtang
  */
 public class WebScraper {
 	private static final String DEFAULT_URL = "https://newyork.craigslist.org";
@@ -82,7 +83,7 @@ public class WebScraper {
 	}
 
 	/**
-	 * A method implemented in this class, to scrape web content from the Craigslist. Used in task 1.
+	 * A method implemented in this class, to scrape web content from the Craigslist and Amazon. Used in task 2.
 	 * @author awtang
 	 * @param keyword the keyword you want to search
 	 * @return A list of Item that has found. A zero size list is return if nothing is found. Null if any exception (e.g. no connectivity)
@@ -90,7 +91,7 @@ public class WebScraper {
 	public List<Item> scrape(String keyword) {
 		Vector<Item> result = new Vector<Item>();
 		result.addAll(scrapeCraigslist(keyword));
-		result.addAll(scrapeAmazon(keyword));
+		result.addAll(scrapeAmazon(keyword, false));
 		
 		// We sort the items by prices
 		Collections.sort(result, new ItemComparator());
@@ -136,18 +137,18 @@ public class WebScraper {
 	}
 	
 	/**
-	 * Scrape items from Amazon
+	 * Scrape items from Amazon. One page is scraped. Used in task 2.
 	 * @author awtang
-	 * @param keyword
+	 * @param keyword the keyword typed in the text field
+	 * @param test_mode set this to true when running unit tests
 	 * @return items scraped from Amazon
 	 */
-	public List<Item> scrapeAmazon(String keyword) {
+	public List<Item> scrapeAmazon(String keyword, boolean test_mode) {
 		try {
 			// The following part is added by awtang
 			// We scrape data from another website
 			String searchUrl = ANOTHER_URL + "/s/ref=sr_st_date-desc-rank?keywords="
 					+ URLEncoder.encode(keyword, "UTF-8") + "&sort=date-desc-rank";
-			System.out.println(searchUrl);
 			HtmlPage page = client.getPage(searchUrl);
 			
 			List<?> other_items = (List<?>) page.getByXPath("//li[@class='s-result-item celwidget  AdHolder']"
@@ -166,7 +167,7 @@ public class WebScraper {
 				HtmlElement spanPrice_fractional = ((HtmlElement) htmlItem.getFirstByXPath(".//sup[@class='sx-price-fractional']"));
 				HtmlElement spanDate = ((HtmlElement) htmlItem.getFirstByXPath(".//span[@class='a-size-small a-color-secondary']"));
 				
-				Item item = new Item();
+				Item item = test_mode ? new Item(true) : new Item();
 				// The date is set here
 				DateFormat df = new SimpleDateFormat("MMM d, yyyy", Locale.US);
 				if (spanDate != null && !spanDate.asText().matches("^by.*")) {
@@ -193,10 +194,8 @@ public class WebScraper {
 						if ((header_cell.asText().matches("(.|\\r|\\n)*Date First Available(.|\\r|\\n)*")) ||
 								(header_cell.asText().matches("(.|\\r|\\n)*Date first listed on Amazon(.|\\r|\\n)*"))) {
 							std_cell = ((HtmlElement) table_htmlItem.getFirstByXPath(".//td"));
-							if (spanDate != null) {
-								System.out.println(std_cell.asText());
-								item.setDate(std_cell.asText(), df);
-							}
+							System.out.println(std_cell.asText());
+							item.setDate(std_cell.asText(), df);
 						}
 					}
 					client.close();
@@ -216,10 +215,10 @@ public class WebScraper {
 				if (itemAnchor.getHrefAttribute().matches("^https://.*")) {
 					// Some links starts with "https://"
 					System.out.println(itemAnchor.getHrefAttribute() + "\n");
-					item.setUrl(itemAnchor.getHrefAttribute());
+					if (test_mode == false) { item.setUrl(itemAnchor.getHrefAttribute()); }
 				} else {
 					System.out.println(ANOTHER_URL + itemAnchor.getHrefAttribute() + "\n");
-					item.setUrl(ANOTHER_URL + itemAnchor.getHrefAttribute());
+					if (test_mode == false) { item.setUrl(ANOTHER_URL + itemAnchor.getHrefAttribute()); }
 				}
 				// The date is set previously
 				
@@ -228,7 +227,7 @@ public class WebScraper {
 			client.close();
 			return result;
 		} catch (Exception e) {
-			System.out.println(e);
+			System.out.println(e + "\n");
 		}
 		return null;
 	}

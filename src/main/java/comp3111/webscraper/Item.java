@@ -21,7 +21,8 @@ public class Item {
 	private DateFormat format; // added by ckchuad
 	
 	/**
-	 * to initialize url object
+	 * to initialize url object<br>
+	 * used in task 2
 	 * @author ckchuad
 	 */
 	public Item() {
@@ -31,7 +32,7 @@ public class Item {
 	/**
 	 * the default constructor is overloaded
 	 * @author awtang
-	 * @param test_mode set this value to true when performing the unit test
+	 * @param test_mode set this value to true when performing the unit tests
 	 */
 	public Item(boolean test_mode) {
 		if (test_mode == false) {
@@ -41,7 +42,7 @@ public class Item {
 	
 	/**
 	 * to get the portal name<br>
-	 * used in task 1
+	 * used in task 1, 2
 	 * @author awtang
 	 * @return the name of the portal
 	 */
@@ -50,7 +51,8 @@ public class Item {
 	}
 	
 	/**
-	 * to set the portal
+	 * to set the portal<br>
+	 * used in task 2
 	 * @author awtang
 	 * @param portal the name of the portal
 	 */
@@ -58,18 +60,34 @@ public class Item {
 		this.portal = portal;
 	}
 	
+	/**
+	 * used in task 1
+	 * @return the title of the item
+	 */
 	public String getTitle() {
 		return title;
 	}
-
+	
+	/**
+	 * used in task 2
+	 * @param title the title of the item
+	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
+	
+	/**
+	 * used in task 1
+	 * @return the price of the item
+	 */
 	public double getPrice() {
 		return price;
 	}
-
+	
+	/**
+	 * used in task 2
+	 * @param price the price of the item
+	 */
 	public void setPrice(double price) {
 		this.price = price;
 	}
@@ -94,6 +112,7 @@ public class Item {
 	}
 	
 	/**
+	 * used in task 2
 	 * @param url the url to be set
 	 * @author ckchuad
 	 */
@@ -102,6 +121,7 @@ public class Item {
 	}
 	
 	/**
+	 * used in task 2
 	 * @param date the date to be set
 	 * @param format the format of the date
 	 * @author ckchuad
@@ -129,9 +149,10 @@ public class Item {
 	}
 	
 	/**
+	 * for getting the date
 	 * used in task 1
 	 * @author awtang
-	 * @return a "Date" object
+	 * @return the posted date of the item (a Date object)
 	 */
 	public Date getDate_raw() {
 		return this.date;

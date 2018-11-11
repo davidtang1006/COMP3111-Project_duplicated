@@ -117,7 +117,7 @@ public class Controller extends WebScraperApplication {
 	}
 	
 	/**
-	 * Used in task 1
+	 * Get the items from the object "result" and display them. Used in task 1.
 	 * @author awtang
 	 * @param test_mode set this to true when running unit tests
 	 */
@@ -202,7 +202,7 @@ public class Controller extends WebScraperApplication {
 	 * used in task 1<br>
 	 * opens the url specified in url in a new browser window<br>
 	 * call method:<br>
-	 * item.getUrl().addEventHandler(ActionEvent.ACTION, (e) -> openDoc(item.getUrlText()));<br>
+	 * item.getUrl().addEventHandler(ActionEvent.ACTION, (e) -&gt; openDoc(item.getUrlText()));<br>
 	 * or<br>
 	 * openDoc(label.getText());
 	 * @author ckchuad, awtang

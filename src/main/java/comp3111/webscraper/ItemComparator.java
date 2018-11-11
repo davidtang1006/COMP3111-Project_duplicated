@@ -8,11 +8,11 @@ import java.util.Comparator;
  */
 public class ItemComparator implements Comparator<Item> {
 	/**
-	 * Used in task 1.
+	 * Used in task 2.
 	 * @author awtang
 	 * @param i1 the first item
 	 * @param i2 the second item
-	 * @return -1 if i1 < i2, 0 if i1 = i2, 1 if i1 > i2
+	 * @return -1 if i1 &lt; i2, 0 if i1 = i2, 1 if i1 &gt; i2
 	 */
 	@Override
 	public int compare(Item i1, Item i2){
