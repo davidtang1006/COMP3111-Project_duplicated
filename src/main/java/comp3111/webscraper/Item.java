@@ -2,7 +2,7 @@ package comp3111.webscraper;
 
 import javafx.scene.control.Hyperlink;
 
-// New imports, by awtang
+// New imports, by ckchuad
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;

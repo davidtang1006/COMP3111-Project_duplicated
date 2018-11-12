@@ -98,6 +98,12 @@ public class WebScraper {
 		return result;
 	}
 	
+	/**
+	 * Scrape items from Craigslist. One page is scraped. Used in task 2.
+	 * @author awtang
+	 * @param keyword the keyword typed in the text field
+	 * @return items scraped from Craigslist
+	 */
 	public List<Item> scrapeCraigslist(String keyword) {
 		try {
 			String searchUrl = DEFAULT_URL + "/search/sss?sort=rel&query=" + URLEncoder.encode(keyword, "UTF-8");
