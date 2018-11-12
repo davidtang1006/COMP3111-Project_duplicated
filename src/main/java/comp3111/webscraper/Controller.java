@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Hyperlink;
 import java.util.List;
+import java.util.Vector;
 
 
 /**
@@ -176,9 +177,10 @@ public class Controller {
     @FXML
     void closeWindow() {
     	lastSearch = currSearch;
-    	currSearch = null;
-    	labelMenuLastSearch.setDisable(false); // enable last search
-
+    	if(lastSearch != null) {
+    		labelMenuLastSearch.setDisable(false); // enable last search
+    	}
+    	
     	// Console tab
     	textAreaConsole.setText(""); // resets console
 
@@ -190,8 +192,9 @@ public class Controller {
     	labelLatest.setVisited(false);
 
     	// Table tab
-//    	createTable(currSearch);
-    	ObservableList<Item> emptyList = FXCollections.observableArrayList();
+    	Vector<Item> items = new Vector<Item>();
+		List<Item> items_list = items;
+//		ObservableList<Item> emptyList = getList(items_list);
 //    	table.setItems(emptyList);
 
     }
