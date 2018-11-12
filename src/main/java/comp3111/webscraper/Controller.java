@@ -108,7 +108,9 @@ public class Controller {
     /**
      * task 6, update the searched lists upon new searches
      * @author imc4kmacpro
-     * @param items
+     * @param List<Item> items
+     * @return void
+     * @exception none
      */
     private void updateSearchLists(List<Item> items) {
     	if(currSearch != null) { // not first search, enable lastSearch function
@@ -121,7 +123,9 @@ public class Controller {
     /**
      * for testing
      * @author imc4kmacpro
+     * @param List<Item> items
      * @return void
+     * @exception none
      */
     public void updateSearchListsTest(List<Item> items) {
     	updateSearchLists(items);
@@ -130,7 +134,9 @@ public class Controller {
     /**
      * for testing
      * @author imc4kmacpro
-     * @return currSearch
+     * @param null
+     * @return List<Item> currSearch
+     * @exception none
      */
     public List<Item> getCurrSearch() {
     	return currSearch;
@@ -139,7 +145,9 @@ public class Controller {
     /**
      * for testing
      * @author imc4kmacpro
+     * @param null
      * @return lastSearch
+     * @exception none
      */
     public List<Item> getLastSearch() {
     	return lastSearch;
@@ -148,6 +156,9 @@ public class Controller {
     /**
      * task 6, show about team
      * @author imc4kmacpro
+     * @param ActionEvent event
+     * @return void
+     * @exception none
      */
     @FXML
     public void showAboutTeam(ActionEvent event) {
@@ -164,15 +175,21 @@ public class Controller {
     /**
      * task 6, quit button
      * @author imc4kmacpro
+     * @param ActionEvent event
+     * @return void
+     * @exception none
      */
     @FXML
-    public void terminateWindow(ActionEvent event) throws Exception {
+    public void terminateWindow(ActionEvent event) {
     	Platform.exit();
     }
     
     /**
      * task 6, close button
      * @author imc4kmacpro
+     * @param null
+     * @return void
+     * @exception none
      */
     @FXML
     void closeWindow() {
@@ -202,6 +219,9 @@ public class Controller {
     /**
      * task 6, reload previous search state
      * @author imc4kmacpro
+     * @param null
+     * @return void
+     * @exception none
      */
     @FXML
     void reloadLastSearch() {
