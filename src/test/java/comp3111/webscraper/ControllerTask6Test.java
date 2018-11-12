@@ -89,13 +89,5 @@ public class ControllerTask6Test {
 		c.updateSearchListsTest(items2_l);
 		assertEquals(items_l, c.getLastSearch());
 	}
-	/**
-	 * test reload last search
-	 * this method is not required because it is a gui method showing previous search list
-	 * @author imc4kmacpro
-	 */
-	@Test
-	public void testReloadLastSearch() {
-		assertTrue(true);
-	}
+	
 }
