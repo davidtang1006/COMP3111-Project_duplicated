@@ -126,7 +126,9 @@ public class Controller extends WebScraperApplication{
      * or 
      * openDoc(label.getText());
      * @author imc4kmacpro
-     * @param url
+     * @param String url
+     * @return void
+     * @exception none
      */
     private void openDoc(String url) {
     	host.showDocument(url);
@@ -139,6 +141,7 @@ public class Controller extends WebScraperApplication{
      * @author imc4kmacpro
      * @param List<Item> items
      * @return ObservableList<Item>
+     * @exception none
      */
     private ObservableList<Item> getList(List<Item> items){
     	ObservableList<Item> list = FXCollections.observableArrayList();
@@ -151,8 +154,8 @@ public class Controller extends WebScraperApplication{
     /**
      * public test method for getList()
      * @author imc4kmacpro
-     * @param items
-     * @return
+     * @param List<Item> items
+     * @return ObservableList<Item>
      */
     public ObservableList<Item> getListTest(List<Item> items){
     	return getList(items);
@@ -162,7 +165,9 @@ public class Controller extends WebScraperApplication{
      * this function puts everything in items into the table view
      * requires function getList(), openDoc()
      * @author imc4kmacpro
-     * @param items
+     * @param List<Item> items
+     * @return void
+     * @exception none
      */
     public void createTable(List<Item> items) {
     	for(Item item: items) {

@@ -18,7 +18,7 @@ public class Item {
 	 * @author imc4kmacpro
 	 */
 	public Item() {
-		url = new Hyperlink("https://google.com.hk");
+//		url = new Hyperlink("https://google.com.hk");
 	}
 	
 	public String getTitle() {

@@ -20,6 +20,10 @@ public class ControllerTest {
 		assertNotNull(c);
 	}
 	
+	/**
+	 * create an observable list for a not null list
+	 * @author imc4kmacpro
+	 */
 	@Test
 	public void testGetList() {
 		Controller c = new Controller();
@@ -31,6 +35,19 @@ public class ControllerTest {
 						//Nov 8 new SimpleDateFormat("MMM dd", Locale.ENGLISH)
 		item.setDate("Nov 8", new SimpleDateFormat("MMM dd", Locale.ENGLISH));
 		items.add(item);
+		List<Item> items_list = items;
+		ObservableList<Item> oList = c.getListTest(items_list);
+		assertNotNull(oList);
+	}
+	
+	/**
+	 * create an observable list for a null list
+	 * @author imc4kmacpro
+	 */
+	@Test
+	public void testGetListNull() {
+		Controller c = new Controller();
+		Vector<Item> items = new Vector<Item>();
 		List<Item> items_list = items;
 		ObservableList<Item> oList = c.getListTest(items_list);
 		assertNotNull(oList);

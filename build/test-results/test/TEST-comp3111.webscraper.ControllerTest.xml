@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="comp3111.webscraper.ControllerTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2018-11-08T13:57:35" hostname="ImC4ks-MacBook-Pro.local" time="1.474">
+<testsuite name="comp3111.webscraper.ControllerTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2018-11-12T10:15:59" hostname="ImC4ks-MacBook-Pro.local" time="1.271">
   <properties/>
-  <testcase name="testCreation" classname="comp3111.webscraper.ControllerTest" time="1.455"/>
-  <testcase name="testGetList" classname="comp3111.webscraper.ControllerTest" time="0.018"/>
+  <testcase name="testCreation" classname="comp3111.webscraper.ControllerTest" time="1.226"/>
+  <testcase name="testGetListNull" classname="comp3111.webscraper.ControllerTest" time="0.02"/>
+  <testcase name="testGetList" classname="comp3111.webscraper.ControllerTest" time="0.025"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
