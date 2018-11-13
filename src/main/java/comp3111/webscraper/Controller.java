@@ -87,10 +87,10 @@ public class Controller extends WebScraperApplication{
     /**
      * Default initializer. It is empty.
      */
-    @FXML
-    private void initialize() {
-    	textAreaConsole.setText("Branch task 4");
-    }
+//    @FXML
+//    private void initialize() {
+////    	textAreaConsole.setText("Branch task 4");
+//    }
     
     /**
      * Called when the search button is pressed.
@@ -116,10 +116,14 @@ public class Controller extends WebScraperApplication{
      */
     @FXML
     private void actionNew() {
-    	System.out.println("actionNew");
+//    	System.out.println("actionNew");
     }
     
-    // by Calvin, hyperlink helper function
+    public void actionNewTest() {
+    	actionNew();
+    }
+    
+    // by Calvin, open link helper function
     /**
      * opens the url specified in url in a new browser window
      * call method:

@@ -14,10 +14,29 @@ import java.util.Vector;
 
 public class ControllerTestTask4 {
 	
+	/**
+	 * tests creation of controller
+	 * @author imc4kmacpro
+	 */
 	@Test
 	public void testCreation() {
 		Controller c = new Controller();
 		assertNotNull(c);
+	}
+	
+	/**
+	 * tests actionNew() can be run
+	 * @author imc4kmacpro
+	 */
+	@Test
+	public void testActionNew() {
+		Controller c = new Controller();
+		try{
+			c.actionNewTest();
+		}catch (Exception e) {
+			assertTrue(false);
+		}
+		assertTrue(true);
 	}
 	
 	/**

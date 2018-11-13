@@ -68,9 +68,9 @@ public class Item {
 		try{
 <span class="fc" id="L69">			this.format = format;</span>
 <span class="fc" id="L70">			this.date = format.parse(date);</span>
-<span class="nc" id="L71">		}catch(ParseException e) {</span>
-<span class="nc" id="L72">			System.out.println(e.toString());</span>
-<span class="nc" id="L73">			this.date = null;</span>
+<span class="fc" id="L71">		}catch(ParseException e) {</span>
+<span class="fc" id="L72">			System.out.println(e.toString());</span>
+<span class="fc" id="L73">			this.date = null;</span>
 <span class="fc" id="L74">		}</span>
 <span class="fc" id="L75">	}</span>
 
@@ -80,10 +80,10 @@ public class Item {
 	 * @return String
 	 */
 	public String getDate() {
-<span class="pc bpc" id="L83" title="1 of 2 branches missed.">		if(date != null) {</span>
+<span class="fc bfc" id="L83" title="All 2 branches covered.">		if(date != null) {</span>
 <span class="fc" id="L84">			return format.format(date);</span>
 		}
-<span class="nc" id="L86">		return &quot;No Date&quot;;</span>
+<span class="fc" id="L86">		return &quot;No Date&quot;;</span>
 	}
 	
 

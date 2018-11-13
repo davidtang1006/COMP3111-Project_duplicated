@@ -87,10 +87,10 @@ public class Controller extends WebScraperApplication{
     /**
      * Default initializer. It is empty.
      */
-    @FXML
-    private void initialize() {
-<span class="nc" id="L92">    	textAreaConsole.setText(&quot;Branch task 4&quot;);</span>
-<span class="nc" id="L93">    }</span>
+//    @FXML
+//    private void initialize() {
+////    	textAreaConsole.setText(&quot;Branch task 4&quot;);
+//    }
     
     /**
      * Called when the search button is pressed.
@@ -116,10 +116,14 @@ public class Controller extends WebScraperApplication{
      */
     @FXML
     private void actionNew() {
-<span class="nc" id="L119">    	System.out.println(&quot;actionNew&quot;);</span>
-<span class="nc" id="L120">    }</span>
+//    	System.out.println(&quot;actionNew&quot;);
+<span class="fc" id="L120">    }</span>
     
-    // by Calvin, hyperlink helper function
+    public void actionNewTest() {
+<span class="fc" id="L123">    	actionNew();</span>
+<span class="fc" id="L124">    }</span>
+    
+    // by Calvin, open link helper function
     /**
      * opens the url specified in url in a new browser window
      * call method:
@@ -132,8 +136,8 @@ public class Controller extends WebScraperApplication{
      * @exception none
      */
     private void openDoc(String url) {
-<span class="nc" id="L135">    	host.showDocument(url);</span>
-<span class="nc" id="L136">    }</span>
+<span class="nc" id="L139">    	host.showDocument(url);</span>
+<span class="nc" id="L140">    }</span>
     // end by Calvin, hyperlink helper function
     
     // by Calvin, task 4
@@ -145,11 +149,11 @@ public class Controller extends WebScraperApplication{
      * @exception none
      */
     private ObservableList&lt;Item&gt; getList(List&lt;Item&gt; items){
-<span class="fc" id="L148">    	ObservableList&lt;Item&gt; list = FXCollections.observableArrayList();</span>
-<span class="fc bfc" id="L149" title="All 2 branches covered.">    	for(Item item: items) {</span>
-<span class="fc" id="L150">    		list.add(item);</span>
-<span class="fc" id="L151">    	}</span>
-<span class="fc" id="L152">    	return list;</span>
+<span class="fc" id="L152">    	ObservableList&lt;Item&gt; list = FXCollections.observableArrayList();</span>
+<span class="fc bfc" id="L153" title="All 2 branches covered.">    	for(Item item: items) {</span>
+<span class="fc" id="L154">    		list.add(item);</span>
+<span class="fc" id="L155">    	}</span>
+<span class="fc" id="L156">    	return list;</span>
     }
     
     /**
@@ -159,7 +163,7 @@ public class Controller extends WebScraperApplication{
      * @return ObservableList&lt;Item&gt;
      */
     public ObservableList&lt;Item&gt; getListTest(List&lt;Item&gt; items){
-<span class="fc" id="L162">    	return getList(items);</span>
+<span class="fc" id="L166">    	return getList(items);</span>
     }
     
     /**
@@ -171,27 +175,27 @@ public class Controller extends WebScraperApplication{
      * @exception none
      */
     public void createTable(List&lt;Item&gt; items) {
-<span class="nc" id="L174">    	ObservableList&lt;Item&gt; tableList = getList(items);</span>
-<span class="nc" id="L175">    	labelTableTitle.setCellValueFactory(new PropertyValueFactory&lt;Item, String&gt;(&quot;title&quot;));</span>
-<span class="nc" id="L176">    	labelTablePrice.setCellValueFactory(new PropertyValueFactory&lt;Item, Double&gt;(&quot;price&quot;));</span>
-<span class="nc" id="L177">    	labelTableURL.setCellValueFactory(new PropertyValueFactory&lt;Item, String&gt;(&quot;url&quot;));</span>
-<span class="nc" id="L178">    	labelTableURL.setCellFactory(tc -&gt; {</span>
-<span class="nc" id="L179">    		TableCell&lt;Item, String&gt; cell = new TableCell&lt;Item, String&gt;(){</span>
+<span class="nc" id="L178">    	ObservableList&lt;Item&gt; tableList = getList(items);</span>
+<span class="nc" id="L179">    	labelTableTitle.setCellValueFactory(new PropertyValueFactory&lt;Item, String&gt;(&quot;title&quot;));</span>
+<span class="nc" id="L180">    	labelTablePrice.setCellValueFactory(new PropertyValueFactory&lt;Item, Double&gt;(&quot;price&quot;));</span>
+<span class="nc" id="L181">    	labelTableURL.setCellValueFactory(new PropertyValueFactory&lt;Item, String&gt;(&quot;url&quot;));</span>
+<span class="nc" id="L182">    	labelTableURL.setCellFactory(tc -&gt; {</span>
+<span class="nc" id="L183">    		TableCell&lt;Item, String&gt; cell = new TableCell&lt;Item, String&gt;(){</span>
     			@Override
     			protected void updateItem(String item, boolean empty) {
-<span class="nc" id="L182">    				super.updateItem(item,  empty);</span>
-<span class="nc" id="L183">    				setText(item);</span>
-<span class="nc" id="L184">    			}</span>
+<span class="nc" id="L186">    				super.updateItem(item,  empty);</span>
+<span class="nc" id="L187">    				setText(item);</span>
+<span class="nc" id="L188">    			}</span>
     		};
-<span class="nc" id="L186">    		cell.setOnMouseClicked(e -&gt; {</span>
-<span class="nc" id="L187">    			openDoc(cell.getText());</span>
-<span class="nc" id="L188">    			System.out.println(cell.getText());</span>
-<span class="nc" id="L189">    		});</span>
-<span class="nc" id="L190">    		return cell;</span>
+<span class="nc" id="L190">    		cell.setOnMouseClicked(e -&gt; {</span>
+<span class="nc" id="L191">    			openDoc(cell.getText());</span>
+<span class="nc" id="L192">    			System.out.println(cell.getText());</span>
+<span class="nc" id="L193">    		});</span>
+<span class="nc" id="L194">    		return cell;</span>
     	});
-<span class="nc" id="L192">    	labelTableDate.setCellValueFactory(new PropertyValueFactory&lt;Item, String&gt;(&quot;date&quot;));</span>
-<span class="nc" id="L193">    	table.setItems(tableList);</span>
-<span class="nc" id="L194">    }</span>
+<span class="nc" id="L196">    	labelTableDate.setCellValueFactory(new PropertyValueFactory&lt;Item, String&gt;(&quot;date&quot;));</span>
+<span class="nc" id="L197">    	table.setItems(tableList);</span>
+<span class="nc" id="L198">    }</span>
     // end by Calvin, task 4
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

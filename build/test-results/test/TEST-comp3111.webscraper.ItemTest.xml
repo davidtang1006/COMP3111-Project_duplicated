@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="comp3111.webscraper.ItemTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2018-11-13T09:52:27" hostname="ImC4ks-MacBook-Pro.local" time="0.035">
+<testsuite name="comp3111.webscraper.ItemTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2018-11-13T12:49:30" hostname="ImC4ks-MacBook-Pro.local" time="0.034">
   <properties/>
   <testcase name="testCreation" classname="comp3111.webscraper.ItemTest" time="0.003"/>
-  <testcase name="testSetDate" classname="comp3111.webscraper.ItemTest" time="0.029"/>
-  <testcase name="testSetUrl" classname="comp3111.webscraper.ItemTest" time="0.001"/>
+  <testcase name="testSetUrl" classname="comp3111.webscraper.ItemTest" time="0.0"/>
+  <testcase name="testSetDate1" classname="comp3111.webscraper.ItemTest" time="0.021"/>
+  <testcase name="testSetDate2" classname="comp3111.webscraper.ItemTest" time="0.0"/>
+  <testcase name="testSetDate3" classname="comp3111.webscraper.ItemTest" time="0.008"/>
   <testcase name="testSetPrice" classname="comp3111.webscraper.ItemTest" time="0.001"/>
-  <testcase name="testSetTitle" classname="comp3111.webscraper.ItemTest" time="0.001"/>
-  <system-out><![CDATA[]]></system-out>
+  <testcase name="testSetTitle" classname="comp3111.webscraper.ItemTest" time="0.0"/>
+  <system-out><![CDATA[java.text.ParseException: Unparseable date: "Something"
+]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

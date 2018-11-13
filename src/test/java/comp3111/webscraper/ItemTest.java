@@ -44,13 +44,37 @@ public class ItemTest {
 	
 	/**
 	 * test set/get date
+	 * this tests valid date
 	 * @author imc4kmacpro
 	 */
 	@Test
-	public void testSetDate() {
+	public void testSetDate1() {
 		Item i = new Item();
 		i.setDate("Nov 8", new SimpleDateFormat("MMM dd", Locale.ENGLISH));
 		assertEquals(i.getDate(), "Nov 08");
+	}
+	
+	/**
+	 * test set/get date
+	 * this tests invalid date
+	 * @author imc4kmacpro
+	 */
+	@Test
+	public void testSetDate2() {
+		Item i = new Item();
+		assertEquals(i.getDate(), "No Date");
+	}
+	
+	/**
+	 * test set/get date
+	 * this tests invalid date format
+	 * @author imc4kmacpro
+	 */
+	@Test
+	public void testSetDate3() {
+		Item i = new Item();
+		i.setDate("Something", new SimpleDateFormat("MMM dd", Locale.ENGLISH));
+		assertEquals(i.getDate(), "No Date");
 	}
 	
 	/**
