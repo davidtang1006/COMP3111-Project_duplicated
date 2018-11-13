@@ -136,16 +136,20 @@ public class WebScraper {
 			String baseURL = "https://newyork.craigslist.org";
 			String searchUrl = defaultUrl;
 			HtmlPage page = client.getPage(defaultUrl);
+			// add the default to pages
+			pages.add(defaultUrl);
 			while(true) {
-				// scrape multi pages
+				// get href in html
 				HtmlAnchor nextUrlObject = ((HtmlAnchor) page.getFirstByXPath(".//span/a[@class='button next']"));
+				// get the text in href
 				String nextUrl = nextUrlObject.getHrefAttribute().trim();
 				System.out.println("Getting page " + (pageNum++));
 				System.out.println("Page Url:" + searchUrl);
+				// if things are in href
 				if(!nextUrl.equals("")) {
-					pages.add(nextUrl);
 					searchUrl = baseURL + nextUrl;
 					page = client.getPage(searchUrl);
+					pages.add(searchUrl);
 				}
 				else {
 					break;
@@ -153,9 +157,8 @@ public class WebScraper {
 			}
 			return pages;
 		} catch (Exception e) {
-			System.out.println("No pages");
-			// just return null
-			return null;
+			// means reach last page
+			return pages;
 		}
 	}
 	
@@ -175,16 +178,20 @@ public class WebScraper {
 			String baseURL = "https://www.amazon.com";
 			String searchUrl = defaultUrl;
 			HtmlPage page = client.getPage(defaultUrl);
+			// add the default to pages
+			pages.add(defaultUrl);
 			while(true) {
-				// scrape multi pages
+				// get href in html
 				HtmlAnchor nextUrlObject = ((HtmlAnchor) page.getFirstByXPath(".//span/a[@class='pagnNext']"));
+				// get the text in href
 				String nextUrl = nextUrlObject.getHrefAttribute().trim();
 				System.out.println("Getting page " + (pageNum++));
 				System.out.println("Page Url:" + searchUrl);
+				// if things are in href
 				if(!nextUrl.equals("")) {
-					pages.add(nextUrl);
 					searchUrl = baseURL + nextUrl;
 					page = client.getPage(searchUrl);
+					pages.add(searchUrl);
 				}
 				else {
 					break;
@@ -192,9 +199,8 @@ public class WebScraper {
 			}
 			return pages;
 		} catch (Exception e) {
-			System.out.println("No pages");
-			// just return null
-			return null;
+			// means reach last page
+			return pages;
 		}
 	}
 	
