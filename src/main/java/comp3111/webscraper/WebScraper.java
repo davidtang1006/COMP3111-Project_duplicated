@@ -148,7 +148,6 @@ public class WebScraper {
 	 * Scrape items from Amazon. One page is scraped. Used in task 2.
 	 * @author awtang
 	 * @param keyword the keyword typed in the text field
-	 * @param test_mode set this to true when running unit tests
 	 * @return items scraped from Amazon
 	 */
 	public List<Item> scrapeAmazon(String keyword) {
