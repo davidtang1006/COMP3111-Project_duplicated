@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
 
-public class ControllerTest {
+public class ControllerTestTask4 {
 	
 	@Test
 	public void testCreation() {

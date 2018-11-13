@@ -18,6 +18,7 @@ import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Hyperlink;
@@ -63,7 +64,7 @@ public class Controller extends WebScraperApplication{
     private TableColumn<Item, Double> labelTablePrice;
 
     @FXML
-    private TableColumn<Item, Hyperlink> labelTableURL;
+    private TableColumn<Item, String> labelTableURL;
 
     @FXML
     private TableColumn<Item, String> labelTableDate;
@@ -170,13 +171,24 @@ public class Controller extends WebScraperApplication{
      * @exception none
      */
     public void createTable(List<Item> items) {
-    	for(Item item: items) {
-    		item.getUrl().addEventHandler(ActionEvent.ACTION, (e) -> openDoc(item.getUrlText()));
-    	}
     	ObservableList<Item> tableList = getList(items);
     	labelTableTitle.setCellValueFactory(new PropertyValueFactory<Item, String>("title"));
     	labelTablePrice.setCellValueFactory(new PropertyValueFactory<Item, Double>("price"));
-    	labelTableURL.setCellValueFactory(new PropertyValueFactory<Item, Hyperlink>("url"));
+    	labelTableURL.setCellValueFactory(new PropertyValueFactory<Item, String>("url"));
+    	labelTableURL.setCellFactory(tc -> {
+    		TableCell<Item, String> cell = new TableCell<Item, String>(){
+    			@Override
+    			protected void updateItem(String item, boolean empty) {
+    				super.updateItem(item,  empty);
+    				setText(item);
+    			}
+    		};
+    		cell.setOnMouseClicked(e -> {
+    			openDoc(cell.getText());
+    			System.out.println(cell.getText());
+    		});
+    		return cell;
+    	});
     	labelTableDate.setCellValueFactory(new PropertyValueFactory<Item, String>("date"));
     	table.setItems(tableList);
     }

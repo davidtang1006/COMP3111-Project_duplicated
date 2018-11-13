@@ -9,7 +9,7 @@ import javafx.scene.control.Hyperlink;
 public class Item {
 	private String title ; 
 	private double price ;
-	private Hyperlink url ; // modified by ckchuad, from String to Hyperlink
+	private String url ; // modified by ckchuad, from Hyperlink to String
 	private Date date; // added by ckchuad
 	private DateFormat format; // added by ckchaud
 	
@@ -18,7 +18,6 @@ public class Item {
 	 * @author imc4kmacpro
 	 */
 	public Item() {
-//		url = new Hyperlink("https://google.com.hk");
 	}
 	
 	public String getTitle() {
@@ -33,32 +32,28 @@ public class Item {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+	
 	/**
 	 *
-	 * return value: changed from String to Hyperlink
+	 * return value: changed from Hyperlink back to String
 	 * @author imc4kmacpro
-	 * @return Hyperlink
+	 * @param void
+	 * @return String
+	 * @exception none
 	 * 
 	 */
-	public Hyperlink getUrl() {
+	public String getUrl() {
 		return url;
 	}
 	
-	/** Task 4
-	 * for adding event handler
-	 * @author imc4kmacpro
-	 * @return: String
-	 */
-	public String getUrlText() { 
-		return url.getText();
-	}
-	
 	/**
-	 * @param String url 
 	 * @author imc4kmacpro
+	 * @param String url 
+	 * @return void
+	 * @exception none
 	 */
 	public void setUrl(String url) {
-		this.url.setText(url);
+		this.url = url;
 	}
 	
 	
