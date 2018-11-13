@@ -22,14 +22,14 @@ public class ItemComparatorTest {
 	public void testCompare1() {
 		// The first item
 		DateFormat df = new SimpleDateFormat("MMMM d, yyyy", Locale.US);
-		Item i_1 = new Item(true);
+		Item i_1 = new Item();
 		i_1.setDate("January 2, 2018", df);
 		i_1.setPortal("Amazon");
 		i_1.setPrice(1.0);
 		i_1.setTitle("Apple");
 		
 		// The second item
-		Item i_2 = new Item(true);
+		Item i_2 = new Item();
 		i_2.setDate("January 1, 2018", df);
 		i_2.setPortal("Craigslist");
 		i_2.setPrice(2.0);
@@ -47,14 +47,14 @@ public class ItemComparatorTest {
 	public void testCompare2() {
 		// The first item
 		DateFormat df = new SimpleDateFormat("MMMM d, yyyy", Locale.US);
-		Item i_1 = new Item(true);
+		Item i_1 = new Item();
 		i_1.setDate("January 2, 2018", df);
 		i_1.setPortal("Amazon");
 		i_1.setPrice(1.0);
 		i_1.setTitle("Apple");
 		
 		// The second item
-		Item i_2 = new Item(true);
+		Item i_2 = new Item();
 		i_2.setDate("January 1, 2018", df);
 		i_2.setPortal("Craigslist");
 		i_2.setPrice(1.0);
@@ -72,14 +72,14 @@ public class ItemComparatorTest {
 	public void testCompare3() {
 		// The first item
 		DateFormat df = new SimpleDateFormat("MMMM d, yyyy", Locale.US);
-		Item i_1 = new Item(true);
+		Item i_1 = new Item();
 		i_1.setDate("January 2, 2018", df);
 		i_1.setPortal("Craigslist");
 		i_1.setPrice(1.0);
 		i_1.setTitle("Apple");
 		
 		// The second item
-		Item i_2 = new Item(true);
+		Item i_2 = new Item();
 		i_2.setDate("January 1, 2018", df);
 		i_2.setPortal("Amazon");
 		i_2.setPrice(1.0);
@@ -96,14 +96,14 @@ public class ItemComparatorTest {
 	public void testCompare4() {
 		// The first item
 		DateFormat df = new SimpleDateFormat("MMMM d, yyyy", Locale.US);
-		Item i_1 = new Item(true);
+		Item i_1 = new Item();
 		i_1.setDate("January 2, 2018", df);
 		i_1.setPortal("Amazon");
 		i_1.setPrice(1.0);
 		i_1.setTitle("Apple");
 		
 		// The second item
-		Item i_2 = new Item(true);
+		Item i_2 = new Item();
 		i_2.setDate("January 1, 2018", df);
 		i_2.setPortal("Amazon");
 		i_2.setPrice(1.0);
@@ -120,14 +120,14 @@ public class ItemComparatorTest {
 	public void testCompare5() {
 		// The first item
 		DateFormat df = new SimpleDateFormat("MMMM d, yyyy", Locale.US);
-		Item i_1 = new Item(true);
+		Item i_1 = new Item();
 		i_1.setDate("January 2, 2018", df);
 		i_1.setPortal("Craigslist");
 		i_1.setPrice(1.0);
 		i_1.setTitle("Apple");
 		
 		// The second item
-		Item i_2 = new Item(true);
+		Item i_2 = new Item();
 		i_2.setDate("January 1, 2018", df);
 		i_2.setPortal("Craigslist");
 		i_2.setPrice(1.0);

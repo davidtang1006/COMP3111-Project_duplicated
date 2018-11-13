@@ -1,7 +1,5 @@
 package comp3111.webscraper;
 
-import javafx.scene.control.Hyperlink;
-
 // New imports, by ckchuad
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -14,10 +12,10 @@ import java.util.Date;
 public class Item {
 	private String title;
 	private double price;
-	private Hyperlink url; // modified by ckchuad, from String to Hyperlink
+	private String url;
 	
 	private String portal; // added by awtang
-	private Date date = null; // added by ckchuad
+	private Date date; // added by ckchuad
 	private DateFormat format; // added by ckchuad
 	
 	/**
@@ -26,18 +24,7 @@ public class Item {
 	 * @author ckchuad
 	 */
 	public Item() {
-		url = new Hyperlink();
-	}
-	
-	/**
-	 * the default constructor is overloaded
-	 * @author awtang
-	 * @param test_mode set this value to true when performing the unit tests
-	 */
-	public Item(boolean test_mode) {
-		if (test_mode == false) {
-			url = new Hyperlink();
-		}
+
 	}
 	
 	/**
@@ -93,22 +80,12 @@ public class Item {
 	}
 	
 	/**
-	 * return value is changed from String to Hyperlink
+	 * for getting the url
 	 * @author ckchuad
-	 * @return Hyperlink
+	 * @return String
 	 */
-	public Hyperlink getUrl() {
+	public String getUrl() {
 		return url;
-	}
-	
-	/**
-	 * for adding event handler (task 4)<br>
-	 * used in task 1 as well
-	 * @author ckchuad
-	 * @return: String
-	 */
-	public String getUrlText() { 
-		return url.getText();
 	}
 	
 	/**
@@ -117,7 +94,7 @@ public class Item {
 	 * @author ckchuad
 	 */
 	public void setUrl(String url) {
-		this.url.setText(url);
+		this.url = url;
 	}
 	
 	/**

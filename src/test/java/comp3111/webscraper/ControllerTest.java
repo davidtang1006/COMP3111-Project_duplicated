@@ -24,7 +24,7 @@ public class ControllerTest {
 	public void testGetItemsAndDisplay1() {
 		// The first item
 		DateFormat df = new SimpleDateFormat("MMMM d, yyyy", Locale.US);
-		Item i_1 = new Item(true);
+		Item i_1 = new Item();
 		i_1.setDate("January 2, 2018", df);
 		i_1.setPortal("Amazon");
 		i_1.setPrice(1.0);
@@ -32,7 +32,7 @@ public class ControllerTest {
 		c.result.add(i_1);
 		
 		// The second item
-		Item i_2 = new Item(true);
+		Item i_2 = new Item();
 		i_2.setDate("January 1, 2018", df);
 		i_2.setPortal("Craigslist");
 		i_2.setPrice(2.0);
@@ -40,7 +40,7 @@ public class ControllerTest {
 		c.result.add(i_2);
 		
 		// The third item
-		Item i_3 = new Item(true);
+		Item i_3 = new Item();
 		i_3.setDate("January 3, 2018", df);
 		i_3.setPortal("Amazon");
 		i_3.setPrice(3.0);
@@ -73,7 +73,7 @@ public class ControllerTest {
 	public void testGetItemsAndDisplay2() {
 		// The first item
 		DateFormat df = new SimpleDateFormat("MMMM d, yyyy", Locale.US);
-		Item i_1 = new Item(true);
+		Item i_1 = new Item();
 		i_1.setDate("January 2, 2018", df);
 		i_1.setPortal("Amazon");
 		i_1.setPrice(0.0);
@@ -81,7 +81,7 @@ public class ControllerTest {
 		c.result.add(i_1);
 		
 		// The second item
-		Item i_2 = new Item(true);
+		Item i_2 = new Item();
 		i_2.setDate("January 1, 2018", df);
 		i_2.setPortal("Craigslist");
 		i_2.setPrice(0.0);
@@ -89,7 +89,7 @@ public class ControllerTest {
 		c.result.add(i_2);
 		
 		// The third item
-		Item i_3 = new Item(true);
+		Item i_3 = new Item();
 		i_3.setDate("January 3, 2018", df);
 		i_3.setPortal("Amazon");
 		i_3.setPrice(0.0);
@@ -121,7 +121,7 @@ public class ControllerTest {
 	@Test
 	public void testGetItemsAndDisplay3() {
 		DateFormat df = new SimpleDateFormat("MMMM d, yyyy", Locale.US);
-		Item i_1 = new Item(true);
+		Item i_1 = new Item();
 		i_1.setDate("January 1, 2018", df);
 		i_1.setPortal("Amazon");
 		i_1.setPrice(1.0);
@@ -153,7 +153,7 @@ public class ControllerTest {
 	@Test
 	public void testGetItemsAndDisplay4() {
 		DateFormat df = new SimpleDateFormat("MMMM d, yyyy", Locale.US);
-		Item i_1 = new Item(true);
+		Item i_1 = new Item();
 		i_1.setDate("January 1, 2018", df);
 		i_1.setPortal("Amazon");
 		i_1.setPrice(0.0);
@@ -184,7 +184,7 @@ public class ControllerTest {
 	 */
 	@Test
 	public void testGetItemsAndDisplay5() {
-		Item i_1 = new Item(true);
+		Item i_1 = new Item();
 		//i_1.setDate("January 1, 2018", df);
 		i_1.setPortal("Amazon");
 		i_1.setPrice(0.0);

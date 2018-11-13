@@ -45,10 +45,11 @@ public class Controller extends WebScraperApplication {
 	private TextArea textAreaConsole;
 
 	private WebScraper scraper;
-	
+
 	// by awtang
 	public List<Item> result = new Vector<Item>();
 	public int item_count = 0;
+	public int event_handler_count = 0;
 	public int item_count_nonzero = 0;
 	public double price_sum = 0;
 	public double min_price = Double.POSITIVE_INFINITY;
@@ -56,7 +57,7 @@ public class Controller extends WebScraperApplication {
 	public String labelLatest_title = "";
 	public String labelLatest_url = "";
 	public Date max_date = new Date(0L); // "0L" means the number zero of type "long"
-	
+
 	public int test_exit_value = 0; // for unit testing
 	// end by awtang
 
@@ -125,17 +126,20 @@ public class Controller extends WebScraperApplication {
 		String output = "";
 		item_count = result.size();
 		
+		if (event_handler_count == 0 && test_mode == false) {
+			// The event handler is added once only
+			labelMin.addEventHandler(ActionEvent.ACTION, (e) -> openDoc(labelMin_url));
+			labelLatest.addEventHandler(ActionEvent.ACTION, (e) -> openDoc(labelLatest_url));
+			event_handler_count++;
+		}
+		
 		if(item_count >= 1) {
 			labelLatest_title = result.get(0).getTitle(); // The first result
-			if (test_mode == false) { labelLatest_url = result.get(0).getUrlText(); } // The first result
+			labelLatest_url = result.get(0).getUrl(); // The first result
 			
 			for (Item item : result) {
 				// We print the scraped data in the console tab
-				if (test_mode == false) {
-					output += item.getTitle() + "\t" + item.getPrice() + "\t" + item.getUrlText() + "\n";
-				} else {
-					output += item.getTitle() + "\t" + item.getPrice() + "\n";
-				}
+				output += item.getTitle() + "\t" + item.getPrice() + "\t" + item.getUrl() + "\n";
 				
 				if (item.getPrice() != 0.0) {
 					// Items with zero selling price is excluded in the calculations
@@ -146,7 +150,7 @@ public class Controller extends WebScraperApplication {
 					if (item.getPrice() < min_price) {
 						min_price = item.getPrice();
 						// Set the URL for labelMin_url
-						if (test_mode == false) { labelMin_url = item.getUrlText(); }
+						labelMin_url = item.getUrl();
 					}
 				}
 				
@@ -155,7 +159,7 @@ public class Controller extends WebScraperApplication {
 					if (item.getDate_raw().compareTo(max_date) > 0) {
 						max_date = item.getDate_raw();
 						labelLatest_title = item.getTitle();
-						if (test_mode == false) { labelLatest_url = item.getUrlText(); }
+						labelLatest_url = item.getUrl();
 					}
 				}
 			}
@@ -177,9 +181,7 @@ public class Controller extends WebScraperApplication {
 			if (test_mode == false) {
 				textAreaConsole.setText(output);
 				labelCount.setText(Integer.toString(item_count));
-				labelMin.addEventHandler(ActionEvent.ACTION, (e) -> openDoc(labelMin_url));
 				labelLatest.setText(labelLatest_title);
-				labelLatest.addEventHandler(ActionEvent.ACTION, (e) -> openDoc(labelLatest_url));
 			}
 		} else { // We cannot find a result
 			test_exit_value = 3;

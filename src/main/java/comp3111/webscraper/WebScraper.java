@@ -91,7 +91,7 @@ public class WebScraper {
 	public List<Item> scrape(String keyword) {
 		Vector<Item> result = new Vector<Item>();
 		result.addAll(scrapeCraigslist(keyword));
-		result.addAll(scrapeAmazon(keyword, false));
+		result.addAll(scrapeAmazon(keyword));
 		
 		// We sort the items by prices
 		Collections.sort(result, new ItemComparator());
@@ -123,15 +123,17 @@ public class WebScraper {
 				// It is possible that an item doesn't have any price, we set the price to 0.0
 				// in this case
 				String itemPrice = spanPrice == null ? "0.0" : spanPrice.asText();
-
+				
 				Item item = new Item();
 				item.setPortal("Craigslist"); // 
 				item.setTitle(itemAnchor.asText());
+				System.out.println(itemAnchor.asText());
 				item.setUrl(itemAnchor.getHrefAttribute());
-
+				
 				item.setPrice(new Double(itemPrice.replace("$", "")));
-				item.setDate(spanDate.asText(), new SimpleDateFormat("MMM dd", Locale.ENGLISH));
-
+				item.setDate(spanDate.getAttribute("datetime"), new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US));
+				System.out.println(spanDate.getAttribute("datetime") + "\n");
+				
 				result.add(item);
 			}
 			client.close();
@@ -149,12 +151,13 @@ public class WebScraper {
 	 * @param test_mode set this to true when running unit tests
 	 * @return items scraped from Amazon
 	 */
-	public List<Item> scrapeAmazon(String keyword, boolean test_mode) {
+	public List<Item> scrapeAmazon(String keyword) {
 		try {
 			// The following part is added by awtang
 			// We scrape data from another website
 			String searchUrl = ANOTHER_URL + "/s/ref=sr_st_date-desc-rank?keywords="
 					+ URLEncoder.encode(keyword, "UTF-8") + "&sort=date-desc-rank";
+			System.out.println(searchUrl);
 			HtmlPage page = client.getPage(searchUrl);
 			
 			List<?> other_items = (List<?>) page.getByXPath("//li[@class='s-result-item celwidget  AdHolder']"
@@ -173,7 +176,7 @@ public class WebScraper {
 				HtmlElement spanPrice_fractional = ((HtmlElement) htmlItem.getFirstByXPath(".//sup[@class='sx-price-fractional']"));
 				HtmlElement spanDate = ((HtmlElement) htmlItem.getFirstByXPath(".//span[@class='a-size-small a-color-secondary']"));
 				
-				Item item = test_mode ? new Item(true) : new Item();
+				Item item = new Item();
 				// The date is set here
 				DateFormat df = new SimpleDateFormat("MMM d, yyyy", Locale.US);
 				if (spanDate != null && !spanDate.asText().matches("^by.*")) {
@@ -221,10 +224,10 @@ public class WebScraper {
 				if (itemAnchor.getHrefAttribute().matches("^https://.*")) {
 					// Some links starts with "https://"
 					System.out.println(itemAnchor.getHrefAttribute() + "\n");
-					if (test_mode == false) { item.setUrl(itemAnchor.getHrefAttribute()); }
+					item.setUrl(itemAnchor.getHrefAttribute());
 				} else {
 					System.out.println(ANOTHER_URL + itemAnchor.getHrefAttribute() + "\n");
-					if (test_mode == false) { item.setUrl(ANOTHER_URL + itemAnchor.getHrefAttribute()); }
+					item.setUrl(ANOTHER_URL + itemAnchor.getHrefAttribute());
 				}
 				// The date is set previously
 				

@@ -2,6 +2,7 @@ package comp3111.webscraper;
 
 // New imports by awtang
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  * This class is for testing the class "WebScraper"
@@ -16,28 +17,28 @@ public class WebScraperTest {
 	 */
 	@Test
 	public void testScrapeAmazon() {
-		ws.scrapeAmazon("apple", true);
-		ws.scrapeAmazon("bag", true);
-		ws.scrapeAmazon("ball", true);
-		ws.scrapeAmazon("calculator", true);
-		ws.scrapeAmazon("chair", true);
-		ws.scrapeAmazon("diamond", true);
-		ws.scrapeAmazon("g-shock", true);
-		ws.scrapeAmazon("gta5", true);
-		ws.scrapeAmazon("harry potter", true);
-		ws.scrapeAmazon("inception", true);
-		ws.scrapeAmazon("iphone", true);
-		ws.scrapeAmazon("jewelry", true);
-		ws.scrapeAmazon("microsoft office", true);
-		ws.scrapeAmazon("minecraft", true);
-		ws.scrapeAmazon("pen", true);
-		ws.scrapeAmazon("pineapple", true);
-		ws.scrapeAmazon("samsung", true);
-		ws.scrapeAmazon("sony", true);
-		ws.scrapeAmazon("superman", true);
-		ws.scrapeAmazon("watch", true);
+		assertFalse(ws.scrapeAmazon("apple").isEmpty());
+		assertFalse(ws.scrapeAmazon("bag").isEmpty());
+		assertFalse(ws.scrapeAmazon("ball").isEmpty());
+		assertFalse(ws.scrapeAmazon("calculator").isEmpty());
+		assertFalse(ws.scrapeAmazon("chair").isEmpty());
+		assertFalse(ws.scrapeAmazon("diamond").isEmpty());
+		assertFalse(ws.scrapeAmazon("g-shock").isEmpty());
+		assertFalse(ws.scrapeAmazon("gta5").isEmpty());
+		assertFalse(ws.scrapeAmazon("harry potter").isEmpty());
+		assertFalse(ws.scrapeAmazon("inception").isEmpty());
+		assertFalse(ws.scrapeAmazon("iphone").isEmpty());
+		assertFalse(ws.scrapeAmazon("jewelry").isEmpty());
+		assertFalse(ws.scrapeAmazon("microsoft office").isEmpty());
+		assertFalse(ws.scrapeAmazon("minecraft").isEmpty());
+		assertFalse(ws.scrapeAmazon("pen").isEmpty());
+		assertFalse(ws.scrapeAmazon("pineapple").isEmpty());
+		assertFalse(ws.scrapeAmazon("samsung").isEmpty());
+		assertFalse(ws.scrapeAmazon("sony").isEmpty());
+		assertFalse(ws.scrapeAmazon("superman").isEmpty());
+		assertFalse(ws.scrapeAmazon("watch").isEmpty());
 		
-		ws.scrapeAmazon("cwLfnfzoBcCGlGdZneyP", true); // There should be no results
-		ws.scrapeAmazon("LCPKqiZqgIBAISHncpPC", true); // There should be no results
+		assertTrue(ws.scrapeAmazon("cwLfnfzoBcCGlGdZneyP").isEmpty()); // There should be no results
+		assertTrue(ws.scrapeAmazon("LCPKqiZqgIBAISHncpPC").isEmpty()); // There should be no results
 	}
 }

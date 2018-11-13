@@ -14,7 +14,7 @@ public class ItemTest {
 	 */
 	@Test
 	public void testSetTitle() {
-		Item i = new Item(true);
+		Item i = new Item();
 		i.setTitle("ABCDE");
 		assertEquals("ABCDE", i.getTitle());
 	}
