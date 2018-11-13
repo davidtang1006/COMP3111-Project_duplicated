@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="comp3111.webscraper.ControllerTask6Test" tests="4" skipped="0" failures="0" errors="0" timestamp="2018-11-11T10:23:47" hostname="ImC4ks-MacBook-Pro.local" time="1.35">
+<testsuite name="comp3111.webscraper.ControllerTask6Test" tests="3" skipped="0" failures="0" errors="0" timestamp="2018-11-13T13:00:53" hostname="ImC4ks-MacBook-Pro.local" time="1.378">
   <properties/>
-  <testcase name="testUpdateSearchListsLastSearch" classname="comp3111.webscraper.ControllerTask6Test" time="1.338"/>
-  <testcase name="testUpdateSearchListsCurrSearch" classname="comp3111.webscraper.ControllerTask6Test" time="0.002"/>
-  <testcase name="testUpdateSearchListsFirstAdd" classname="comp3111.webscraper.ControllerTask6Test" time="0.006"/>
-  <testcase name="testReloadLastSearch" classname="comp3111.webscraper.ControllerTask6Test" time="0.0"/>
+  <testcase name="testUpdateSearchListsLastSearch" classname="comp3111.webscraper.ControllerTask6Test" time="1.376"/>
+  <testcase name="testUpdateSearchListsCurrSearch" classname="comp3111.webscraper.ControllerTask6Test" time="0.001"/>
+  <testcase name="testUpdateSearchListsFirstAdd" classname="comp3111.webscraper.ControllerTask6Test" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

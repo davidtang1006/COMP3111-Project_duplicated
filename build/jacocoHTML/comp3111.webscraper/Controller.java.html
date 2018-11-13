@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Hyperlink;
 import java.util.List;
+import java.util.Vector;
 
 
 /**
@@ -65,125 +66,175 @@ public class Controller {
     /**
      * Default controller
      */
-<span class="nc" id="L68">    public Controller() {</span>
-<span class="nc" id="L69">    	scraper = new WebScraper();</span>
-<span class="nc" id="L70">    	labelMenuLastSearch = new MenuItem();</span>
-<span class="nc" id="L71">    }</span>
+<span class="fc" id="L69">    public Controller() {</span>
+<span class="fc" id="L70">    	scraper = new WebScraper();</span>
+<span class="fc" id="L71">    	labelMenuLastSearch = new MenuItem();</span>
+<span class="fc" id="L72">    }</span>
 
     /**
      * Default initializer. It is empty.
      */
     @FXML
     private void initialize() {
-<span class="nc" id="L78">    	labelMenuLastSearch.setDisable(true);</span>
-<span class="nc" id="L79">    }</span>
+<span class="nc" id="L79">    	labelMenuLastSearch.setDisable(true);</span>
+<span class="nc" id="L80">    }</span>
     
     /**
      * Called when the search button is pressed.
      */
     @FXML
     private void actionSearch() {
-<span class="nc" id="L86">    	System.out.println(&quot;actionSearch: &quot; + textFieldKeyword.getText());</span>
-<span class="nc" id="L87">    	List&lt;Item&gt; result = scraper.scrape(textFieldKeyword.getText());</span>
-<span class="nc" id="L88">    	String output = &quot;&quot;;</span>
-<span class="nc bnc" id="L89" title="All 2 branches missed.">    	for (Item item : result) {</span>
-<span class="nc" id="L90">    		output += item.getTitle() + &quot;\t&quot; + item.getPrice() + &quot;\t&quot; + item.getUrl() + &quot;\n&quot;;</span>
-<span class="nc" id="L91">    	}</span>
-<span class="nc" id="L92">    	textAreaConsole.setText(output);</span>
+<span class="nc" id="L87">    	System.out.println(&quot;actionSearch: &quot; + textFieldKeyword.getText());</span>
+<span class="nc" id="L88">    	List&lt;Item&gt; result = scraper.scrape(textFieldKeyword.getText());</span>
+<span class="nc" id="L89">    	String output = &quot;&quot;;</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">    	for (Item item : result) {</span>
+<span class="nc" id="L91">    		output += item.getTitle() + &quot;\t&quot; + item.getPrice() + &quot;\t&quot; + item.getUrl() + &quot;\n&quot;;</span>
+<span class="nc" id="L92">    	}</span>
+<span class="nc" id="L93">    	textAreaConsole.setText(output);</span>
     	
-<span class="nc" id="L94">    	labelCount.setText(&quot;hi&quot;);</span>
-<span class="nc" id="L95">    	updateSearchLists(result);</span>
-<span class="nc" id="L96">    }</span>
+<span class="nc" id="L95">    	labelCount.setText(&quot;hi&quot;);</span>
+<span class="nc" id="L96">    	updateSearchLists(result);</span>
+<span class="nc" id="L97">    }</span>
     
     /**
      * Called when the new button is pressed. Very dummy action - print something in the command prompt.
      */
     @FXML
     private void actionNew() {
-<span class="nc" id="L103">    	System.out.println(&quot;actionNew&quot;);</span>
-<span class="nc" id="L104">    }</span>
+<span class="nc" id="L104">    	System.out.println(&quot;actionNew&quot;);</span>
+<span class="nc" id="L105">    }</span>
     
     // by Calvin, task 6
     /**
      * task 6, update the searched lists upon new searches
      * @author imc4kmacpro
-     * @param items
+     * @param List&lt;Item&gt; items
+     * @return void
+     * @exception none
      */
-    public void updateSearchLists(List&lt;Item&gt; items) {
-<span class="nc bnc" id="L113" title="All 2 branches missed.">    	if(currSearch != null) { // not first search, enable lastSearch function</span>
-<span class="nc" id="L114">    		labelMenuLastSearch.setDisable(false);</span>
+    private void updateSearchLists(List&lt;Item&gt; items) {
+<span class="fc bfc" id="L116" title="All 2 branches covered.">    	if(currSearch != null) { // not first search, enable lastSearch function</span>
+<span class="fc" id="L117">    		labelMenuLastSearch.setDisable(false);</span>
     	}
-<span class="nc" id="L116">    	lastSearch = currSearch;</span>
-<span class="nc" id="L117">    	currSearch = items;</span>
-<span class="nc" id="L118">    }</span>
+<span class="fc" id="L119">    	lastSearch = currSearch;</span>
+<span class="fc" id="L120">    	currSearch = items;</span>
+<span class="fc" id="L121">    }</span>
+    
+    /**
+     * for testing
+     * @author imc4kmacpro
+     * @param List&lt;Item&gt; items
+     * @return void
+     * @exception none
+     */
+    public void updateSearchListsTest(List&lt;Item&gt; items) {
+<span class="fc" id="L131">    	updateSearchLists(items);</span>
+<span class="fc" id="L132">    }</span>
+    
+    /**
+     * for testing
+     * @author imc4kmacpro
+     * @param null
+     * @return List&lt;Item&gt; currSearch
+     * @exception none
+     */
+    public List&lt;Item&gt; getCurrSearch() {
+<span class="fc" id="L142">    	return currSearch;</span>
+    }
+    
+    /**
+     * for testing
+     * @author imc4kmacpro
+     * @param null
+     * @return lastSearch
+     * @exception none
+     */
+    public List&lt;Item&gt; getLastSearch() {
+<span class="fc" id="L153">    	return lastSearch;</span>
+    }
     
     /**
      * task 6, show about team
      * @author imc4kmacpro
+     * @param ActionEvent event
+     * @return void
+     * @exception none
      */
     @FXML
     public void showAboutTeam(ActionEvent event) {
-<span class="nc" id="L126">    	Alert alert = new Alert(AlertType.INFORMATION);</span>
-<span class="nc" id="L127">    	alert.setTitle(&quot;About our team&quot;);</span>
-<span class="nc" id="L128">    	alert.setHeaderText(&quot;Information about our team&quot;);</span>
-<span class="nc" id="L129">    	alert.setContentText(&quot;Team member 1: Chu Cheuk Kiu\tckchuad\tImC4k\n&quot;</span>
+<span class="nc" id="L165">    	Alert alert = new Alert(AlertType.INFORMATION);</span>
+<span class="nc" id="L166">    	alert.setTitle(&quot;About our team&quot;);</span>
+<span class="nc" id="L167">    	alert.setHeaderText(&quot;Information about our team&quot;);</span>
+<span class="nc" id="L168">    	alert.setContentText(&quot;Team member 1: Chu Cheuk Kiu\tckchuad\tImC4k\n&quot;</span>
     			+ &quot;Team member 2: Leung Lai Yung\tlyleungad\tBenker-Leung\n&quot;
     			+ &quot;Team member 3: Tang Au Wa\tawtang\tdavidtang1006\n&quot;);
-<span class="nc" id="L132">    	alert.setResizable(true);</span>
-<span class="nc" id="L133">    	alert.showAndWait();</span>
-<span class="nc" id="L134">    }</span>
+<span class="nc" id="L171">    	alert.setResizable(true);</span>
+<span class="nc" id="L172">    	alert.showAndWait();</span>
+<span class="nc" id="L173">    }</span>
     
     /**
      * task 6, quit button
      * @author imc4kmacpro
+     * @param ActionEvent event
+     * @return void
+     * @exception none
      */
     @FXML
-    public void terminateWindow(ActionEvent event) throws Exception {
-<span class="nc" id="L142">    	Platform.exit();</span>
-<span class="nc" id="L143">    }</span>
+    public void terminateWindow(ActionEvent event) {
+<span class="nc" id="L184">    	Platform.exit();</span>
+<span class="nc" id="L185">    }</span>
     
     /**
      * task 6, close button
      * @author imc4kmacpro
+     * @param null
+     * @return void
+     * @exception none
      */
     @FXML
     void closeWindow() {
-<span class="nc" id="L151">    	lastSearch = currSearch;</span>
-<span class="nc" id="L152">    	currSearch = null;</span>
-<span class="nc" id="L153">    	labelMenuLastSearch.setDisable(false); // enable last search</span>
-
+<span class="nc" id="L196">    	lastSearch = currSearch;</span>
+<span class="nc bnc" id="L197" title="All 2 branches missed.">    	if(lastSearch != null) {</span>
+<span class="nc" id="L198">    		labelMenuLastSearch.setDisable(false); // enable last search</span>
+    	}
+    	
     	// Console tab
-<span class="nc" id="L156">    	textAreaConsole.setText(&quot;&quot;); // resets console</span>
+<span class="nc" id="L202">    	textAreaConsole.setText(&quot;&quot;); // resets console</span>
 
     	// Summary tab
-<span class="nc" id="L159">    	labelPrice.setText(&quot;&lt;AvgPrice&gt;&quot;);</span>
-<span class="nc" id="L160">    	labelMin.setText(&quot;&lt;Lowest&gt;&quot;);</span>
-<span class="nc" id="L161">    	labelMin.setVisited(false);</span>
-<span class="nc" id="L162">    	labelLatest.setText(&quot;&lt;Latest&gt;&quot;);</span>
-<span class="nc" id="L163">    	labelLatest.setVisited(false);</span>
+<span class="nc" id="L205">    	labelPrice.setText(&quot;&lt;AvgPrice&gt;&quot;);</span>
+<span class="nc" id="L206">    	labelMin.setText(&quot;&lt;Lowest&gt;&quot;);</span>
+<span class="nc" id="L207">    	labelMin.setVisited(false);</span>
+<span class="nc" id="L208">    	labelLatest.setText(&quot;&lt;Latest&gt;&quot;);</span>
+<span class="nc" id="L209">    	labelLatest.setVisited(false);</span>
 
     	// Table tab
-//    	createTable(currSearch);
-<span class="nc" id="L167">    	ObservableList&lt;Item&gt; emptyList = FXCollections.observableArrayList();</span>
+<span class="nc" id="L212">    	Vector&lt;Item&gt; items = new Vector&lt;Item&gt;();</span>
+<span class="nc" id="L213">		List&lt;Item&gt; items_list = items;</span>
+//		ObservableList&lt;Item&gt; emptyList = getList(items_list);
 //    	table.setItems(emptyList);
 
-<span class="nc" id="L170">    }</span>
+<span class="nc" id="L217">    }</span>
     
     /**
      * task 6, reload previous search state
      * @author imc4kmacpro
+     * @param null
+     * @return void
+     * @exception none
      */
     @FXML
     void reloadLastSearch() {
-<span class="nc" id="L178">    	labelMenuLastSearch.setDisable(true);</span>
-<span class="nc" id="L179">    	String output = &quot;&quot;;</span>
-<span class="nc bnc" id="L180" title="All 2 branches missed.">    	for (Item item : lastSearch) {</span>
-<span class="nc" id="L181">    		output += item.getTitle() + &quot;\t&quot; + item.getPrice() + &quot;\t&quot; + item.getUrlText() + &quot;\n&quot;;</span>
-<span class="nc" id="L182">    	}</span>
-<span class="nc" id="L183">    	textAreaConsole.setText(output);</span>
+<span class="nc" id="L228">    	labelMenuLastSearch.setDisable(true);</span>
+<span class="nc" id="L229">    	String output = &quot;&quot;;</span>
+<span class="nc bnc" id="L230" title="All 2 branches missed.">    	for (Item item : lastSearch) {</span>
+<span class="nc" id="L231">    		output += item.getTitle() + &quot;\t&quot; + item.getPrice() + &quot;\t&quot; + item.getUrl() + &quot;\n&quot;;</span>
+<span class="nc" id="L232">    	}</span>
+<span class="nc" id="L233">    	textAreaConsole.setText(output);</span>
+//    	updateSearchLists(lastSearch);
 //    	insertSummary(lastSearch);
 //    	createTable(lastSearch);
-<span class="nc" id="L186">    }</span>
+<span class="nc" id="L237">    }</span>
     // end by Calvin, task 6
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

@@ -228,7 +228,7 @@ public class Controller {
     	labelMenuLastSearch.setDisable(true);
     	String output = "";
     	for (Item item : lastSearch) {
-    		output += item.getTitle() + "\t" + item.getPrice() + "\t" + item.getUrlText() + "\n";
+    		output += item.getTitle() + "\t" + item.getPrice() + "\t" + item.getUrl() + "\n";
     	}
     	textAreaConsole.setText(output);
 //    	updateSearchLists(lastSearch);

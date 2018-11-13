@@ -23,6 +23,7 @@ public class ControllerTask6Test {
 		item.setTitle("haha");
 		item.setPrice(3.333);
 		item.setDate("Nov 08", new SimpleDateFormat("MMM dd", Locale.ENGLISH));
+		item.setUrl("www.google.com.hk");
 		items_v.add(item);
 		List<Item> items_l = items_v;
 		c.updateSearchListsTest(items_l);
@@ -45,6 +46,7 @@ public class ControllerTask6Test {
 		item.setTitle("haha");
 		item.setPrice(3.333);
 		item.setDate("Nov 08", new SimpleDateFormat("MMM dd", Locale.ENGLISH));
+		item.setUrl("www.google.com.hk");
 		items_v.add(item);
 		List<Item> items_l = items_v;
 		c.updateSearchListsTest(items_l);
@@ -53,6 +55,7 @@ public class ControllerTask6Test {
 		item2.setTitle("2nd item");
 		item2.setPrice(1000000);
 		item2.setDate("Oct 31", new SimpleDateFormat("MMM dd", Locale.ENGLISH));
+		item2.setUrl("www.youtube.com.hk");
 		items_v.add(item2);
 		List<Item> items2_l = items_v;
 		c.updateSearchListsTest(items2_l);
@@ -84,6 +87,7 @@ public class ControllerTask6Test {
 		item2.setTitle("2nd item");
 		item2.setPrice(1000000);
 		item2.setDate("Oct 31", new SimpleDateFormat("MMM dd", Locale.ENGLISH));
+		item2.setUrl("www.youtube.com.hk");
 		items_v.add(item2);
 		List<Item> items2_l = items_v;
 		c.updateSearchListsTest(items2_l);
