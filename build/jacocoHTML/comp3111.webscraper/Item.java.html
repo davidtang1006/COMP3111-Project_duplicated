@@ -9,7 +9,7 @@ import javafx.scene.control.Hyperlink;
 public class Item {
 	private String title ; 
 	private double price ;
-	private Hyperlink url ; // modified by ckchuad, from String to Hyperlink
+	private String url ; // modified by ckchuad, from Hyperlink to String
 	private Date date; // added by ckchuad
 	private DateFormat format; // added by ckchaud
 	
@@ -17,49 +17,44 @@ public class Item {
 	 * to initialize url object
 	 * @author imc4kmacpro
 	 */
-<span class="fc" id="L20">	public Item() {</span>
-//		url = new Hyperlink(&quot;https://google.com.hk&quot;);
-<span class="fc" id="L22">	}</span>
+<span class="nc" id="L20">	public Item() {</span>
+<span class="nc" id="L21">	}</span>
 	
 	public String getTitle() {
-<span class="fc" id="L25">		return title;</span>
+<span class="nc" id="L24">		return title;</span>
 	}
 	public void setTitle(String title) {
-<span class="fc" id="L28">		this.title = title;</span>
-<span class="fc" id="L29">	}</span>
+<span class="nc" id="L27">		this.title = title;</span>
+<span class="nc" id="L28">	}</span>
 	public double getPrice() {
-<span class="fc" id="L31">		return price;</span>
+<span class="nc" id="L30">		return price;</span>
 	}
 	public void setPrice(double price) {
-<span class="fc" id="L34">		this.price = price;</span>
-<span class="fc" id="L35">	}</span>
+<span class="nc" id="L33">		this.price = price;</span>
+<span class="nc" id="L34">	}</span>
+	
 	/**
 	 *
-	 * return value: changed from String to Hyperlink
+	 * return value: changed from Hyperlink back to String
 	 * @author imc4kmacpro
-	 * @return Hyperlink
+	 * @param void
+	 * @return String
+	 * @exception none
 	 * 
 	 */
-	public Hyperlink getUrl() {
-<span class="nc" id="L44">		return url;</span>
-	}
-	
-	/** Task 4
-	 * for adding event handler
-	 * @author imc4kmacpro
-	 * @return: String
-	 */
-	public String getUrlText() { 
-<span class="nc" id="L53">		return url.getText();</span>
+	public String getUrl() {
+<span class="nc" id="L46">		return url;</span>
 	}
 	
 	/**
-	 * @param String url 
 	 * @author imc4kmacpro
+	 * @param String url 
+	 * @return void
+	 * @exception none
 	 */
 	public void setUrl(String url) {
-<span class="nc" id="L61">		this.url.setText(url);</span>
-<span class="nc" id="L62">	}</span>
+<span class="nc" id="L56">		this.url = url;</span>
+<span class="nc" id="L57">	}</span>
 	
 	
 	/**
@@ -71,13 +66,13 @@ public class Item {
 	 */
 	public void setDate(String date, DateFormat format){
 		try{
-<span class="fc" id="L74">			this.format = format;</span>
-<span class="fc" id="L75">			this.date = format.parse(date);</span>
-<span class="nc" id="L76">		}catch(ParseException e) {</span>
-<span class="nc" id="L77">			System.out.println(e.toString());</span>
-<span class="nc" id="L78">			this.date = null;</span>
-<span class="fc" id="L79">		}</span>
-<span class="fc" id="L80">	}</span>
+<span class="nc" id="L69">			this.format = format;</span>
+<span class="nc" id="L70">			this.date = format.parse(date);</span>
+<span class="nc" id="L71">		}catch(ParseException e) {</span>
+<span class="nc" id="L72">			System.out.println(e.toString());</span>
+<span class="nc" id="L73">			this.date = null;</span>
+<span class="nc" id="L74">		}</span>
+<span class="nc" id="L75">	}</span>
 
 	/**
 	 * if date is null, then return &quot;No Date&quot;
@@ -85,10 +80,10 @@ public class Item {
 	 * @return String
 	 */
 	public String getDate() {
-<span class="pc bpc" id="L88" title="1 of 2 branches missed.">		if(date != null) {</span>
-<span class="fc" id="L89">			return format.format(date);</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">		if(date != null) {</span>
+<span class="nc" id="L84">			return format.format(date);</span>
 		}
-<span class="nc" id="L91">		return &quot;No Date&quot;;</span>
+<span class="nc" id="L86">		return &quot;No Date&quot;;</span>
 	}
 	
 

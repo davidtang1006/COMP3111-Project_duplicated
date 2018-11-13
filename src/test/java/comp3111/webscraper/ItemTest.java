@@ -52,4 +52,15 @@ public class ItemTest {
 		i.setDate("Nov 8", new SimpleDateFormat("MMM dd", Locale.ENGLISH));
 		assertEquals(i.getDate(), "Nov 08");
 	}
+	
+	/**
+	 * test set/get url
+	 * @author imc4kmacpro
+	 */
+	@Test
+	public void testSetUrl() {
+		Item i = new Item();
+		i.setUrl("www.google.com.hk");
+		assertEquals(i.getDate(), "www.google.com.hk");
+	}
 }
