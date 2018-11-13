@@ -77,12 +77,12 @@ public class Controller extends WebScraperApplication{
     /**
      * Default controller
      */
-<span class="nc" id="L80">    public Controller() {</span>
-<span class="nc" id="L81">    	scraper = new WebScraper();</span>
+<span class="fc" id="L80">    public Controller() {</span>
+<span class="fc" id="L81">    	scraper = new WebScraper();</span>
     	// by Calvin, task 4
-<span class="nc" id="L83">    	host = this.getHostServices();</span>
+<span class="fc" id="L83">    	host = this.getHostServices();</span>
     	// end by Calvin, task 4
-<span class="nc" id="L85">    }</span>
+<span class="fc" id="L85">    }</span>
 
     /**
      * Default initializer. It is empty.
@@ -145,11 +145,11 @@ public class Controller extends WebScraperApplication{
      * @exception none
      */
     private ObservableList&lt;Item&gt; getList(List&lt;Item&gt; items){
-<span class="nc" id="L148">    	ObservableList&lt;Item&gt; list = FXCollections.observableArrayList();</span>
-<span class="nc bnc" id="L149" title="All 2 branches missed.">    	for(Item item: items) {</span>
-<span class="nc" id="L150">    		list.add(item);</span>
-<span class="nc" id="L151">    	}</span>
-<span class="nc" id="L152">    	return list;</span>
+<span class="fc" id="L148">    	ObservableList&lt;Item&gt; list = FXCollections.observableArrayList();</span>
+<span class="fc bfc" id="L149" title="All 2 branches covered.">    	for(Item item: items) {</span>
+<span class="fc" id="L150">    		list.add(item);</span>
+<span class="fc" id="L151">    	}</span>
+<span class="fc" id="L152">    	return list;</span>
     }
     
     /**
@@ -159,7 +159,7 @@ public class Controller extends WebScraperApplication{
      * @return ObservableList&lt;Item&gt;
      */
     public ObservableList&lt;Item&gt; getListTest(List&lt;Item&gt; items){
-<span class="nc" id="L162">    	return getList(items);</span>
+<span class="fc" id="L162">    	return getList(items);</span>
     }
     
     /**

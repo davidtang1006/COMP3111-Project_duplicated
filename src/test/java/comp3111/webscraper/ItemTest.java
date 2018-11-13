@@ -61,6 +61,6 @@ public class ItemTest {
 	public void testSetUrl() {
 		Item i = new Item();
 		i.setUrl("www.google.com.hk");
-		assertEquals(i.getDate(), "www.google.com.hk");
+		assertEquals(i.getUrl(), "www.google.com.hk");
 	}
 }
