@@ -105,12 +105,14 @@ public class Controller extends WebScraperApplication{
     
     /**
      * Default controller
+     * @author imc4kmacpro
      */
     public Controller() {
     	scraper = new WebScraper();
       // by Calvin, task 6
     	labelMenuLastSearch = new MenuItem();
       // end by Calvin, task 6
+    	
     	// by Calvin, task 4
     	host = this.getHostServices();
     	// end by Calvin, task 4
@@ -118,6 +120,7 @@ public class Controller extends WebScraperApplication{
 
     /**
      * Default initializer. It is empty.
+     * @author imc4kmacpro Benker
      */
     @FXML
     private void initialize() {
@@ -129,6 +132,8 @@ public class Controller extends WebScraperApplication{
     
     /**
      * Called when the search button is pressed.
+     * NOTE: part of code should be refactored into a method: updateUI()
+     * @author imc4kmacpro Benker
      */
     @FXML
     private void actionSearch() {
@@ -158,16 +163,25 @@ public class Controller extends WebScraperApplication{
     }
     
     /**
-     * Called when the new button is pressed. Very dummy action - print something in the command prompt.
+     * test method for actionSearch
+     * @author imc4kmacpro
+     * @param keyword
      */
-    @FXML
-    private void actionNew() {
-//    	System.out.println("actionNew");
+    public List<Item> actionSearchTest(String keyword) {
+    	textFieldKeyword.setText(keyword);
+    	actionSearch();
+    	return currSearch;
     }
     
-    public void actionNewTest() {
-    	actionNew();
+    /**
+     * test method for getting scraper object
+     * @author imc4kmacpro
+     * @return scraper
+     */
+    public WebScraper getScraper() {
+    	return scraper;
     }
+    
     
     // by Calvin, open link helper function
     /**
@@ -177,9 +191,19 @@ public class Controller extends WebScraperApplication{
      * or 
      * openDoc(label.getText());
      * @author imc4kmacpro
+     * @param url
      */
     private void openDoc(String url) {
     	host.showDocument(url);
+    }
+    
+    /**
+     * test method for openDoc
+     * @author imc4kmacpro
+     * @param url the string that requires the browser to open
+     */
+    public void openDocTest(String url) {
+    	openDoc(url);
     }
     // end by Calvin, hyperlink helper function
     
