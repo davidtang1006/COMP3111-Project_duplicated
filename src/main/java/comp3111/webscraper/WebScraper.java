@@ -1,6 +1,7 @@
 package comp3111.webscraper;
 
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -145,6 +146,90 @@ public class WebScraper {
 	}
 	
 	/**
+	 * This function suppose to return lists of urls
+	 * 
+	 * @author Benker
+	 * @param defaultUrl - the first page
+	 * @return A list of string starting with the first page
+	 */
+	public List<String> getPagesCraigslist(String defaultUrl)
+	{
+		List<String> pages = new ArrayList<String>();
+		try {
+			int pageNum = 1;
+			String baseURL = "https://newyork.craigslist.org";
+			String searchUrl = defaultUrl;
+			HtmlPage page = client.getPage(defaultUrl);
+			// add the default to pages
+			pages.add(defaultUrl);
+			while(true) {
+				// get href in html
+				HtmlAnchor nextUrlObject = ((HtmlAnchor) page.getFirstByXPath(".//span/a[@class='button next']"));
+				// get the text in href
+				String nextUrl = nextUrlObject.getHrefAttribute().trim();
+				System.out.println("Getting page " + (pageNum++));
+				System.out.println("Page Url:" + searchUrl);
+				// if things are in href
+				if(!nextUrl.equals("")) {
+					searchUrl = baseURL + nextUrl;
+					page = client.getPage(searchUrl);
+					pages.add(searchUrl);
+				}
+				else {
+					break;
+				}
+			}
+			return pages;
+		} catch (Exception e) {
+			// means reach last page
+			return pages;
+		}
+	}
+	
+	
+	/**
+	 * This function suppose to return lists of urls
+	 * 
+	 * @author Benker
+	 * @param defaultUrl - the first page
+	 * @return A list of string starting with the first page
+	 */
+	public List<String> getPagesAmazon(String defaultUrl)
+	{
+		List<String> pages = new ArrayList<String>();
+		try {
+			int pageNum = 1;
+			String baseURL = "https://www.amazon.com";
+			String searchUrl = defaultUrl;
+			HtmlPage page = client.getPage(defaultUrl);
+			// add the default to pages
+			pages.add(defaultUrl);
+			while(true) {
+				// get href in html
+				HtmlAnchor nextUrlObject = ((HtmlAnchor) page.getFirstByXPath(".//span/a[@class='pagnNext']"));
+				// get the text in href
+				String nextUrl = nextUrlObject.getHrefAttribute().trim();
+				System.out.println("Getting page " + (pageNum++));
+				System.out.println("Page Url:" + searchUrl);
+				// if things are in href
+				if(!nextUrl.equals("")) {
+					searchUrl = baseURL + nextUrl;
+					page = client.getPage(searchUrl);
+					pages.add(searchUrl);
+				}
+				else {
+					break;
+				}
+			}
+			return pages;
+		} catch (Exception e) {
+			// means reach last page
+			return pages;
+		}
+	}
+	
+	
+}
 	 * Scrape items from Amazon. One page is scraped. Used in task 2.
 	 * @author awtang
 	 * @param keyword the keyword typed in the text field

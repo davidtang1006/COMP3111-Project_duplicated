@@ -24,7 +24,6 @@ public class Item {
 	 * @author ckchuad
 	 */
 	public Item() {
-
 	}
 	
 	/**
