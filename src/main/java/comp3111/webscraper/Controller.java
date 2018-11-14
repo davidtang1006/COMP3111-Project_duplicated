@@ -3,6 +3,18 @@
  */
 package comp3111.webscraper;
 
+
+// by Calvin, task 6
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+// end by Calvin, task 6
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 // by Calvin, for task 4
 import javafx.application.HostServices;
 import javafx.application.Platform;
@@ -23,6 +35,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Hyperlink;
 import java.util.List;
+import java.util.Vector;
 
 
 /**
@@ -74,11 +87,26 @@ public class Controller extends WebScraperApplication{
     
     private WebScraper scraper;
     
+    // by Calvin, task 6
+    @FXML
+    private MenuItem labelMenuLastSearch;
+
+    @FXML
+    private MenuItem labelAboutTeam;
+    
+    private List<Item> currSearch;
+
+    private List<Item> lastSearch;
+    // end by Calvin, task 6
+    
     /**
      * Default controller
      */
     public Controller() {
     	scraper = new WebScraper();
+      // by Calvin, task 6
+    	labelMenuLastSearch = new MenuItem();
+      // end by Calvin, task 6
     	// by Calvin, task 4
     	host = this.getHostServices();
     	// end by Calvin, task 4
@@ -87,10 +115,10 @@ public class Controller extends WebScraperApplication{
     /**
      * Default initializer. It is empty.
      */
-//    @FXML
-//    private void initialize() {
-////    	textAreaConsole.setText("Branch task 4");
-//    }
+    @FXML
+    private void initialize() {
+    	labelMenuLastSearch.setDisable(true);
+    }
     
     /**
      * Called when the search button is pressed.
@@ -105,8 +133,11 @@ public class Controller extends WebScraperApplication{
     	}
     	textAreaConsole.setText(output);
     	
-    	labelCount.setText("hi");
-    	// by Calvin, task 4
+      // by Calvin, task 6
+    	updateSearchLists(result);
+      // end by Calvin, task 6
+    	
+      // by Calvin, task 4
     	createTable(result);
     	// end by Calvin, task 4
     }
@@ -131,9 +162,6 @@ public class Controller extends WebScraperApplication{
      * or 
      * openDoc(label.getText());
      * @author imc4kmacpro
-     * @param String url
-     * @return void
-     * @exception none
      */
     private void openDoc(String url) {
     	host.showDocument(url);
@@ -144,16 +172,15 @@ public class Controller extends WebScraperApplication{
     /**
      * this function is for creating a list to be added into the table for task 4
      * @author imc4kmacpro
-     * @param List<Item> items
-     * @return ObservableList<Item>
-     * @exception none
+     * @param items
+     * @return a list that can be put into a table view
      */
     private ObservableList<Item> getList(List<Item> items){
-    	ObservableList<Item> list = FXCollections.observableArrayList();
+    	ObservableList<Item> olist = FXCollections.observableArrayList();
     	for(Item item: items) {
     		list.add(item);
     	}
-    	return list;
+    	return olist;
     }
     
     /**
@@ -197,4 +224,135 @@ public class Controller extends WebScraperApplication{
     	table.setItems(tableList);
     }
     // end by Calvin, task 4
+    
+    // by Calvin, task 6
+    /**
+     * task 6, update the searched lists upon new searches
+     * @author imc4kmacpro
+     * @param List<Item> items
+     * @return void
+     * @exception none
+     */
+    private void updateSearchLists(List<Item> items) {
+    	if(currSearch != null) { // not first search, enable lastSearch function
+    		labelMenuLastSearch.setDisable(false);
+    	}
+    	lastSearch = currSearch;
+    	currSearch = items;
+    }
+    
+    /**
+     * for testing
+     * @author imc4kmacpro
+     * @param List<Item> items
+     */
+    public void updateSearchListsTest(List<Item> items) {
+    	updateSearchLists(items);
+    }
+    
+    /**
+     * for testing
+     * @author imc4kmacpro
+     * @param null
+     * @return List<Item> currSearch
+     * @exception none
+     */
+    public List<Item> getCurrSearch() {
+    	return currSearch;
+    }
+    
+    /**
+     * for testing
+     * @author imc4kmacpro
+     * @param null
+     * @return lastSearch
+     * @exception none
+     */
+    public List<Item> getLastSearch() {
+    	return lastSearch;
+    }
+    
+    /**
+     * task 6, show about team
+     * @author imc4kmacpro
+     * @param ActionEvent event
+     * @return void
+     * @exception none
+     */
+    @FXML
+    public void showAboutTeam(ActionEvent event) {
+    	Alert alert = new Alert(AlertType.INFORMATION);
+    	alert.setTitle("About our team");
+    	alert.setHeaderText("Information about our team");
+    	alert.setContentText("Team member 1: Chu Cheuk Kiu\tckchuad\tImC4k\n"
+    			+ "Team member 2: Leung Lai Yung\tlyleungad\tBenker-Leung\n"
+    			+ "Team member 3: Tang Au Wa\tawtang\tdavidtang1006\n");
+    	alert.setResizable(true);
+    	alert.showAndWait();
+    }
+    
+    /**
+     * task 6, quit button
+     * @author imc4kmacpro
+     * @param ActionEvent event
+     * @return void
+     * @exception none
+     */
+    @FXML
+    public void terminateWindow(ActionEvent event) {
+    	Platform.exit();
+    }
+    
+    /**
+     * task 6, close button
+     * @author imc4kmacpro
+     * @param null
+     * @return void
+     * @exception none
+     */
+    @FXML
+    void closeWindow() {
+    	lastSearch = currSearch;
+    	if(lastSearch != null) {
+    		labelMenuLastSearch.setDisable(false); // enable last search
+    	}
+    	
+    	// Console tab
+    	textAreaConsole.setText(""); // resets console
+
+    	// Summary tab
+    	labelPrice.setText("<AvgPrice>");
+    	labelMin.setText("<Lowest>");
+    	labelMin.setVisited(false);
+    	labelLatest.setText("<Latest>");
+    	labelLatest.setVisited(false);
+
+    	// Table tab
+    	Vector<Item> items = new Vector<Item>();
+		List<Item> items_list = items;
+//		ObservableList<Item> emptyList = getList(items_list);
+//    	table.setItems(emptyList);
+
+    }
+    
+    /**
+     * task 6, reload previous search state
+     * @author imc4kmacpro
+     * @param null
+     * @return void
+     * @exception none
+     */
+    @FXML
+    void reloadLastSearch() {
+    	labelMenuLastSearch.setDisable(true);
+    	String output = "";
+    	for (Item item : lastSearch) {
+    		output += item.getTitle() + "\t" + item.getPrice() + "\t" + item.getUrl() + "\n";
+    	}
+    	textAreaConsole.setText(output);
+//    	updateSearchLists(lastSearch);
+//    	insertSummary(lastSearch);
+//    	createTable(lastSearch);
+    }
+    // end by Calvin, task 6
 }

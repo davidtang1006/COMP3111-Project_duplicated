@@ -9,7 +9,7 @@ import javafx.scene.control.Hyperlink;
 public class Item {
 	private String title ; 
 	private double price ;
-	private String url ; // modified by ckchuad, from Hyperlink to String
+	private String url ;
 	private Date date; // added by ckchuad
 	private DateFormat format; // added by ckchaud
 	
