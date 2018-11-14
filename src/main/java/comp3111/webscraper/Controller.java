@@ -178,7 +178,7 @@ public class Controller extends WebScraperApplication{
     private ObservableList<Item> getList(List<Item> items){
     	ObservableList<Item> olist = FXCollections.observableArrayList();
     	for(Item item: items) {
-    		list.add(item);
+    		olist.add(item);
     	}
     	return olist;
     }
@@ -330,8 +330,8 @@ public class Controller extends WebScraperApplication{
     	// Table tab
     	Vector<Item> items = new Vector<Item>();
 		List<Item> items_list = items;
-//		ObservableList<Item> emptyList = getList(items_list);
-//    	table.setItems(emptyList);
+		ObservableList<Item> emptyList = getList(items_list);
+    	table.setItems(emptyList);
 
     }
     
@@ -344,15 +344,16 @@ public class Controller extends WebScraperApplication{
      */
     @FXML
     void reloadLastSearch() {
+    	System.out.println("reloading last search");
     	labelMenuLastSearch.setDisable(true);
     	String output = "";
     	for (Item item : lastSearch) {
     		output += item.getTitle() + "\t" + item.getPrice() + "\t" + item.getUrl() + "\n";
     	}
     	textAreaConsole.setText(output);
-//    	updateSearchLists(lastSearch);
-//    	insertSummary(lastSearch);
-//    	createTable(lastSearch);
+    	updateSearchLists(lastSearch);
+//    	getItemsAndDisplay(false);
+    	createTable(lastSearch);
     }
     // end by Calvin, task 6
 }
