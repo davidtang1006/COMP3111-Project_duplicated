@@ -1,8 +1,9 @@
 package comp3111.webscraper;
 
 // New imports by awtang
-import org.junit.Test;
+import java.net.URLEncoder;
 import static org.junit.Assert.*;
+import org.junit.Test;
 
 /**
  * This class is for testing the class "WebScraper"
@@ -10,6 +11,8 @@ import static org.junit.Assert.*;
  */
 public class WebScraperTest {
 	private WebScraper ws = new WebScraper();
+	private static final String url_string_1 = "https://www.amazon.com/s/ref=sr_st_date-desc-rank?keywords=";
+	private static final String url_string_2 = "&sort=date-desc-rank";
 	
 	/**
 	 * Test the method "scrapeAmazon". Multiple keywords are tested.
@@ -17,28 +20,33 @@ public class WebScraperTest {
 	 */
 	@Test
 	public void testScrapeAmazon() {
-		assertFalse(ws.scrapeAmazon("apple").isEmpty());
-		assertFalse(ws.scrapeAmazon("bag").isEmpty());
-		assertFalse(ws.scrapeAmazon("ball").isEmpty());
-		assertFalse(ws.scrapeAmazon("calculator").isEmpty());
-		assertFalse(ws.scrapeAmazon("chair").isEmpty());
-		assertFalse(ws.scrapeAmazon("diamond").isEmpty());
-		assertFalse(ws.scrapeAmazon("g-shock").isEmpty());
-		assertFalse(ws.scrapeAmazon("gta5").isEmpty());
-		assertFalse(ws.scrapeAmazon("harry potter").isEmpty());
-		assertFalse(ws.scrapeAmazon("inception").isEmpty());
-		assertFalse(ws.scrapeAmazon("iphone").isEmpty());
-		assertFalse(ws.scrapeAmazon("jewelry").isEmpty());
-		assertFalse(ws.scrapeAmazon("microsoft office").isEmpty());
-		assertFalse(ws.scrapeAmazon("minecraft").isEmpty());
-		assertFalse(ws.scrapeAmazon("pen").isEmpty());
-		assertFalse(ws.scrapeAmazon("pineapple").isEmpty());
-		assertFalse(ws.scrapeAmazon("samsung").isEmpty());
-		assertFalse(ws.scrapeAmazon("sony").isEmpty());
-		assertFalse(ws.scrapeAmazon("superman").isEmpty());
-		assertFalse(ws.scrapeAmazon("watch").isEmpty());
+		try {
+		assertFalse(ws.scrapeAmazon(url_string_1 + URLEncoder.encode("apple", "UTF-8") + url_string_2).isEmpty());
+		assertFalse(ws.scrapeAmazon(url_string_1 + URLEncoder.encode("bag", "UTF-8") + url_string_2).isEmpty());
+		assertFalse(ws.scrapeAmazon(url_string_1 + URLEncoder.encode("ball", "UTF-8") + url_string_2).isEmpty());
+		assertFalse(ws.scrapeAmazon(url_string_1 + URLEncoder.encode("calculator", "UTF-8") + url_string_2).isEmpty());
+		assertFalse(ws.scrapeAmazon(url_string_1 + URLEncoder.encode("chair", "UTF-8") + url_string_2).isEmpty());
+		assertFalse(ws.scrapeAmazon(url_string_1 + URLEncoder.encode("diamond", "UTF-8") + url_string_2).isEmpty());
+		assertFalse(ws.scrapeAmazon(url_string_1 + URLEncoder.encode("g-shock", "UTF-8") + url_string_2).isEmpty());
+		assertFalse(ws.scrapeAmazon(url_string_1 + URLEncoder.encode("gta5", "UTF-8") + url_string_2).isEmpty());
+		assertFalse(ws.scrapeAmazon(url_string_1 + URLEncoder.encode("harry potter", "UTF-8") + url_string_2).isEmpty());
+		assertFalse(ws.scrapeAmazon(url_string_1 + URLEncoder.encode("inception", "UTF-8") + url_string_2).isEmpty());
+		assertFalse(ws.scrapeAmazon(url_string_1 + URLEncoder.encode("iphone", "UTF-8") + url_string_2).isEmpty());
+		assertFalse(ws.scrapeAmazon(url_string_1 + URLEncoder.encode("jewelry", "UTF-8") + url_string_2).isEmpty());
+		assertFalse(ws.scrapeAmazon(url_string_1 + URLEncoder.encode("microsoft office", "UTF-8") + url_string_2).isEmpty());
+		assertFalse(ws.scrapeAmazon(url_string_1 + URLEncoder.encode("minecraft", "UTF-8") + url_string_2).isEmpty());
+		assertFalse(ws.scrapeAmazon(url_string_1 + URLEncoder.encode("pen", "UTF-8") + url_string_2).isEmpty());
+		assertFalse(ws.scrapeAmazon(url_string_1 + URLEncoder.encode("pineapple", "UTF-8") + url_string_2).isEmpty());
+		assertFalse(ws.scrapeAmazon(url_string_1 + URLEncoder.encode("samsung", "UTF-8") + url_string_2).isEmpty());
+		assertFalse(ws.scrapeAmazon(url_string_1 + URLEncoder.encode("sony", "UTF-8") + url_string_2).isEmpty());
+		assertFalse(ws.scrapeAmazon(url_string_1 + URLEncoder.encode("superman", "UTF-8") + url_string_2).isEmpty());
+		assertFalse(ws.scrapeAmazon(url_string_1 + URLEncoder.encode("watch", "UTF-8") + url_string_2).isEmpty());
 		
-		assertTrue(ws.scrapeAmazon("cwLfnfzoBcCGlGdZneyP").isEmpty()); // There should be no results
-		assertTrue(ws.scrapeAmazon("LCPKqiZqgIBAISHncpPC").isEmpty()); // There should be no results
+		assertTrue(ws.scrapeAmazon(url_string_1 + URLEncoder.encode("cwLfnfzoBcCGlGdZneyP", "UTF-8") + url_string_2).isEmpty()); // There should be no results
+		assertTrue(ws.scrapeAmazon(url_string_1 + URLEncoder.encode("LCPKqiZqgIBAISHncpPC", "UTF-8") + url_string_2).isEmpty()); // There should be no results
+		}
+		catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 }
