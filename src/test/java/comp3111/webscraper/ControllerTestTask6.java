@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
 
-public class ControllerTask6Test {
+public class ControllerTestTask6 {
 	/**
 	 * test update search list method
 	 * a list should be assigned to currSearch
