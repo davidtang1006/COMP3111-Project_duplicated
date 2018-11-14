@@ -147,7 +147,7 @@ public class Controller extends WebScraperApplication{
     	
     	
     	// added by Benker for task5
-    	// set refine button disable to fasle after search
+    	// set refine button disable to false after search
 //    	if(result.size()>0) {
 //    		refineButton.setDisable(false);
 //    	}
