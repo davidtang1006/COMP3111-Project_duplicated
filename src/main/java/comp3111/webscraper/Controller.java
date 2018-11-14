@@ -103,11 +103,14 @@ public class Controller extends WebScraperApplication{
     private List<Item> lastSearch;
     // end by Calvin, task 6
     
+    private boolean test_mode; //added by Calvin, 4.1
+    
     /**
      * Default controller
      * @author imc4kmacpro
      */
     public Controller() {
+    	test_mode = false; // added by Calvin, 4.1
     	scraper = new WebScraper();
       // by Calvin, task 6
     	labelMenuLastSearch = new MenuItem();
@@ -139,8 +142,19 @@ public class Controller extends WebScraperApplication{
     private void actionSearch() {
     	System.out.println("actionSearch: " + textFieldKeyword.getText());
     	List<Item> result = scraper.scrape(textFieldKeyword.getText());
+    	updateUI(result);
+    }
+    
+    
+    /**
+     * 4.1
+     * refactored method to update UI all at once
+     * @author imc4kmacpro
+     * @param list the list of items to be shown in console, summary and table
+     */
+    private void updateUI(List<Item> list) {
     	String output = "";
-    	for (Item item : result) {
+    	for (Item item : list) {
     		output += item.getTitle() + "\t" + item.getPrice() + "\t" + item.getUrl() + "\n";
     	}
     	textAreaConsole.setText(output);
@@ -154,11 +168,11 @@ public class Controller extends WebScraperApplication{
     	// end task5
       
       // by Calvin, task 6
-    	updateSearchLists(result);
+    	updateSearchLists(list);
       // end by Calvin, task 6
     	
       // by Calvin, task 4
-    	createTable(result);
+    	createTable(list);
     	// end by Calvin, task 4
     }
     
@@ -168,7 +182,7 @@ public class Controller extends WebScraperApplication{
 //     * @param keyword
 //     */
 //    public List<Item> actionSearchTest(String keyword) {
-//    	textFieldKeyword = new TextField();
+//
 //    	textFieldKeyword.setText(keyword);
 //    	actionSearch();
 //    	return currSearch;
