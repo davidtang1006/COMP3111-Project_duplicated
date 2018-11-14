@@ -107,36 +107,44 @@ public class WebScraper {
 	 */
 	public List<Item> scrapeCraigslist(String keyword) {
 		try {
-			String searchUrl = DEFAULT_URL + "/search/sss?sort=rel&query=" + URLEncoder.encode(keyword, "UTF-8");
-			System.out.println(searchUrl);
-			HtmlPage page = client.getPage(searchUrl);
-			
-			List<?> items = (List<?>) page.getByXPath("//li[@class='result-row']");
-			
+			String url = DEFAULT_URL + "/search/sss?sort=rel&query=" + URLEncoder.encode(keyword, "UTF-8");
 			Vector<Item> result = new Vector<Item>();
 			
-			for (int i = 0; i < items.size(); i++) {
-				HtmlElement htmlItem = (HtmlElement) items.get(i);
-				HtmlAnchor itemAnchor = ((HtmlAnchor) htmlItem.getFirstByXPath(".//p[@class='result-info']/a"));
-				HtmlElement spanPrice = ((HtmlElement) htmlItem.getFirstByXPath(".//a/span[@class='result-price']"));
-				HtmlElement spanDate = ((HtmlElement) htmlItem.getFirstByXPath(".//p/time[@class='result-date']"));
+			// function to get urls
+			List<String> pages = getPagesCraigslist(url);
+			
+			// loop the urls returned from task3
+			for (String searchUrl : pages) {
+				System.out.println(searchUrl);
+				HtmlPage page = client.getPage(searchUrl);
 				
-				// It is possible that an item doesn't have any price, we set the price to 0.0
-				// in this case
-				String itemPrice = spanPrice == null ? "0.0" : spanPrice.asText();
+				List<?> items = (List<?>) page.getByXPath("//li[@class='result-row']");
 				
-				Item item = new Item();
-				item.setPortal("Craigslist"); // 
-				item.setTitle(itemAnchor.asText());
-				System.out.println(itemAnchor.asText());
-				item.setUrl(itemAnchor.getHrefAttribute());
 				
-				item.setPrice(new Double(itemPrice.replace("$", "")));
-				item.setDate(spanDate.getAttribute("datetime"), new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US));
-				System.out.println(spanDate.getAttribute("datetime") + "\n");
-				
-				result.add(item);
+				for (int i = 0; i < items.size(); i++) {
+					HtmlElement htmlItem = (HtmlElement) items.get(i);
+					HtmlAnchor itemAnchor = ((HtmlAnchor) htmlItem.getFirstByXPath(".//p[@class='result-info']/a"));
+					HtmlElement spanPrice = ((HtmlElement) htmlItem.getFirstByXPath(".//a/span[@class='result-price']"));
+					HtmlElement spanDate = ((HtmlElement) htmlItem.getFirstByXPath(".//p/time[@class='result-date']"));
+					
+					// It is possible that an item doesn't have any price, we set the price to 0.0
+					// in this case
+					String itemPrice = spanPrice == null ? "0.0" : spanPrice.asText();
+					
+					Item item = new Item();
+					item.setPortal("Craigslist"); // 
+					item.setTitle(itemAnchor.asText());
+					System.out.println(itemAnchor.asText());
+					item.setUrl(itemAnchor.getHrefAttribute());
+					
+					item.setPrice(new Double(itemPrice.replace("$", "")));
+					item.setDate(spanDate.getAttribute("datetime"), new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US));
+					System.out.println(spanDate.getAttribute("datetime") + "\n");
+					
+					result.add(item);
+				}
 			}
+			
 			client.close();
 			return result;
 		} catch (Exception e) {
@@ -144,6 +152,111 @@ public class WebScraper {
 		}
 		return null;
 	}
+	
+	
+	/**
+	 * Scrape items from Amazon. One page is scraped. Used in task 2.
+	 * @author awtang
+	 * @param keyword the keyword typed in the text field
+	 * @return items scraped from Amazon
+	 */
+	public List<Item> scrapeAmazon(String keyword) {
+		try {
+			// The following part is added by awtang
+			// We scrape data from another website
+			String url = ANOTHER_URL + "/s/ref=sr_st_date-desc-rank?keywords="
+					+ URLEncoder.encode(keyword, "UTF-8") + "&sort=date-desc-rank";
+			
+			List<String> pages = getPagesAmazon(url);
+			Vector<Item> result = new Vector<Item>();
+			
+			// loop the urls
+			for (String searchUrl : pages) {
+				System.out.println(searchUrl);
+				HtmlPage page = client.getPage(searchUrl);
+				
+				List<?> other_items = (List<?>) page.getByXPath("//li[@class='s-result-item celwidget  AdHolder']"
+						+ "|//li[@class='s-result-item celwidget  ']"
+						+ "|//li[@class='s-result-item s-result-card-for-container a-declarative celwidget  AdHolder']"
+						+ "|//li[@class='s-result-item s-result-card-for-container a-declarative celwidget  ']");
+				
+				
+				for (int i = 0; i < other_items.size(); i++) {
+					HtmlElement htmlItem = (HtmlElement) other_items.get(i);
+					HtmlAnchor itemAnchor = ((HtmlAnchor) htmlItem.getFirstByXPath(".//a")); // To get the URL
+					HtmlElement item_title = ((HtmlElement) htmlItem.getFirstByXPath(".//a/h2"));
+					if (item_title == null) { continue; } // The item is not standard
+					HtmlElement spanPrice_whole = ((HtmlElement) htmlItem.getFirstByXPath(".//span[@class='sx-price-whole']"));
+					HtmlElement spanPrice_fractional = ((HtmlElement) htmlItem.getFirstByXPath(".//sup[@class='sx-price-fractional']"));
+					HtmlElement spanDate = ((HtmlElement) htmlItem.getFirstByXPath(".//span[@class='a-size-small a-color-secondary']"));
+					
+					Item item = new Item();
+					// The date is set here
+					DateFormat df = new SimpleDateFormat("MMM d, yyyy", Locale.US);
+					if (spanDate != null && !spanDate.asText().matches("^by.*")) {
+						System.out.println(spanDate.asText());
+						item.setDate(spanDate.asText(), df);
+					}
+					
+					/* (Visiting item's information page is not necessary)
+					else {
+						HtmlElement std_cell = null;
+						HtmlPage info_page = null;
+						if (itemAnchor.getHrefAttribute().matches("^https://.*")) {
+							// Some links starts with "https://"
+							info_page = client.getPage(itemAnchor.getHrefAttribute());
+						} else {
+							info_page = client.getPage(ANOTHER_URL + itemAnchor.getHrefAttribute());
+						}
+						
+						List<?> table_items = (List<?>) info_page.getByXPath("//table[@id='productDetails_detailBullets_sections1']/tbody/tr");
+						// Use for loop to look for the posted date
+						for (int j = 0; j < table_items.size(); j++) {
+							HtmlElement table_htmlItem = (HtmlElement) table_items.get(j);
+							HtmlElement header_cell = ((HtmlElement) table_htmlItem.getFirstByXPath(".//th"));
+							if ((header_cell.asText().matches("(.|\\r|\\n)*Date First Available(.|\\r|\\n)*")) ||
+									(header_cell.asText().matches("(.|\\r|\\n)*Date first listed on Amazon(.|\\r|\\n)*"))) {
+								std_cell = ((HtmlElement) table_htmlItem.getFirstByXPath(".//td"));
+								System.out.println(std_cell.asText());
+								item.setDate(std_cell.asText(), df);
+							}
+						}
+						client.close();
+					}
+					*/
+					
+					// It is possible that an item doesn't have any price, we set the price to 0.0
+					// in this case
+					String itemPrice = spanPrice_whole == null ? "0.0" :
+						spanPrice_whole.asText().replace(",", "") + "." + spanPrice_fractional.asText();
+					
+					item.setPortal("Amazon");
+					System.out.println(item_title.asText());
+					item.setTitle(item_title.asText());
+					System.out.println(itemPrice);
+					item.setPrice(new Double(itemPrice));
+					if (itemAnchor.getHrefAttribute().matches("^https://.*")) {
+						// Some links starts with "https://"
+						System.out.println(itemAnchor.getHrefAttribute() + "\n");
+						item.setUrl(itemAnchor.getHrefAttribute());
+					} else {
+						System.out.println(ANOTHER_URL + itemAnchor.getHrefAttribute() + "\n");
+						item.setUrl(ANOTHER_URL + itemAnchor.getHrefAttribute());
+					}
+					// The date is set previously
+					
+					result.add(item);
+				}
+			}
+			client.close();
+			return result;
+		} catch (Exception e) {
+			System.out.println(e + "\n");
+		}
+		return null;
+	}
+	
+	
 	
 	/**
 	 * This function suppose to return lists of urls
@@ -229,99 +342,4 @@ public class WebScraper {
 	}
 	
 	
-}
-	 * Scrape items from Amazon. One page is scraped. Used in task 2.
-	 * @author awtang
-	 * @param keyword the keyword typed in the text field
-	 * @return items scraped from Amazon
-	 */
-	public List<Item> scrapeAmazon(String keyword) {
-		try {
-			// The following part is added by awtang
-			// We scrape data from another website
-			String searchUrl = ANOTHER_URL + "/s/ref=sr_st_date-desc-rank?keywords="
-					+ URLEncoder.encode(keyword, "UTF-8") + "&sort=date-desc-rank";
-			System.out.println(searchUrl);
-			HtmlPage page = client.getPage(searchUrl);
-			
-			List<?> other_items = (List<?>) page.getByXPath("//li[@class='s-result-item celwidget  AdHolder']"
-					+ "|//li[@class='s-result-item celwidget  ']"
-					+ "|//li[@class='s-result-item s-result-card-for-container a-declarative celwidget  AdHolder']"
-					+ "|//li[@class='s-result-item s-result-card-for-container a-declarative celwidget  ']");
-			
-			Vector<Item> result = new Vector<Item>();
-			
-			for (int i = 0; i < other_items.size(); i++) {
-				HtmlElement htmlItem = (HtmlElement) other_items.get(i);
-				HtmlAnchor itemAnchor = ((HtmlAnchor) htmlItem.getFirstByXPath(".//a")); // To get the URL
-				HtmlElement item_title = ((HtmlElement) htmlItem.getFirstByXPath(".//a/h2"));
-				if (item_title == null) { continue; } // The item is not standard
-				HtmlElement spanPrice_whole = ((HtmlElement) htmlItem.getFirstByXPath(".//span[@class='sx-price-whole']"));
-				HtmlElement spanPrice_fractional = ((HtmlElement) htmlItem.getFirstByXPath(".//sup[@class='sx-price-fractional']"));
-				HtmlElement spanDate = ((HtmlElement) htmlItem.getFirstByXPath(".//span[@class='a-size-small a-color-secondary']"));
-				
-				Item item = new Item();
-				// The date is set here
-				DateFormat df = new SimpleDateFormat("MMM d, yyyy", Locale.US);
-				if (spanDate != null && !spanDate.asText().matches("^by.*")) {
-					System.out.println(spanDate.asText());
-					item.setDate(spanDate.asText(), df);
-				}
-				
-				/* (Visiting item's information page is not necessary)
-				else {
-					HtmlElement std_cell = null;
-					HtmlPage info_page = null;
-					if (itemAnchor.getHrefAttribute().matches("^https://.*")) {
-						// Some links starts with "https://"
-						info_page = client.getPage(itemAnchor.getHrefAttribute());
-					} else {
-						info_page = client.getPage(ANOTHER_URL + itemAnchor.getHrefAttribute());
-					}
-					
-					List<?> table_items = (List<?>) info_page.getByXPath("//table[@id='productDetails_detailBullets_sections1']/tbody/tr");
-					// Use for loop to look for the posted date
-					for (int j = 0; j < table_items.size(); j++) {
-						HtmlElement table_htmlItem = (HtmlElement) table_items.get(j);
-						HtmlElement header_cell = ((HtmlElement) table_htmlItem.getFirstByXPath(".//th"));
-						if ((header_cell.asText().matches("(.|\\r|\\n)*Date First Available(.|\\r|\\n)*")) ||
-								(header_cell.asText().matches("(.|\\r|\\n)*Date first listed on Amazon(.|\\r|\\n)*"))) {
-							std_cell = ((HtmlElement) table_htmlItem.getFirstByXPath(".//td"));
-							System.out.println(std_cell.asText());
-							item.setDate(std_cell.asText(), df);
-						}
-					}
-					client.close();
-				}
-				*/
-				
-				// It is possible that an item doesn't have any price, we set the price to 0.0
-				// in this case
-				String itemPrice = spanPrice_whole == null ? "0.0" :
-					spanPrice_whole.asText().replace(",", "") + "." + spanPrice_fractional.asText();
-				
-				item.setPortal("Amazon");
-				System.out.println(item_title.asText());
-				item.setTitle(item_title.asText());
-				System.out.println(itemPrice);
-				item.setPrice(new Double(itemPrice));
-				if (itemAnchor.getHrefAttribute().matches("^https://.*")) {
-					// Some links starts with "https://"
-					System.out.println(itemAnchor.getHrefAttribute() + "\n");
-					item.setUrl(itemAnchor.getHrefAttribute());
-				} else {
-					System.out.println(ANOTHER_URL + itemAnchor.getHrefAttribute() + "\n");
-					item.setUrl(ANOTHER_URL + itemAnchor.getHrefAttribute());
-				}
-				// The date is set previously
-				
-				result.add(item);
-			}
-			client.close();
-			return result;
-		} catch (Exception e) {
-			System.out.println(e + "\n");
-		}
-		return null;
-	}
 }
