@@ -112,7 +112,25 @@ public class Controller extends WebScraperApplication {
 		
 		// Fetch the result by the scraper
 		System.out.println("actionSearch: " + textFieldKeyword.getText());
-		result = scraper.scrape(textFieldKeyword.getText());
+//		result = scraper.scrape(textFieldKeyword.getText());
+		
+		// added by Benker, for task3, removed scrape function
+		String keyword = textFieldKeyword.getText().trim();
+		int pageCount = 0;
+		System.out.println("Start to get page");
+		List<String> craigslistPages = scraper.getPagesCraigslist(keyword);
+		List<String> amazonPages = scraper.getPagesAmazon(keyword);
+		System.out.println("Finished get page");
+		for (String page : craigslistPages) {
+			result.addAll(scraper.scrapeCraigslist(page));
+			textAreaConsole.appendText("Scraped " + (++pageCount) + " pages");
+		}
+		for (String page : amazonPages) {
+			result.addAll(scraper.scrapeAmazon(page));
+			textAreaConsole.appendText("Scraped " + (++pageCount) + " pages");
+		}
+		// end task3
+		
 		
 		getItemsAndDisplay(false);
 	}
