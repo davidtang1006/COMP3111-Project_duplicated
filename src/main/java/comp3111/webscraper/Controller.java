@@ -37,6 +37,10 @@ import javafx.scene.control.Hyperlink;
 import java.util.List;
 import java.util.Vector;
 
+// added by Benker for task5
+import java.util.function.Predicate;
+import java.util.ArrayList;
+// end task5
 
 /**
  * 
@@ -117,6 +121,9 @@ public class Controller extends WebScraperApplication{
      */
     @FXML
     private void initialize() {
+    	// added by Benker for task5
+//    	 refineButton.setDisable(true);
+    	// ended task5
     	labelMenuLastSearch.setDisable(true);
     }
     
@@ -133,6 +140,14 @@ public class Controller extends WebScraperApplication{
     	}
     	textAreaConsole.setText(output);
     	
+    	
+    	// added by Benker for task5
+    	// set refine button disable to fasle after search
+//    	if(result.size()>0) {
+//    		refineButton.setDisable(false);
+//    	}
+    	// end task5
+      
       // by Calvin, task 6
     	updateSearchLists(result);
       // end by Calvin, task 6
@@ -354,6 +369,47 @@ public class Controller extends WebScraperApplication{
     	updateSearchLists(lastSearch);
 //    	getItemsAndDisplay(false);
     	createTable(lastSearch);
+    } 
+  // end by Calvin, task 6
+    
+    /**
+     *	This function is to filter the results searched
+     *	
+     * 
+     * @author Benker
+     * @param none
+     * @return void
+     * 
+     */
+    @FXML
+    private void refineSearch() {    	
+    	// the word to filter
+    	final String filter = textFieldKeyword.getText();
+    	// handle to conditions
+    	Predicate<Item> pred = p-> p.getTitle().indexOf(filter) == -1;
+    	// remove if condition meet
+    	currSearch.removeIf(pred);
+    	// update the UI with new items list
+      // need one function to update UI
+//    	refineButton.setDisable(true);
+    	
     }
-    // end by Calvin, task 6
+    
+    /**
+     * 	This function is helper function to test refineSearch
+     * 
+     * 	@author Benker
+     * 	@param	items the list of items to be tested
+     * 	@param	k the keyword that to be filter
+     * 	@return	the size of currSearch after filter
+     */
+    public int testRefineSearch(List<Item> items, String k) {
+    	
+//    	currSearch = items;
+//    	textFieldKeyword.setText(k);
+//    	refineSearch();
+//    	return currSearch.size();
+    	
+    	return 0;
+    }
 }
