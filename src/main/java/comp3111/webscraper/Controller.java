@@ -162,16 +162,17 @@ public class Controller extends WebScraperApplication{
     	// end by Calvin, task 4
     }
     
-    /**
-     * test method for actionSearch
-     * @author imc4kmacpro
-     * @param keyword
-     */
-    public List<Item> actionSearchTest(String keyword) {
-    	textFieldKeyword.setText(keyword);
-    	actionSearch();
-    	return currSearch;
-    }
+//    /**
+//     * test method for actionSearch
+//     * @author imc4kmacpro
+//     * @param keyword
+//     */
+//    public List<Item> actionSearchTest(String keyword) {
+//    	textFieldKeyword = new TextField();
+//    	textFieldKeyword.setText(keyword);
+//    	actionSearch();
+//    	return currSearch;
+//    }
     
     /**
      * test method for getting scraper object

@@ -44,12 +44,28 @@ public class IntegrationTest {
 	}
 	
 	/**
-	 * tests scraper
+	 * tests scraper: has result
 	 * @author imc4kmacpro
 	 */
 	@Test
-	public void testScraper() {
+	public void testScraperNotEmpty() {
 		List<Item> list = c.getScraper().scrape("iphone");
 		assertNotNull(list);
 	}
+	
+	/**
+	 * tests scraper: has no result
+	 * @author imc4kmacpro
+	 */
+	@Test
+	public void testScraperEmpty() {
+		List<Item> list = c.getScraper().scrape("galaxy s10 1 fl 4 v");
+		assertTrue(list.isEmpty());
+	}
+	
+//	@Test
+//	public void testActionSearch() {
+//		List<Item> list = c.actionSearchTest("iphone");
+//		assertTrue(!list.isEmpty());
+//	}
 }

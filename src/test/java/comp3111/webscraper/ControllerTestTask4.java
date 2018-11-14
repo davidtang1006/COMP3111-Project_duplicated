@@ -21,12 +21,11 @@ public class ControllerTestTask4 {
 	 */
 	@Test
 	public void testGetList() {
-		Controller c = new Controller();
 		Vector<Item> items = new Vector<Item>();
 		Item item = new Item();
 		item.setTitle("haha");
 		item.setPrice(3.333);
-//		item.setUrl("https://google.com.hk");
+		item.setUrl("https://google.com.hk");
 						//Nov 8 new SimpleDateFormat("MMM dd", Locale.ENGLISH)
 		item.setDate("Nov 8", new SimpleDateFormat("MMM dd", Locale.ENGLISH));
 		items.add(item);
@@ -41,10 +40,23 @@ public class ControllerTestTask4 {
 	 */
 	@Test
 	public void testGetListNull() {
-		Controller c = new Controller();
 		Vector<Item> items = new Vector<Item>();
 		List<Item> items_list = items;
 		ObservableList<Item> oList = c.getListTest(items_list);
 		assertNotNull(oList);
 	}
+	
+//	@Test
+//	public void testCreateTable() {
+//		Vector<Item> items = new Vector<Item>();
+//		Item item = new Item();
+//		item.setTitle("haha");
+//		item.setPrice(3.333);
+//		item.setUrl("https://google.com.hk");
+//						//Nov 8 new SimpleDateFormat("MMM dd", Locale.ENGLISH)
+//		item.setDate("Nov 8", new SimpleDateFormat("MMM dd", Locale.ENGLISH));
+//		items.add(item);
+//		List<Item> items_list = items;
+//		c.createTable(items_list);
+//	}
 }
