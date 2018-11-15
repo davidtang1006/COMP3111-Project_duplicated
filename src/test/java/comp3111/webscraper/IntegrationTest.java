@@ -26,6 +26,14 @@ public class IntegrationTest {
 	}
 	
 	/**
+	 * tests initialization of GUI objects
+	 */
+	@Test
+	public void testInitGUIObjs() {
+		c.initGUIObjs();
+		assertTrue(true);
+	}
+	/**
 	 * tests opening empty string using openDoc()
 	 * @author awtang
 	 */
@@ -63,9 +71,10 @@ public class IntegrationTest {
 		assertTrue(list.isEmpty());
 	}
 	
-//	@Test
-//	public void testActionSearch() {
-//		List<Item> list = c.actionSearchTest("iphone");
-//		assertTrue(!list.isEmpty());
-//	}
+	@Test
+	public void testActionSearch() {
+		c.initGUIObjs();
+		List<Item> list = c.actionSearchTest("iphone");
+		assertTrue(!list.isEmpty());
+	}
 }

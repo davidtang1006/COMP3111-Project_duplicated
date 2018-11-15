@@ -120,6 +120,27 @@ public class Controller extends WebScraperApplication{
     	host = this.getHostServices();
     	// end by Calvin, task 4
     }
+    
+    /***************************************************/
+    /*
+     * Test method: initialize GUI objects
+     */
+    public void initGUIObjs() {
+    	labelCount = new Label();
+    	labelPrice = new Label();
+    	labelMin = new Hyperlink();
+    	labelLatest = new Hyperlink();
+    	textFieldKeyword = new TextField();
+    	textAreaConsole = new TextArea();
+    	table = new TableView();
+    	labelTableTitle = new TableColumn<>();
+    	labelTablePrice = new TableColumn<>();
+    	labelTableURL = new TableColumn<>();
+    	labelTableDate = new TableColumn<>();
+    	labelMenuLastSearch = new MenuItem();
+    	labelAboutTeam = new MenuItem();
+    }
+    /***************************************************/
 
     /**
      * Default initializer. It is empty.
@@ -176,17 +197,17 @@ public class Controller extends WebScraperApplication{
     	// end by Calvin, task 4
     }
     
-//    /**
-//     * test method for actionSearch
-//     * @author imc4kmacpro
-//     * @param keyword
-//     */
-//    public List<Item> actionSearchTest(String keyword) {
-//
-//    	textFieldKeyword.setText(keyword);
-//    	actionSearch();
-//    	return currSearch;
-//    }
+    /**
+     * test method for actionSearch
+     * @author imc4kmacpro
+     * @param keyword
+     */
+    public List<Item> actionSearchTest(String keyword) {
+
+    	textFieldKeyword.setText(keyword);
+    	actionSearch();
+    	return currSearch;
+    }
     
     /**
      * test method for getting scraper object
