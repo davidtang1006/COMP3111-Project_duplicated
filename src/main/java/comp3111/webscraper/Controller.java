@@ -457,6 +457,8 @@ public class Controller extends WebScraperApplication {
     		labelMenuLastSearch.setDisable(false); // enable last search
     	}
     	
+    	textFieldKeyword.setText("");
+    	
     	// Console tab
     	textAreaConsole.setText(""); // resets console
 
