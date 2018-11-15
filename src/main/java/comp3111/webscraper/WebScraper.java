@@ -1,6 +1,5 @@
 package comp3111.webscraper;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -104,12 +103,11 @@ public class WebScraper {
 	
 	
 	/**
-	 * 	Loop the urls, combine functions from task2 and task3
+	 * 	Loop the URLs, combine functions from task2 and task3
 	 * 
-	 * 	@author awtang, Benker
+	 * 	@author awtang, lyleungad
 	 * 	@param	
 	 * 	@return lists of items
-	 * 
 	 */
 	public List<Item> scrapeAll(String keyword){
 		
@@ -202,6 +200,7 @@ public class WebScraper {
 		try {
 			// The following part is added by awtang
 			// We scrape data from another website
+			
 //			String searchUrl = ANOTHER_URL + "/s/ref=sr_st_date-desc-rank?keywords="
 //					+ URLEncoder.encode(keyword, "UTF-8") + "&sort=date-desc-rank";
 			System.out.println(searchUrl);
@@ -288,12 +287,11 @@ public class WebScraper {
 		return null;
 	}
 	
-	
 	/**
-	 * This function suppose to return lists of urls
+	 * This function is supposed to return lists of URLs
 	 * 
-	 * @author Benker
-	 * @param defaultUrl - the first page
+	 * @author lyleungad
+	 * @param defaultUrl the first page
 	 * @return A list of string starting with the first page
 	 */
 	public List<String> getPagesCraigslist(String keyword)
@@ -327,17 +325,17 @@ public class WebScraper {
 				}
 			}
 		} catch (Exception e) {
-			// means reach last page
+			// we reach last page
 			return pages;
 		}
 	}
 	
 	
 	/**
-	 * This function suppose to return lists of urls
+	 * This function is supposed to return lists of URLs
 	 * 
-	 * @author Benker
-	 * @param defaultUrl - the first page
+	 * @author lyleungad
+	 * @param defaultUrl the first page
 	 * @return A list of string starting with the first page
 	 */
 	public List<String> getPagesAmazon(String keyword)
@@ -373,7 +371,7 @@ public class WebScraper {
 				}
 			}
 		} catch (Exception e) {
-			// means reach last page
+			// we reach last page
 			return pages;
 		}
 	}

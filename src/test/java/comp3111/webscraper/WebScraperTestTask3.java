@@ -5,12 +5,15 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
+/**
+ * This class is for testing the methods in class "WebScraper" used in task 3
+ * @author lyleungad
+ */
 public class WebScraperTestTask3 {
-	
 	
 	/**
 	 *	Test the method "getPagesCraigslist"
-	 *	@author Benker 
+	 *	@author lyleungad
 	 */
 	@Test
 	public void testGetPagesCraigslist() {
@@ -22,18 +25,17 @@ public class WebScraperTestTask3 {
 		String more_url = "https://newyork.craigslist.org/search/sss?query=galaxy%20s9&sort=rel";
 		List<String> ls = s.getPagesCraigslist(one_url);
 		
-		
 		// test one page, including no page
-		assertEquals(ls.size(), 1);
+		assertEquals(1, ls.size());
 		
 		// test two page
 		ls = s.getPagesCraigslist(more_url);
-		assertEquals(ls.size(), 2);
+		assertEquals(2, ls.size());
 	}
 	
 	/**
 	 *	Test the method "getPagesAmazon"
-	 *	@author Benker 
+	 *	@author lyleungad
 	 */
 	@Test
 	public void testGetPagesAmazon() {
@@ -49,17 +51,14 @@ public class WebScraperTestTask3 {
 		String exc_url = "https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=whatisthisar&rh=i%3Aaps%2Ck%3Awhatisthisar";
 		
 		// test one page, including no page
-		assertEquals(ls.size(), 1);
+		assertEquals(1, ls.size());
 		
-		// test two page
+		// test two pages
 		ls = s.getPagesAmazon(more_url);
-		assertEquals(ls.size(), 20);
+		assertEquals(20, ls.size());
 		
 		// test one page, exception
 		ls = s.getPagesAmazon(exc_url);
-		assertEquals(ls.size(), 1);
-		
+		assertEquals(1, ls.size());
 	}
-	
-	
 }
