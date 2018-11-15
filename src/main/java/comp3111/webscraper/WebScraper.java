@@ -84,55 +84,65 @@ public class WebScraper {
 		client.getOptions().setJavaScriptEnabled(false);
 	}
 
-//	/**
-//	 * A method implemented in this class, to scrape web content from the Craigslist and Amazon. Used in task 2.
-//	 * @author awtang
-//	 * @param keyword the keyword you want to search
-//	 * @return A list of Item that has found. A zero size list is return if nothing is found. Null if any exception (e.g. no connectivity)
-//	 */
-//	public List<Item> scrape(String keyword) {
-////		Vector<Item> result = new Vector<Item>();
-////		result.addAll(scrapeCraigslist(keyword));
-////		result.addAll(scrapeAmazon(keyword));
-//		
-//		List<Item> result = scrapeAll(keyword);
-//		
-//		// We sort the items by prices
-//		Collections.sort(result, new ItemComparator());
-//		return result;
-//	}
-	
-	
-//	/**
-//	 * 	Loop the urls, combine functions from task2 and task3
-//	 * 
-//	 * 	@author awtang, Benker
-//	 * 	@param	
-//	 * 	@return lists of items
-//	 * 
-//	 */
-//	public List<Item> scrapeAll(String keyword){
-//		
+	/**
+	 * A method implemented in this class, to scrape web content from the Craigslist and Amazon. Used in task 2.
+	 * @author awtang
+	 * @param keyword the keyword you want to search
+	 * @return A list of Item that has found. A zero size list is return if nothing is found. Null if any exception (e.g. no connectivity)
+	 */
+	public List<Item> scrape(String keyword) {
 //		Vector<Item> result = new Vector<Item>();
-//		try {						
-//			List<String> pages = getPagesCraigslist(keyword);
-//			// loop the urls and scrape item for this page
-//			for (String searchUrl : pages) {
-//				result.addAll(scrapeCraigslist(searchUrl));
-//			}
-//			
-//			pages = getPagesAmazon(keyword);
-//			// loop the urls and scrape item for this page
-//			for (String searchUrl : pages) {
-//				result.addAll(scrapeAmazon(searchUrl));
-//			}
-//			
-//			return result;
-//		} catch (Exception e) {
-//			System.out.println(e);
-//		}
-//		return result;
-//	} 
+//		result.addAll(scrapeCraigslist(keyword));
+//		result.addAll(scrapeAmazon(keyword));
+		
+		List<Item> result = scrapeAll(keyword);
+		
+		// We sort the items by prices
+		Collections.sort(result, new ItemComparator());
+		return result;
+	}
+	
+	
+	/**
+	 * 	Loop the urls, combine functions from task2 and task3
+	 * 
+	 * 	@author awtang, Benker
+	 * 	@param	
+	 * 	@return lists of items
+	 * 
+	 */
+	public List<Item> scrapeAll(String keyword){
+		
+		Vector<Item> result = new Vector<Item>();
+		try {						
+			List<String> pages = getPagesCraigslist(keyword);
+			
+			int pageCount = 0;
+			
+			// loop the urls and scrape item for this page
+			for (String searchUrl : pages) {
+				result.addAll(scrapeCraigslist(searchUrl));
+				
+				// notify user got one pages
+				System.out.println("Scraped pages: " + (++pageCount) + " from Craigslist");
+			}
+			
+			pageCount = 0;
+			pages = getPagesAmazon(keyword);
+			// loop the urls and scrape item for this page
+			for (String searchUrl : pages) {
+				result.addAll(scrapeAmazon(searchUrl));
+				
+				// notify user got one pages
+				System.out.println("Scraped pages: " + (++pageCount) + " from Amazon");
+			}
+			
+			return result;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return result;
+	} 
 	
 	
 	/**
@@ -294,6 +304,10 @@ public class WebScraper {
 			String baseURL = "https://newyork.craigslist.org";
 			String searchUrl = defaultUrl;
 			HtmlPage page = client.getPage(defaultUrl);
+			
+			// print msg that show application still running
+			System.out.println("Start getting urls");
+			
 			// add the default to pages
 			pages.add(defaultUrl);
 			while(true) {
@@ -306,12 +320,12 @@ public class WebScraper {
 					searchUrl = baseURL + nextUrl;
 					page = client.getPage(searchUrl);
 					pages.add(searchUrl);
+					System.out.println("Got " + pages.size() + " urls");
 				}
 				else {
-					break;
+					return pages;
 				}
 			}
-			return pages;
 		} catch (Exception e) {
 			// means reach last page
 			return pages;
@@ -336,6 +350,10 @@ public class WebScraper {
 			String baseURL = "https://www.amazon.com";
 			String searchUrl = defaultUrl;
 			HtmlPage page = client.getPage(defaultUrl);
+			
+			// print msg that show application still running
+			System.out.println("Start getting urls");
+			
 			// add the default to pages
 			pages.add(defaultUrl);
 			while(true) {
@@ -348,12 +366,12 @@ public class WebScraper {
 					searchUrl = baseURL + nextUrl;
 					page = client.getPage(searchUrl);
 					pages.add(searchUrl);
+					System.out.println("Got " + pages.size() + " urls");
 				}
 				else {
-					break;
+					return pages;
 				}
 			}
-			return pages;
 		} catch (Exception e) {
 			// means reach last page
 			return pages;
