@@ -351,7 +351,7 @@ public class Controller extends WebScraperApplication{
      * task 6, show about team
      * @author imc4kmacpro
      * @param ActionEvent event
-     * @return void
+     * @return true if successfully displayed about team info
      * @exception none
      */
     @FXML
@@ -370,12 +370,13 @@ public class Controller extends WebScraperApplication{
      * task 6, quit button
      * @author imc4kmacpro
      * @param ActionEvent event
-     * @return void
+     * @return true if successful termination
      * @exception none
      */
     @FXML
-    public void terminateWindow(ActionEvent event) {
+    public boolean terminateWindow(ActionEvent event) {
     	Platform.exit();
+    	return true;
     }
     
     /**
@@ -418,18 +419,36 @@ public class Controller extends WebScraperApplication{
      * @exception none
      */
     @FXML
-    void reloadLastSearch() {
+    private void reloadLastSearch() {
     	System.out.println("reloading last search");
     	labelMenuLastSearch.setDisable(true);
-    	String output = "";
-    	for (Item item : lastSearch) {
-    		output += item.getTitle() + "\t" + item.getPrice() + "\t" + item.getUrl() + "\n";
-    	}
-    	textAreaConsole.setText(output);
-    	updateSearchLists(lastSearch);
-//    	getItemsAndDisplay(false);
-    	createTable(lastSearch);
+    	updateUI(lastSearch);
+//    	String output = "";
+//    	for (Item item : lastSearch) {
+//    		output += item.getTitle() + "\t" + item.getPrice() + "\t" + item.getUrl() + "\n";
+//    	}
+//    	textAreaConsole.setText(output);
+//    	updateSearchLists(lastSearch);
+////    	getItemsAndDisplay(false);
+//    	createTable(lastSearch);
     } 
+    
+    /**
+     * test method, call reloadLastSearch()
+     * @author imc4kmacpro
+     */
+    public void testReloadLastSearch() {
+    	reloadLastSearch();
+    }
+    
+    /**
+     * get texts from textFieldConsole
+     * @author imc4kmacpro
+     * @return output
+     */
+    public String getConsoleText() {
+    	return textAreaConsole.getText();
+    }
   // end by Calvin, task 6
     
     /**
@@ -450,6 +469,7 @@ public class Controller extends WebScraperApplication{
     	// remove if condition meet
     	currSearch.removeIf(pred);
     	// update the UI with new items list
+    	updateUI(currSearch);
       // need one function to update UI
 //    	refineButton.setDisable(true);
     	

@@ -12,8 +12,6 @@ import java.util.List;
  *
  */
 public class IntegrationTest {
-	WebScraperApplication a = new WebScraperApplication();
-	Controller c = new Controller();
 	
 	/**
 	 * tests creation of controller
@@ -30,6 +28,7 @@ public class IntegrationTest {
 	 */
 	@Test
 	public void testInitGUIObjs() {
+		Controller c = new Controller();
 		c.initGUIObjs();
 		assertTrue(true);
 	}
@@ -39,6 +38,8 @@ public class IntegrationTest {
 	 */
 	@Test
 	public void testOpenDocNotEmpty() {
+		Controller c = new Controller();
+		c.initGUIObjs();
 		c.openDocTest("https://www.google.com.hk/");
 	}
 	
@@ -48,6 +49,8 @@ public class IntegrationTest {
 	 */
 	@Test
 	public void testOpenDocEmpty() {
+		Controller c = new Controller();
+		c.initGUIObjs();
 		c.openDocTest("");
 	}
 	
@@ -57,6 +60,8 @@ public class IntegrationTest {
 	 */
 	@Test
 	public void testScraperNotEmpty() {
+		Controller c = new Controller();
+		c.initGUIObjs();
 		List<Item> list = c.getScraper().scrape("iphone");
 		assertNotNull(list);
 	}
@@ -67,12 +72,15 @@ public class IntegrationTest {
 	 */
 	@Test
 	public void testScraperEmpty() {
+		Controller c = new Controller();
+		c.initGUIObjs();
 		List<Item> list = c.getScraper().scrape("galaxy s10 1 fl 4 v");
 		assertTrue(list.isEmpty());
 	}
 	
 	@Test
 	public void testActionSearch() {
+		Controller c = new Controller();
 		c.initGUIObjs();
 		List<Item> list = c.actionSearchTest("iphone");
 		assertTrue(!list.isEmpty());

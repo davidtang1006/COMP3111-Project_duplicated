@@ -18,6 +18,7 @@ public class ControllerTestTask6 {
 	@Test
 	public void testUpdateSearchListsFirstAdd() {
 		Controller c = new Controller();
+		c.initGUIObjs();
 		Vector<Item> items_v = new Vector<Item>();
 		Item item = new Item();
 		item.setTitle("haha");
@@ -41,6 +42,7 @@ public class ControllerTestTask6 {
 	@Test
 	public void testUpdateSearchListsCurrSearch() {
 		Controller c = new Controller();
+		c.initGUIObjs();
 		Vector<Item> items_v = new Vector<Item>();
 		Item item = new Item();
 		item.setTitle("haha");
@@ -73,6 +75,7 @@ public class ControllerTestTask6 {
 	@Test
 	public void testUpdateSearchListsLastSearch() {
 		Controller c = new Controller();
+		c.initGUIObjs();
 		Vector<Item> items_v = new Vector<Item>();
 		Item item = new Item();
 		item.setTitle("haha");
@@ -94,4 +97,60 @@ public class ControllerTestTask6 {
 		assertEquals(items_l, c.getLastSearch());
 	}
 	
+	/**
+	 * tests terminate window
+	 * @author imc4kmacpro
+	 */
+	@Test
+	public void testTerminateWindow() {
+		Controller c = new Controller();
+		c.initGUIObjs();
+		assertTrue(c.terminateWindow(null));
+	}
+
+	/**
+	 * tests close window
+	 * @author imc4kmacpro
+	 */
+	@Test
+	public void testCloseWindow() {
+		Controller c = new Controller();
+		c.initGUIObjs();
+		c.closeWindow();
+		assertEquals(c.getCurrSearch(), c.getLastSearch());
+	}
+	
+	/**
+	 * tests reload last search
+	 * @author imc4kmacpro
+	 */
+	@Test
+	public void testReloadLastSearch() {
+		Controller c = new Controller();
+		c.initGUIObjs();
+		
+		Vector<Item> items_v = new Vector<Item>();
+		Item item = new Item();
+		item.setTitle("haha");
+		item.setPrice(3.333);
+		item.setDate("Nov 08", new SimpleDateFormat("MMM dd", Locale.ENGLISH));
+		item.setUrl("www.google.com.hk");
+		items_v.add(item);
+		List<Item> items_l = items_v;
+		c.updateSearchListsTest(items_l);
+		items_v.clear();
+		
+		Item item2 = new Item();
+		item2.setTitle("2nd item");
+		item2.setPrice(1000000);
+		item2.setDate("Oct 31", new SimpleDateFormat("MMM dd", Locale.ENGLISH));
+		item2.setUrl("www.youtube.com.hk");
+		items_v.add(item2);
+		List<Item> items2_l = items_v;
+		c.updateSearchListsTest(items2_l);
+		
+		c.testReloadLastSearch();
+		String supposedOutput = item.getTitle() + "\t" + item.getPrice() + "\t" + item.getUrl() + "\n";
+		assertEquals(c.getConsoleText(), supposedOutput);
+	}
 }
