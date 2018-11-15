@@ -40,7 +40,7 @@ public class IntegrationTest {
 	public void testOpenDocNotEmpty() {
 		Controller c = new Controller();
 		c.initGUIObjs();
-		c.openDocTest("https://www.google.com.hk/");
+		c.openDoc("https://www.google.com.hk/");
 	}
 	
 	/**
@@ -51,7 +51,7 @@ public class IntegrationTest {
 	public void testOpenDocEmpty() {
 		Controller c = new Controller();
 		c.initGUIObjs();
-		c.openDocTest("");
+		c.openDoc("");
 	}
 	
 	/**
