@@ -106,7 +106,7 @@ public class WebScraper {
 	 * 	Loop the URLs, combine functions from task2 and task3
 	 * 
 	 * 	@author awtang, lyleungad
-	 * 	@param	
+	 * 	@param keyword the string to lookup online
 	 * 	@return lists of items
 	 */
 	public List<Item> scrapeAll(String keyword){
@@ -146,7 +146,7 @@ public class WebScraper {
 	/**
 	 * Scrape items from Craigslist. One page is scraped. Used in task 2.
 	 * @author awtang
-	 * @param keyword the keyword typed in the text field
+	 * @param searchUrl the url to browse
 	 * @return items scraped from Craigslist
 	 */
 	public List<Item> scrapeCraigslist(String searchUrl) {
@@ -193,7 +193,7 @@ public class WebScraper {
 	/**
 	 * Scrape items from Amazon. One page is scraped. Used in task 2.
 	 * @author awtang
-	 * @param keyword the keyword typed in the text field
+	 * @param searchUrl the url to browse
 	 * @return items scraped from Amazon
 	 */
 	public List<Item> scrapeAmazon(String searchUrl) {
@@ -291,7 +291,7 @@ public class WebScraper {
 	 * This function is supposed to return lists of URLs
 	 * 
 	 * @author lyleungad
-	 * @param defaultUrl the first page
+	 * @param keyword the string to lookup online
 	 * @return A list of string starting with the first page
 	 */
 	public List<String> getPagesCraigslist(String keyword)
@@ -335,7 +335,7 @@ public class WebScraper {
 	 * This function is supposed to return lists of URLs
 	 * 
 	 * @author lyleungad
-	 * @param defaultUrl the first page
+	 * @param keyword the string to lookup online
 	 * @return A list of string starting with the first page
 	 */
 	public List<String> getPagesAmazon(String keyword)
