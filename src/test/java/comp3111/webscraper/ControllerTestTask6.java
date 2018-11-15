@@ -86,13 +86,14 @@ public class ControllerTestTask6 {
 		c.updateSearchListsTest(items_l);
 		assertEquals(items_l, c.getCurrSearch());
 		
+		Vector<Item> items_v2 = new Vector<Item>();
 		Item item2 = new Item();
 		item2.setTitle("2nd item");
 		item2.setPrice(1000000);
 		item2.setDate("Oct 31", new SimpleDateFormat("MMM dd", Locale.ENGLISH));
 		item2.setUrl("www.youtube.com.hk");
 		items_v.add(item2);
-		List<Item> items2_l = items_v;
+		List<Item> items2_l = items_v2;
 		c.updateSearchListsTest(items2_l);
 		assertEquals(items_l, c.getLastSearch());
 	}
@@ -138,19 +139,20 @@ public class ControllerTestTask6 {
 		items_v.add(item);
 		List<Item> items_l = items_v;
 		c.updateSearchListsTest(items_l);
-		items_v.clear();
+		assertEquals(items_l, c.getCurrSearch());
 		
+		Vector<Item> items_v2 = new Vector<Item>();
 		Item item2 = new Item();
 		item2.setTitle("2nd item");
 		item2.setPrice(1000000);
 		item2.setDate("Oct 31", new SimpleDateFormat("MMM dd", Locale.ENGLISH));
 		item2.setUrl("www.youtube.com.hk");
-		items_v.add(item2);
-		List<Item> items2_l = items_v;
+		items_v2.add(item2);
+		List<Item> items2_l = items_v2;
 		c.updateSearchListsTest(items2_l);
 		
 		c.testReloadLastSearch();
-		String supposedOutput = item.getTitle() + "\t" + item.getPrice() + "\t" + item.getUrl() + "\n";
-		assertEquals(c.getConsoleText(), supposedOutput);
+		String expectedOutput = item.getTitle() + "\t" + item.getPrice() + "\t" + item.getUrl() + "\n";
+		assertEquals(expectedOutput, c.getConsoleText());
 	}
 }
