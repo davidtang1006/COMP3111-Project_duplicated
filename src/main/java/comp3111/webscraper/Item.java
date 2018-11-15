@@ -13,7 +13,7 @@ public class Item {
 	private String title;
 	private double price;
 	private String url;
-	
+  
 	private String portal; // added by awtang
 	private Date date; // added by ckchuad
 	private DateFormat format; // added by ckchuad
