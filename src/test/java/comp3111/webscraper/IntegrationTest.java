@@ -62,7 +62,7 @@ public class IntegrationTest {
 	public void testScraperNotEmpty() {
 		Controller c = new Controller();
 		c.initGUIObjs();
-		List<Item> list = c.getScraper().scrape("iphone");
+		List<Item> list = c.getScraper().scrape("galaxy s10 r3");
 		assertNotNull(list);
 	}
 	
@@ -82,7 +82,7 @@ public class IntegrationTest {
 	public void testActionSearch() {
 		Controller c = new Controller();
 		c.initGUIObjs();
-		List<Item> list = c.actionSearchTest("iphone");
+		List<Item> list = c.actionSearchTest("galaxy s10 r3");
 		assertTrue(!list.isEmpty());
 	}
 }

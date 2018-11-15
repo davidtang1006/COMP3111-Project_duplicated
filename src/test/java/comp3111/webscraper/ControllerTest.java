@@ -29,7 +29,7 @@ public class ControllerTest {
 		i_1.setPortal("Amazon");
 		i_1.setPrice(1.0);
 		i_1.setTitle("Apple");
-		c.result.add(i_1);
+		c.getCurrSearch().add(i_1);
 		
 		// The second item
 		Item i_2 = new Item();
@@ -37,7 +37,7 @@ public class ControllerTest {
 		i_2.setPortal("Craigslist");
 		i_2.setPrice(2.0);
 		i_2.setTitle("Banana");
-		c.result.add(i_2);
+		c.getCurrSearch().add(i_2);
 		
 		// The third item
 		Item i_3 = new Item();
@@ -45,9 +45,9 @@ public class ControllerTest {
 		i_3.setPortal("Amazon");
 		i_3.setPrice(3.0);
 		i_3.setTitle("Cherry");
-		c.result.add(i_3);
+		c.getCurrSearch().add(i_3);
 		
-		c.getItemsAndDisplay(true);
+		c.getItemsAndDisplay(true, c.getCurrSearch());
 		assertEquals(3, c.item_count);
 		assertEquals(3, c.item_count_nonzero);
 		assertEquals(6, c.price_sum, 0);
@@ -78,7 +78,7 @@ public class ControllerTest {
 		i_1.setPortal("Amazon");
 		i_1.setPrice(0.0);
 		i_1.setTitle("Apple");
-		c.result.add(i_1);
+		c.getCurrSearch().add(i_1);
 		
 		// The second item
 		Item i_2 = new Item();
@@ -86,7 +86,7 @@ public class ControllerTest {
 		i_2.setPortal("Craigslist");
 		i_2.setPrice(0.0);
 		i_2.setTitle("Banana");
-		c.result.add(i_2);
+		c.getCurrSearch().add(i_2);
 		
 		// The third item
 		Item i_3 = new Item();
@@ -94,9 +94,9 @@ public class ControllerTest {
 		i_3.setPortal("Amazon");
 		i_3.setPrice(0.0);
 		i_3.setTitle("Cherry");
-		c.result.add(i_3);
+		c.getCurrSearch().add(i_3);
 		
-		c.getItemsAndDisplay(true);
+		c.getItemsAndDisplay(true, c.getCurrSearch());
 		assertEquals(3, c.item_count);
 		assertEquals(0, c.item_count_nonzero);
 		assertEquals(0, c.price_sum, 0);
@@ -126,9 +126,9 @@ public class ControllerTest {
 		i_1.setPortal("Amazon");
 		i_1.setPrice(1.0);
 		i_1.setTitle("Apple");
-		c.result.add(i_1);
+		c.getCurrSearch().add(i_1);
 		
-		c.getItemsAndDisplay(true);
+		c.getItemsAndDisplay(true, c.getCurrSearch());
 		assertEquals(1, c.item_count);
 		assertEquals(1, c.item_count_nonzero);
 		assertEquals(1, c.price_sum, 0);
@@ -158,9 +158,9 @@ public class ControllerTest {
 		i_1.setPortal("Amazon");
 		i_1.setPrice(0.0);
 		i_1.setTitle("Apple");
-		c.result.add(i_1);
+		c.getCurrSearch().add(i_1);
 		
-		c.getItemsAndDisplay(true);
+		c.getItemsAndDisplay(true, c.getCurrSearch());
 		assertEquals(1, c.item_count);
 		assertEquals(0, c.item_count_nonzero);
 		assertEquals(0, c.price_sum, 0);
@@ -189,9 +189,9 @@ public class ControllerTest {
 		i_1.setPortal("Amazon");
 		i_1.setPrice(0.0);
 		i_1.setTitle("Apple");
-		c.result.add(i_1);
+		c.getCurrSearch().add(i_1);
 		
-		c.getItemsAndDisplay(true);
+		c.getItemsAndDisplay(true, c.getCurrSearch());
 		assertEquals(1, c.item_count);
 		assertEquals(0, c.item_count_nonzero);
 		assertEquals(0, c.price_sum, 0);
@@ -208,7 +208,7 @@ public class ControllerTest {
 	 */
 	@Test
 	public void testGetItemsAndDisplay6() {
-		c.getItemsAndDisplay(true);
+		c.getItemsAndDisplay(true, c.getCurrSearch());
 		assertEquals(0, c.item_count);
 		assertEquals(0, c.item_count_nonzero);
 		assertEquals(0, c.price_sum, 0);

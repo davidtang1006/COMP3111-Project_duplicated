@@ -114,6 +114,8 @@ public class Controller extends WebScraperApplication {
 		// by ckchuad, task 4
 		host = this.getHostServices();
 		// end by ckchuad, task 4
+		
+		currSearch = new Vector<Item>();
 	}
 	
     /***************************************************/
@@ -179,7 +181,7 @@ public class Controller extends WebScraperApplication {
 			output += item.getTitle() + "\t" + item.getPrice() + "\t" + item.getUrl() + "\n";
 		}
 		textAreaConsole.setText(output);
-		getItemsAndDisplay(false);
+		getItemsAndDisplay(false, list);
 		
 		// added by Benker for task5
 		// set refine button disable to false after search
@@ -225,9 +227,9 @@ public class Controller extends WebScraperApplication {
 	 * @author awtang
 	 * @param test_mode set this to true when running unit tests
 	 */
-	public void getItemsAndDisplay(boolean test_mode) {
-		String output = "";
-		item_count = currSearch.size();
+	public void getItemsAndDisplay(boolean test_mode, List<Item> list) {
+//		String output = "";
+		item_count = list.size();
 		
 		if (event_handler_count == 0 && test_mode == false) {
 			// The event handler is added once only
@@ -237,12 +239,12 @@ public class Controller extends WebScraperApplication {
 		}
 		
 		if(item_count >= 1) {
-			labelLatest_title = currSearch.get(0).getTitle(); // The first result
-			labelLatest_url = currSearch.get(0).getUrl(); // The first result
+			labelLatest_title = list.get(0).getTitle(); // The first result
+			labelLatest_url = list.get(0).getUrl(); // The first result
 			
-			for (Item item : currSearch) {
+			for (Item item : list) {
 				// We print the scraped data in the console tab
-				output += item.getTitle() + "\t" + item.getPrice() + "\t" + item.getUrl() + "\n";
+//				output += item.getTitle() + "\t" + item.getPrice() + "\t" + item.getUrl() + "\n";
 				
 				if (item.getPrice() != 0.0) {
 					// Items with zero selling price is excluded in the calculations
@@ -282,7 +284,7 @@ public class Controller extends WebScraperApplication {
 				}
 			}
 			if (test_mode == false) {
-				textAreaConsole.setText(output);
+//				textAreaConsole.setText(output);
 				labelCount.setText(Integer.toString(item_count));
 				labelLatest.setText(labelLatest_title);
 			}
@@ -293,7 +295,7 @@ public class Controller extends WebScraperApplication {
 				labelMin_url = "";
 				labelLatest_url = "";
 				
-				textAreaConsole.setText(output);
+//				textAreaConsole.setText(output);
 				labelCount.setText("0");
 				labelPrice.setText("-");
 				labelMin.setText("-");
