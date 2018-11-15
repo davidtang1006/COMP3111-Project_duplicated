@@ -167,6 +167,10 @@ public class Controller extends WebScraperApplication {
 		System.out.println("actionSearch: " + textFieldKeyword.getText());
 		List<Item> result = scraper.scrape(textFieldKeyword.getText());		
 		updateUI(result);
+
+		// by Calvin, task 6
+		updateSearchLists(result);
+		// end by Calvin, task 6
 	}
 	
 	/**
@@ -195,10 +199,6 @@ public class Controller extends WebScraperApplication {
 		// by Calvin, task 4
 		createTable(list);
 		// end by Calvin, task 4
-
-		// by Calvin, task 6
-		updateSearchLists(list);
-		// end by Calvin, task 6
 	}
 	
 	/**
@@ -370,11 +370,14 @@ public class Controller extends WebScraperApplication {
      * @exception none
      */
     private void updateSearchLists(List<Item> items) {
-    	if(currSearch != null) { // not first search, enable lastSearch function
-    		labelMenuLastSearch.setDisable(false);
+    	if(currSearch.isEmpty() && lastSearch == null) { // first time
+    		currSearch = items;
     	}
-    	lastSearch = currSearch;
-    	currSearch = items;
+    	else{
+    		labelMenuLastSearch.setDisable(false);
+    		lastSearch = currSearch;
+    		currSearch = items;
+    	}
     }
     
     /**
