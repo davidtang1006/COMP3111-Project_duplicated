@@ -28,7 +28,7 @@ public class ItemTest {
 	public void testSetTitle() {
 		Item i = new Item();
 		i.setTitle("ABCDE");
-		assertEquals(i.getTitle(), "ABCDE");
+		assertEquals("ABCDE", i.getTitle());
 	}
 	
 	/**
@@ -39,7 +39,7 @@ public class ItemTest {
 	public void testSetPrice() {
 		Item i = new Item();
 		i.setPrice(3);
-		assertEquals(i.getPrice(), 3, 0.001);
+		assertEquals(3, i.getPrice(), 0.001);
 	}
 	
 	/**
@@ -51,7 +51,7 @@ public class ItemTest {
 	public void testSetDate1() {
 		Item i = new Item();
 		i.setDate("Nov 8", new SimpleDateFormat("MMM dd", Locale.ENGLISH));
-		assertEquals(i.getDate(), "Nov 08");
+		assertEquals("Nov 08", i.getDate());
 	}
 	
 	/**
@@ -62,7 +62,7 @@ public class ItemTest {
 	@Test
 	public void testSetDate2() {
 		Item i = new Item();
-		assertEquals(i.getDate(), "No Date");
+		assertEquals("No Date", i.getDate());
 	}
 	
 	/**
@@ -74,7 +74,7 @@ public class ItemTest {
 	public void testSetDate3() {
 		Item i = new Item();
 		i.setDate("Something", new SimpleDateFormat("MMM dd", Locale.ENGLISH));
-		assertEquals(i.getDate(), "No Date");
+		assertEquals("No Date", i.getDate());
 	}
 	
 	/**
@@ -85,6 +85,6 @@ public class ItemTest {
 	public void testSetUrl() {
 		Item i = new Item();
 		i.setUrl("www.google.com.hk");
-		assertEquals(i.getUrl(), "www.google.com.hk");
+		assertEquals("www.google.com.hk", i.getUrl());
 	}
 }
