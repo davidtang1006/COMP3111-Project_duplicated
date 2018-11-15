@@ -103,14 +103,12 @@ public class Controller extends WebScraperApplication{
     private List<Item> lastSearch;
     // end by Calvin, task 6
     
-    private boolean test_mode; //added by Calvin, 4.1
     
     /**
      * Default controller
      * @author imc4kmacpro
      */
     public Controller() {
-    	test_mode = false; // added by Calvin, 4.1
     	scraper = new WebScraper();
       // by Calvin, task 6
     	labelMenuLastSearch = new MenuItem();
