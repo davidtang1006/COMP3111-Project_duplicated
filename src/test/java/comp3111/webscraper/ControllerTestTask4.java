@@ -1,6 +1,5 @@
 package comp3111.webscraper;
 
-
 import org.junit.Test;
 
 import javafx.collections.ObservableList;

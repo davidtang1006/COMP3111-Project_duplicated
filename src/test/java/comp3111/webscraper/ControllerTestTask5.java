@@ -6,7 +6,6 @@ import static org.junit.Assert.*;
 import java.util.List;
 import java.util.ArrayList;
 
-
 public class ControllerTestTask5 {
 	/**
 	 * 	Test the method "refineSearch"
@@ -30,9 +29,7 @@ public class ControllerTestTask5 {
 //    	c.currSearch = currSearch;
     	String filter = "IphoneX";
     	// after filtering, item size should be 1
+    	
 //    	assertEquals(currSearch.size(), c.testRefineSearch(currSearch, filter));
-    	
-    	
 	}
-	
 }

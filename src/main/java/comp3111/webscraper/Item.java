@@ -14,7 +14,11 @@ public class Item {
 	private double price;
 	private String url;
   
-	private String portal; // added by awtang
+	/**
+	 * The name of the selling/reselling portal
+	 * @author awtang
+	 */
+	private String portal;
 	private Date date; // added by ckchuad
 	private DateFormat format; // added by ckchuad
 	

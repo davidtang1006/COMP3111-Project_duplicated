@@ -71,6 +71,10 @@ import java.util.Locale;
  */
 public class WebScraper {
 	private static final String DEFAULT_URL = "https://newyork.craigslist.org";
+	/**
+	 * The partial URL of Amazon
+	 * @author awtang
+	 */
 	private static final String ANOTHER_URL = "https://www.amazon.com";
 	private WebClient client;
 
@@ -87,7 +91,7 @@ public class WebScraper {
 	 * A method implemented in this class, to scrape web content from the Craigslist and Amazon. Used in task 2.
 	 * @author awtang
 	 * @param keyword the keyword you want to search
-	 * @return A list of Item that has found. A zero size list is return if nothing is found. Null if any exception (e.g. no connectivity)
+	 * @return A list of Item that has found. A zero size list is return if nothing is found. Null if any exception (e.g. no connectivity).
 	 */
 	public List<Item> scrape(String keyword) {
 //		Vector<Item> result = new Vector<Item>();
@@ -101,7 +105,6 @@ public class WebScraper {
 		return result;
 	}
 	
-	
 	/**
 	 * 	Loop the URLs, combine functions from task2 and task3
 	 * 
@@ -110,7 +113,6 @@ public class WebScraper {
 	 * 	@return lists of items
 	 */
 	public List<Item> scrapeAll(String keyword){
-		
 		Vector<Item> result = new Vector<Item>();
 		try {						
 			List<String> pages = getPagesCraigslist(keyword);
@@ -151,8 +153,7 @@ public class WebScraper {
 	 */
 	public List<Item> scrapeCraigslist(String searchUrl) {
 		try {
-//			String searchUrl = DEFAULT_URL + "/search/sss?sort=rel&query=" + URLEncoder.encode(keyword, "UTF-8");
-			System.out.println(searchUrl);
+			//System.out.println(searchUrl);
 			HtmlPage page = client.getPage(searchUrl);
 			
 			List<?> items = (List<?>) page.getByXPath("//li[@class='result-row']");
@@ -170,14 +171,14 @@ public class WebScraper {
 				String itemPrice = spanPrice == null ? "0.0" : spanPrice.asText();
 				
 				Item item = new Item();
-				item.setPortal("Craigslist"); // 
+				item.setPortal("Craigslist");
 				item.setTitle(itemAnchor.asText());
-				System.out.println(itemAnchor.asText());
+				//System.out.println(itemAnchor.asText());
 				item.setUrl(itemAnchor.getHrefAttribute());
 				
 				item.setPrice(new Double(itemPrice.replace("$", "")));
 				item.setDate(spanDate.getAttribute("datetime"), new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US));
-				System.out.println(spanDate.getAttribute("datetime") + "\n");
+				//System.out.println(spanDate.getAttribute("datetime") + "\n");
 				
 				result.add(item);
 			}
@@ -188,7 +189,6 @@ public class WebScraper {
 		}
 		return null;
 	}
-	
 	
 	/**
 	 * Scrape items from Amazon. One page is scraped. Used in task 2.
@@ -201,9 +201,7 @@ public class WebScraper {
 			// The following part is added by awtang
 			// We scrape data from another website
 			
-//			String searchUrl = ANOTHER_URL + "/s/ref=sr_st_date-desc-rank?keywords="
-//					+ URLEncoder.encode(keyword, "UTF-8") + "&sort=date-desc-rank";
-			System.out.println(searchUrl);
+			//System.out.println(searchUrl);
 			HtmlPage page = client.getPage(searchUrl);
 			
 			List<?> other_items = (List<?>) page.getByXPath("//li[@class='s-result-item celwidget  AdHolder']"
@@ -226,7 +224,7 @@ public class WebScraper {
 				// The date is set here
 				DateFormat df = new SimpleDateFormat("MMM d, yyyy", Locale.US);
 				if (spanDate != null && !spanDate.asText().matches("^by.*")) {
-					System.out.println(spanDate.asText());
+					//System.out.println(spanDate.asText());
 					item.setDate(spanDate.asText(), df);
 				}
 				
@@ -263,16 +261,15 @@ public class WebScraper {
 					spanPrice_whole.asText().replace(",", "") + "." + spanPrice_fractional.asText();
 				
 				item.setPortal("Amazon");
-				System.out.println(item_title.asText());
+				//System.out.println(item_title.asText());
 				item.setTitle(item_title.asText());
-				System.out.println(itemPrice);
+				//System.out.println(itemPrice);
 				item.setPrice(new Double(itemPrice));
-				if (itemAnchor.getHrefAttribute().matches("^https://.*")) {
-					// Some links starts with "https://"
-					System.out.println(itemAnchor.getHrefAttribute() + "\n");
+				if (itemAnchor.getHrefAttribute().matches("^https://.*")) { // Some links starts with "https://"
+					//System.out.println(itemAnchor.getHrefAttribute() + "\n");
 					item.setUrl(itemAnchor.getHrefAttribute());
 				} else {
-					System.out.println(ANOTHER_URL + itemAnchor.getHrefAttribute() + "\n");
+					//System.out.println(ANOTHER_URL + itemAnchor.getHrefAttribute() + "\n");
 					item.setUrl(ANOTHER_URL + itemAnchor.getHrefAttribute());
 				}
 				// The date is set previously
@@ -330,7 +327,6 @@ public class WebScraper {
 		}
 	}
 	
-	
 	/**
 	 * This function is supposed to return lists of URLs
 	 * 
@@ -375,6 +371,4 @@ public class WebScraper {
 			return pages;
 		}
 	}
-	
-	
 }

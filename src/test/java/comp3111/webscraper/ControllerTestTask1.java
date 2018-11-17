@@ -13,7 +13,7 @@ import java.util.Locale;
  * This class is for testing the class "Controller"
  * @author awtang
  */
-public class ControllerTest {
+public class ControllerTestTask1 {
 	private Controller c = new Controller();
 	
 	/**

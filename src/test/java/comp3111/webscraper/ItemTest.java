@@ -5,8 +5,6 @@ import static org.junit.Assert.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
-import javafx.scene.control.Hyperlink;
-
 
 public class ItemTest {
 
@@ -20,7 +18,6 @@ public class ItemTest {
 		assertNotNull(i);
 	}
 
-	
 	@Test
 	public void testSetTitle() {
 		Item i = new Item();

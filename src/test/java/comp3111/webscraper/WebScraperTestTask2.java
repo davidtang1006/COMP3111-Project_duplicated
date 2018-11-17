@@ -9,7 +9,7 @@ import org.junit.Test;
  * This class is for testing the class "WebScraper"
  * @author awtang
  */
-public class WebScraperTest {
+public class WebScraperTestTask2 {
 	private WebScraper ws = new WebScraper();
 	private static final String url_string_1 = "https://newyork.craigslist.org/search/sss?sort=rel&query=";
 	private static final String url_string_2 = "https://www.amazon.com/s/ref=sr_st_date-desc-rank?keywords=";

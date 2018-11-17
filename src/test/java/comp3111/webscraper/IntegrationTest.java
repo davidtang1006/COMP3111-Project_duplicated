@@ -9,10 +9,8 @@ import java.util.List;
  * this class tests the overall functionalities of controller,
  * methods that is not written by specific team mate
  * @author imc4kmacpro
- *
  */
 public class IntegrationTest {
-	
 	/**
 	 * tests creation of controller
 	 * @author imc4kmacpro

@@ -9,15 +9,15 @@ import java.util.List;
 import java.util.Vector;
 
 //by Calvin, task 6
+import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.MenuItem;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 //end by Calvin, task 6
 
-import javafx.event.ActionEvent;
-import javafx.scene.control.MenuItem;
 //by Calvin, for task 4
 import javafx.application.HostServices;
 import javafx.scene.control.TableCell;
@@ -88,19 +88,56 @@ public class Controller extends WebScraperApplication {
     private List<Item> lastSearch;
     // end by Calvin, task 6
 
-	// by awtang
+	/**
+	 * The number of items scraped
+	 * @author awtang
+	 */
 	public int item_count = 0;
+	/**
+	 * The number of event handlers for opening URLs in the summary tab. It should be at most 1.
+	 * @author awtang
+	 */
 	public int event_handler_count = 0;
+	/**
+	 * The number of items that have non-zero price
+	 * @author awtang
+	 */
 	public int item_count_nonzero = 0;
+	/**
+	 * The sum of prices of scraped items to calculate the average selling price
+	 * @author awtang
+	 */
 	public double price_sum = 0;
+	/**
+	 * The minimum price among all the prices of scraped items
+	 * @author awtang
+	 */
 	public double min_price = Double.POSITIVE_INFINITY;
+	/**
+	 * The URL of the item with the minimum price
+	 * @author awtang
+	 */
 	public String labelMin_url = "";
+	/**
+	 * The title of the latest item
+	 * @author awtang
+	 */
 	public String labelLatest_title = "";
+	/**
+	 * The URL of the latest item
+	 * @author awtang
+	 */
 	public String labelLatest_url = "";
-	public Date max_date = new Date(0L); // "0L" means the number zero of type "long"
-
-	public int test_exit_value = 0; // for unit testing
-	// end by awtang
+	/**
+	 * The maximum date among the dates of the items
+	 * @author awtang
+	 */
+	public Date max_date = new Date(0L); // "0L" is the number zero of type "long"
+	/**
+	 * A value for unit testing
+	 * @author awtang
+	 */
+	public int test_exit_value = 0;
 
 	/**
 	 * Default controller
@@ -145,7 +182,9 @@ public class Controller extends WebScraperApplication {
 	@FXML
 	private void initialize() {
 		// added by Benker for task5
-//   	 refineButton.setDisable(true);
+		
+//		refineButton.setDisable(true);
+		
 		// ended task5
 		
 		labelMenuLastSearch.setDisable(true);
@@ -178,7 +217,7 @@ public class Controller extends WebScraperApplication {
 	private void updateUI(List<Item> list) {
 		String output = "";
 		for (Item item : list) {
-			output += item.getTitle() + "\t" + item.getPrice() + "\t" + item.getUrl() + "\n";
+			output += item.getPortal() + ": " + item.getTitle() + "\t" + item.getPrice() + "\t" + item.getUrl() + "\n";
 		}
 		textAreaConsole.setText(output);
 		getItemsAndDisplay(false, list);
@@ -207,7 +246,6 @@ public class Controller extends WebScraperApplication {
 	 * @param keyword
 	 */
 	public List<Item> actionSearchTest(String keyword) {
-
 		textFieldKeyword.setText(keyword);
 		actionSearch();
 		return currSearch;
@@ -223,12 +261,11 @@ public class Controller extends WebScraperApplication {
 	}
 	
 	/**
-	 * Get the items from the object "result" and display them. Used in task 1.
+	 * Get the items from the object "list" and display them. Used in task 1.
 	 * @author awtang
 	 * @param test_mode set this to true when running unit tests
 	 */
 	public void getItemsAndDisplay(boolean test_mode, List<Item> list) {
-//		String output = "";
 		item_count = list.size();
 		
 		if (event_handler_count == 0 && test_mode == false) {
@@ -243,9 +280,6 @@ public class Controller extends WebScraperApplication {
 			labelLatest_url = list.get(0).getUrl(); // The first result
 			
 			for (Item item : list) {
-				// We print the scraped data in the console tab
-//				output += item.getTitle() + "\t" + item.getPrice() + "\t" + item.getUrl() + "\n";
-				
 				if (item.getPrice() != 0.0) {
 					// Items with zero selling price is excluded in the calculations
 					item_count_nonzero += 1;
@@ -284,7 +318,6 @@ public class Controller extends WebScraperApplication {
 				}
 			}
 			if (test_mode == false) {
-//				textAreaConsole.setText(output);
 				labelCount.setText(Integer.toString(item_count));
 				labelLatest.setText(labelLatest_title);
 			}
@@ -295,7 +328,6 @@ public class Controller extends WebScraperApplication {
 				labelMin_url = "";
 				labelLatest_url = "";
 				
-//				textAreaConsole.setText(output);
 				labelCount.setText("0");
 				labelPrice.setText("-");
 				labelMin.setText("-");
@@ -469,7 +501,6 @@ public class Controller extends WebScraperApplication {
 		List<Item> items_list = items;
 		ObservableList<Item> emptyList = getList(items_list);
     	table.setItems(emptyList);
-
     }
     
     /**
@@ -490,7 +521,7 @@ public class Controller extends WebScraperApplication {
 //    	}
 //    	textAreaConsole.setText(output);
 //    	updateSearchLists(lastSearch);
-////    	getItemsAndDisplay(false);
+//    	getItemsAndDisplay(false);
 //    	createTable(lastSearch);
     } 
     
@@ -510,16 +541,14 @@ public class Controller extends WebScraperApplication {
     public String getConsoleText() {
     	return textAreaConsole.getText();
     }
-  // end by Calvin, task 6
+    // end by Calvin, task 6
     
     /**
      *	This function is to filter the results searched
      *	
-     * 
      * @author Benker
      * @param none
      * @return void
-     * 
      */
     @FXML
     private void refineSearch() {    	
@@ -531,9 +560,9 @@ public class Controller extends WebScraperApplication {
     	currSearch.removeIf(pred);
     	// update the UI with new items list
     	updateUI(currSearch);
-      // need one function to update UI
-//    	refineButton.setDisable(true);
+    	// need one function to update UI
     	
+//    	refineButton.setDisable(true);
     }
     
     /**
