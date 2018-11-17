@@ -1,7 +1,7 @@
 package comp3111.webscraper;
 
-import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class WebScraperApplicationTest {
 	

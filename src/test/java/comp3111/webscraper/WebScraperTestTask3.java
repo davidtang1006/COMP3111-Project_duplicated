@@ -1,9 +1,8 @@
 package comp3111.webscraper;
 
+import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
-
-import java.util.List;
 
 /**
  * This class is for testing the methods in class "WebScraper" used in task 3

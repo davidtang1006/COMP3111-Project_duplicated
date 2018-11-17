@@ -1,13 +1,15 @@
 package comp3111.webscraper;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
-
 import java.text.SimpleDateFormat;
 import java.util.Locale;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
+/**
+ * This class is for testing the class "Item"
+ * @author awtang
+ */
 public class ItemTest {
-
 	/**
 	 * Test initialization of Item
 	 * @author imc4kmacpro
@@ -17,7 +19,11 @@ public class ItemTest {
 		Item i = new Item();
 		assertNotNull(i);
 	}
-
+	
+	/**
+	 * Try to set a title for an item
+	 * @author awtang
+	 */
 	@Test
 	public void testSetTitle() {
 		Item i = new Item();

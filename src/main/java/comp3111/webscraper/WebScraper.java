@@ -106,24 +106,25 @@ public class WebScraper {
 	}
 	
 	/**
-	 * 	Loop the URLs, combine functions from task2 and task3
+	 * Scrape the items from multiple pages on Amazon and Craigslist. 
+	 * Methods from task 2 and task 3 are used.
 	 * 
-	 * 	@author awtang, lyleungad
-	 * 	@param keyword the string to lookup online
-	 * 	@return lists of items
+	 * @author awtang, lyleungad
+	 * @param keyword the string to lookup online
+	 * @return a list of items
 	 */
 	public List<Item> scrapeAll(String keyword){
 		Vector<Item> result = new Vector<Item>();
-		try {						
+		try {
 			List<String> pages = getPagesCraigslist(keyword);
 			
 			int pageCount = 0;
 			
-			// loop the urls and scrape item for this page
+			// go through the urls and scrape the items
 			for (String searchUrl : pages) {
 				result.addAll(scrapeCraigslist(searchUrl));
 				
-				// notify user got one pages
+				// notify the user after one page is scraped
 				System.out.println("Scraped pages: " + (++pageCount) + " from Craigslist");
 			}
 			
@@ -144,9 +145,8 @@ public class WebScraper {
 		return result;
 	} 
 	
-	
 	/**
-	 * Scrape items from Craigslist. One page is scraped. Used in task 2.
+	 * Scrape items from Craigslist. One page is scraped.
 	 * @author awtang
 	 * @param searchUrl the url to browse
 	 * @return items scraped from Craigslist
@@ -198,7 +198,6 @@ public class WebScraper {
 	 */
 	public List<Item> scrapeAmazon(String searchUrl) {
 		try {
-			// The following part is added by awtang
 			// We scrape data from another website
 			
 			//System.out.println(searchUrl);

@@ -213,7 +213,7 @@ public class Controller extends WebScraperApplication {
 	}
 	
 	/**
-	 * 4.1 refactored method to update UI all at once
+	 * Used to update the UIs all at once. Used in task 2.
 	 * 
 	 * @author imc4kmacpro
 	 * @param list the list of items to be shown in console, summary and table
@@ -265,7 +265,7 @@ public class Controller extends WebScraperApplication {
 	 * Get the items from the object "list" and display them. Used in task 1.
 	 * @author awtang
 	 * @param test_mode set this to true when running unit tests
-	 * @param list the list to display in summary tab
+	 * @param list the list of items to display in summary tab
 	 */
 	public void getItemsAndDisplay(boolean test_mode, List<Item> list) {
 		item_count = list.size();

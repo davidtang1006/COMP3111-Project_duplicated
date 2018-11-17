@@ -1,11 +1,11 @@
 package comp3111.webscraper;
 
 // New imports, by awtang
-import org.junit.Test;
-import static org.junit.Assert.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  * This class is for testing the class "ItemComparator"

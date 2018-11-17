@@ -1,15 +1,12 @@
 package comp3111.webscraper;
 
-import org.junit.Test;
-
-import javafx.collections.ObservableList;
-
-import static org.junit.Assert.*;
-
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
+import javafx.collections.ObservableList;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class ControllerTestTask4 {
 	

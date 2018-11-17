@@ -1,12 +1,11 @@
 package comp3111.webscraper;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
-
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class ControllerTestTask6 {
 	/**

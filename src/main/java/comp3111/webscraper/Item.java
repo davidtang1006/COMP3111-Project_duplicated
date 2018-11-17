@@ -51,7 +51,7 @@ public class Item {
 	}
 	
 	/**
-	 * used in task 1
+	 * used in task 1, 2
 	 * @return the title of the item
 	 */
 	public String getTitle() {
@@ -67,7 +67,7 @@ public class Item {
 	}
 	
 	/**
-	 * used in task 1
+	 * used in task 1, 2
 	 * @return the price of the item
 	 */
 	public double getPrice() {
@@ -83,7 +83,8 @@ public class Item {
 	}
 	
 	/**
-	 * for getting the url
+	 * for getting the url<br>
+	 * used in task 1, 2
 	 * @author ckchuad
 	 * @return String
 	 */
@@ -129,7 +130,7 @@ public class Item {
 	}
 	
 	/**
-	 * for getting the date
+	 * for getting the date<br>
 	 * used in task 1
 	 * @author awtang
 	 * @return the posted date of the item (a Date object)

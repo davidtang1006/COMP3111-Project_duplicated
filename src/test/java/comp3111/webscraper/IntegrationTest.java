@@ -1,9 +1,8 @@
 package comp3111.webscraper;
 
+import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
-
-import java.util.List;
 
 /**
  * this class tests the overall functionalities of controller,

@@ -1,13 +1,13 @@
 package comp3111.webscraper;
 
 // New imports, by awtang
-import org.junit.Test;
-import static org.junit.Assert.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
 /**
  * This class is for testing the class "Controller"
