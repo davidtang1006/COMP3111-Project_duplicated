@@ -219,13 +219,13 @@ public class ControllerTestTask1 {
 		assertEquals(3, c.test_exit_value);
 	}
 	
-	/**
-	 * We test "openDoc" method by passing "" and then "https://www.google.com.hk/" to it
-	 * @author awtang
-	 */
-	@Test
-	public void testOpenDoc() {
-		c.openDoc("");
-		c.openDoc("https://www.google.com.hk/");
-	}
+//	/**
+//	 * We test "openDoc" method by passing "" and then "https://www.google.com.hk/" to it
+//	 * @author awtang
+//	 */
+//	@Test
+//	public void testOpenDoc() {
+//		c.openDoc("");
+//		c.openDoc("https://www.google.com.hk/");
+//	}
 }

@@ -77,10 +77,18 @@ public class IntegrationTest {
 	}
 	
 	@Test
-	public void testActionSearch() {
+	public void testActionSearchNotEmpty() {
 		Controller c = new Controller();
 		c.initGUIObjs();
 		List<Item> list = c.actionSearchTest("galaxy s10 r3");
 		assertTrue(!list.isEmpty());
+	}
+	
+	@Test
+	public void testActionSearchEmpty() {
+		Controller c = new Controller();
+		c.initGUIObjs();
+		List<Item> list = c.actionSearchTest("");
+		assertTrue(list.isEmpty());
 	}
 }

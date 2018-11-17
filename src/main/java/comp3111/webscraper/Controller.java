@@ -206,6 +206,10 @@ public class Controller extends WebScraperApplication {
 		System.out.println("actionSearch: " + textFieldKeyword.getText());
 		List<Item> result = scraper.scrape(textFieldKeyword.getText());		
 		updateUI(result);
+
+		// by Calvin, task 6
+		updateSearchLists(result);
+		// end by Calvin, task 6
 	}
 	
 	/**
@@ -234,16 +238,13 @@ public class Controller extends WebScraperApplication {
 		// by Calvin, task 4
 		createTable(list);
 		// end by Calvin, task 4
-
-		// by Calvin, task 6
-		updateSearchLists(list);
-		// end by Calvin, task 6
 	}
 	
 	/**
 	 * test method for actionSearch
 	 * @author imc4kmacpro
-	 * @param keyword
+	 * @param keyword the string to lookup online
+	 * @return currSearch the list of items scrapped
 	 */
 	public List<Item> actionSearchTest(String keyword) {
 		textFieldKeyword.setText(keyword);
@@ -264,6 +265,7 @@ public class Controller extends WebScraperApplication {
 	 * Get the items from the object "list" and display them. Used in task 1.
 	 * @author awtang
 	 * @param test_mode set this to true when running unit tests
+	 * @param list the list to display in summary tab
 	 */
 	public void getItemsAndDisplay(boolean test_mode, List<Item> list) {
 		item_count = list.size();
@@ -354,8 +356,8 @@ public class Controller extends WebScraperApplication {
     /**
      * public test method for getList()
      * @author imc4kmacpro
-     * @param List<Item> items
-     * @return ObservableList<Item>
+     * @param items the list of items to display
+     * @return list the list of items inside ObservableList
      */
     public ObservableList<Item> getListTest(List<Item> items){
     	return getList(items);
@@ -365,9 +367,7 @@ public class Controller extends WebScraperApplication {
      * this function puts everything in items into the table view
      * requires function getList(), openDoc()
      * @author imc4kmacpro
-     * @param List<Item> items
-     * @return void
-     * @exception none
+     * @param items the list of items to display in table view
      */
     public void createTable(List<Item> items) {
     	ObservableList<Item> tableList = getList(items);
@@ -396,23 +396,26 @@ public class Controller extends WebScraperApplication {
     // by Calvin, task 6
     /**
      * task 6, update the searched lists upon new searches
+     * if it is the first search, then assign the list to currSearch
+     * otherwise, enable ReloadLastSearch button, assign currSearch to lastSearch, assign new list to currSearch
      * @author imc4kmacpro
-     * @param List<Item> items
-     * @return void
-     * @exception none
+     * @param items the list of item to be updated to currSearch
      */
     private void updateSearchLists(List<Item> items) {
-    	if(currSearch != null) { // not first search, enable lastSearch function
-    		labelMenuLastSearch.setDisable(false);
+    	if(currSearch.isEmpty() && lastSearch == null) { // first time
+    		currSearch = items;
     	}
-    	lastSearch = currSearch;
-    	currSearch = items;
+    	else{
+    		labelMenuLastSearch.setDisable(false);
+    		lastSearch = currSearch;
+    		currSearch = items;
+    	}
     }
     
     /**
      * for testing
      * @author imc4kmacpro
-     * @param List<Item> items
+     * @param items the list of items to be updated to currSearch
      */
     public void updateSearchListsTest(List<Item> items) {
     	updateSearchLists(items);
@@ -421,9 +424,7 @@ public class Controller extends WebScraperApplication {
     /**
      * for testing
      * @author imc4kmacpro
-     * @param null
-     * @return List<Item> currSearch
-     * @exception none
+     * @return currSearch
      */
     public List<Item> getCurrSearch() {
     	return currSearch;
@@ -432,9 +433,7 @@ public class Controller extends WebScraperApplication {
     /**
      * for testing
      * @author imc4kmacpro
-     * @param null
      * @return lastSearch
-     * @exception none
      */
     public List<Item> getLastSearch() {
     	return lastSearch;
@@ -443,9 +442,7 @@ public class Controller extends WebScraperApplication {
     /**
      * task 6, show about team
      * @author imc4kmacpro
-     * @param ActionEvent event
-     * @return true if successfully displayed about team info
-     * @exception none
+     * @param event eg onClick
      */
     @FXML
     public void showAboutTeam(ActionEvent event) {
@@ -462,9 +459,8 @@ public class Controller extends WebScraperApplication {
     /**
      * task 6, quit button
      * @author imc4kmacpro
-     * @param ActionEvent event
+     * @param event eg onClick
      * @return true if successful termination
-     * @exception none
      */
     @FXML
     public boolean terminateWindow(ActionEvent event) {
@@ -485,6 +481,8 @@ public class Controller extends WebScraperApplication {
     	if(lastSearch != null) {
     		labelMenuLastSearch.setDisable(false); // enable last search
     	}
+    	
+    	textFieldKeyword.setText("");
     	
     	// Console tab
     	textAreaConsole.setText(""); // resets console
