@@ -29,6 +29,8 @@ import java.util.Date;
 
 //added by Benker for task5
 import java.util.function.Predicate;
+import javafx.scene.control.Button;
+// end by Benker for task5
 
 /**
  * This class manages GUI interaction
@@ -75,6 +77,11 @@ public class Controller extends WebScraperApplication {
     
     private final HostServices host;
     // end by Calvin, task 4
+    
+    // by Benker, task 5
+    @FXML
+    private Button refineButton;
+    // end by Benker, task 5
     
     // by Calvin, task 6
     @FXML
@@ -182,9 +189,7 @@ public class Controller extends WebScraperApplication {
 	@FXML
 	private void initialize() {
 		// added by Benker for task5
-		
-//		refineButton.setDisable(true);
-		
+		refineButton.setDisable(true);
 		// ended task5
 		
 		labelMenuLastSearch.setDisable(true);
@@ -227,12 +232,10 @@ public class Controller extends WebScraperApplication {
 		getItemsAndDisplay(false, list);
 		
 		// added by Benker for task5
-		// set refine button disable to false after search
-		
-//    	if(list.size()>0) {
-//    		refineButton.setDisable(false);
-//    	}
-		
+		// set refine button disable to false after search		
+    	if(list.size()>0) {
+    		refineButton.setDisable(false);
+    	}
 		// end task5
 
 		// by Calvin, task 4
@@ -549,7 +552,14 @@ public class Controller extends WebScraperApplication {
      * @return void
      */
     @FXML
-    private void refineSearch() {    	
+    private void refineSearch() {
+    	
+    	// if currSearch is null, return
+    	if(currSearch == null) {
+    		refineButton.setDisable(true);
+    		return;
+    	}
+    	
     	// the word to filter
     	final String filter = textFieldKeyword.getText();
     	// handle to conditions
@@ -558,9 +568,8 @@ public class Controller extends WebScraperApplication {
     	currSearch.removeIf(pred);
     	// update the UI with new items list
     	updateUI(currSearch);
-    	// need one function to update UI
-    	
-//    	refineButton.setDisable(true);
+    	// set the button disable
+    	refineButton.setDisable(true);
     }
     
     /**
