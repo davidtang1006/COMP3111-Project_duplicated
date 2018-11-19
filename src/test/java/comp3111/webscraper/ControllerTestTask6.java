@@ -106,7 +106,7 @@ public class ControllerTestTask6 {
 		c.initGUIObjs();
 		assertTrue(c.terminateWindow(null));
 	}
-
+	
 	/**
 	 * tests close window
 	 * @author imc4kmacpro

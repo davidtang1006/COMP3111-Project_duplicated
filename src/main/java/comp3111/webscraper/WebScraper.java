@@ -109,7 +109,7 @@ public class WebScraper {
 	 * Scrape the items from multiple pages on Amazon and Craigslist. 
 	 * Methods from task 2 and task 3 are used.
 	 * 
-	 * @author awtang, lyleungad
+	 * @author awtang, Benker
 	 * @param keyword the string to lookup online
 	 * @return a list of items
 	 */
@@ -286,7 +286,7 @@ public class WebScraper {
 	/**
 	 * This function is supposed to return lists of URLs
 	 * 
-	 * @author lyleungad
+	 * @author Benker
 	 * @param keyword the string to lookup online
 	 * @return A list of string starting with the first page
 	 */
@@ -329,7 +329,7 @@ public class WebScraper {
 	/**
 	 * This function is supposed to return lists of URLs
 	 * 
-	 * @author lyleungad
+	 * @author Benker
 	 * @param keyword the string to lookup online
 	 * @return A list of string starting with the first page
 	 */

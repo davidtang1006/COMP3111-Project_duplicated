@@ -29,6 +29,8 @@ import java.util.Date;
 
 //added by Benker for task5
 import java.util.function.Predicate;
+import javafx.scene.control.Button;
+// end by Benker for task5
 
 /**
  * This class manages GUI interaction
@@ -39,75 +41,80 @@ import java.util.function.Predicate;
 public class Controller extends WebScraperApplication {
 	@FXML
 	private Label labelCount;
-
+	
 	@FXML
 	private Label labelPrice;
-
+	
 	@FXML
 	private Hyperlink labelMin;
-
+	
 	@FXML
 	private Hyperlink labelLatest;
-
+	
 	@FXML
 	private TextField textFieldKeyword;
-
+	
 	@FXML
 	private TextArea textAreaConsole;
-
+	
 	private WebScraper scraper;
 	
     // by Calvin, task 4
     @FXML
     private TableView<Item> table;
-
+    
     @FXML
     private TableColumn<Item, String> labelTableTitle;
-
+    
     @FXML
     private TableColumn<Item, Double> labelTablePrice;
-
+    
     @FXML
     private TableColumn<Item, String> labelTableURL;
-
+    
     @FXML
     private TableColumn<Item, String> labelTableDate;
     
     private final HostServices host;
     // end by Calvin, task 4
     
+    // by Benker, task 5
+    @FXML
+    private Button refineButton;
+    // end by Benker, task 5
+    
     // by Calvin, task 6
     @FXML
     private MenuItem labelMenuLastSearch;
-
+    
     @FXML
     private MenuItem labelAboutTeam;
     
     private List<Item> currSearch;
-
+    
     private List<Item> lastSearch;
     // end by Calvin, task 6
-
-	/**
-	 * The number of items scraped
-	 * @author awtang
-	 */
-	public int item_count = 0;
+    
 	/**
 	 * The number of event handlers for opening URLs in the summary tab. It should be at most 1.
 	 * @author awtang
 	 */
 	public int event_handler_count = 0;
 	/**
-	 * The number of items that have non-zero price
+	 * The number of items scraped
 	 * @author awtang
 	 */
-	public int item_count_nonzero = 0;
+	public int item_count = 0;
 	/**
 	 * The sum of prices of scraped items to calculate the average selling price
 	 * @author awtang
 	 */
 	public double price_sum = 0;
+	/**
+	 * The number of items that have non-zero price
+	 * @author awtang
+	 */
+	public int item_count_nonzero = 0;
 	/**
 	 * The minimum price among all the prices of scraped items
 	 * @author awtang
@@ -119,6 +126,11 @@ public class Controller extends WebScraperApplication {
 	 */
 	public String labelMin_url = "";
 	/**
+	 * The maximum date among the dates of the items
+	 * @author awtang
+	 */
+	public Date max_date = new Date(0L); // "0L" is the number zero of type "long"
+	/**
 	 * The title of the latest item
 	 * @author awtang
 	 */
@@ -128,11 +140,6 @@ public class Controller extends WebScraperApplication {
 	 * @author awtang
 	 */
 	public String labelLatest_url = "";
-	/**
-	 * The maximum date among the dates of the items
-	 * @author awtang
-	 */
-	public Date max_date = new Date(0L); // "0L" is the number zero of type "long"
 	/**
 	 * A value for unit testing
 	 * @author awtang
@@ -175,26 +182,24 @@ public class Controller extends WebScraperApplication {
     	labelAboutTeam = new MenuItem();
     }
     /***************************************************/
-
+    
 	/**
 	 * Default initializer. It is empty.
 	 */
 	@FXML
 	private void initialize() {
 		// added by Benker for task5
-		
-//		refineButton.setDisable(true);
-		
+		refineButton.setDisable(true);
 		// ended task5
 		
 		labelMenuLastSearch.setDisable(true);
 	}
-
+	
 	/**
 	 * Called when the search button is pressed. Used in task 1.
 	 * @author awtang
 	 */
-
+	
 	// (There is no @param, @return, @exception)
 	@FXML
 	private void actionSearch() {
@@ -206,7 +211,7 @@ public class Controller extends WebScraperApplication {
 		System.out.println("actionSearch: " + textFieldKeyword.getText());
 		List<Item> result = scraper.scrape(textFieldKeyword.getText());		
 		updateUI(result);
-
+		
 		// by Calvin, task 6
 		updateSearchLists(result);
 		// end by Calvin, task 6
@@ -227,14 +232,12 @@ public class Controller extends WebScraperApplication {
 		getItemsAndDisplay(false, list);
 		
 		// added by Benker for task5
-		// set refine button disable to false after search
-		
-//    	if(list.size()>0) {
-//    		refineButton.setDisable(false);
-//    	}
-		
+		// set refine button disable to false after search		
+    	if(list.size()>0) {
+    		refineButton.setDisable(false);
+    	}
 		// end task5
-
+    	
 		// by Calvin, task 4
 		createTable(list);
 		// end by Calvin, task 4
@@ -251,7 +254,7 @@ public class Controller extends WebScraperApplication {
 		actionSearch();
 		return currSearch;
 	}
-
+	
 	/**
 	 * test method for getting scraper object
 	 * @author imc4kmacpro
@@ -268,7 +271,12 @@ public class Controller extends WebScraperApplication {
 	 * @param list the list of items to display in summary tab
 	 */
 	public void getItemsAndDisplay(boolean test_mode, List<Item> list) {
+		// Refresh the content for another search
 		item_count = list.size();
+		price_sum = 0;
+		item_count_nonzero = 0;
+		min_price = Double.POSITIVE_INFINITY;
+		max_date.setTime(0L);
 		
 		if (event_handler_count == 0 && test_mode == false) {
 			// The event handler is added once only
@@ -285,6 +293,7 @@ public class Controller extends WebScraperApplication {
 				if (item.getPrice() != 0.0) {
 					// Items with zero selling price is excluded in the calculations
 					item_count_nonzero += 1;
+					
 					price_sum += item.getPrice(); // To calculate the average selling price
 					
 					// Find the item with lowest selling price
@@ -326,7 +335,6 @@ public class Controller extends WebScraperApplication {
 		} else { // We cannot find a result
 			test_exit_value = 3;
 			if (test_mode == false) {
-				// We refresh the contents for another search
 				labelMin_url = "";
 				labelLatest_url = "";
 				
@@ -542,43 +550,56 @@ public class Controller extends WebScraperApplication {
     // end by Calvin, task 6
     
     /**
-     *	This function is to filter the results searched
-     *	
+     * 	This function is to handle button click, called by clicking the button "refine"
+     * 
      * @author Benker
-     * @param none
-     * @return void
      */
     @FXML
-    private void refineSearch() {    	
-    	// the word to filter
-    	final String filter = textFieldKeyword.getText();
-    	// handle to conditions
-    	Predicate<Item> pred = p-> p.getTitle().indexOf(filter) == -1;
-    	// remove if condition meet
-    	currSearch.removeIf(pred);
+    private void refineButtonClick() {
+    	
+    	// if currSearch is null, return
+    	if(currSearch == null) {
+    		refineButton.setDisable(true);
+    		return;
+    	}
+    	// refine the currSearch list with keyword in text field
+    	refineSearch(currSearch, textFieldKeyword.getText().trim());
     	// update the UI with new items list
     	updateUI(currSearch);
-    	// need one function to update UI
+    	// set the button disable
+    	refineButton.setDisable(true);
     	
-//    	refineButton.setDisable(true);
+    }
+    
+    /**
+     *	This function is to filter the items in list
+     *	
+     * @author Benker
+     * @param target the list of items
+     * @param filter keep the Item if contains the filter
+     */
+    private void refineSearch(List<Item> target, String filter) {
+    	
+    	// help to remove the items in the list
+    	Predicate<Item> pred = p-> p.getTitle().indexOf(filter) == -1;
+    	// remove if condition meet
+    	target.removeIf(pred);
+    	
     }
     
     /**
      * 	This function is helper function to test refineSearch
      * 
-     * 	@author Benker
-     * 	@param	items the list of items to be tested
-     * 	@param	k the keyword that to be filter
-     * 	@return	the size of currSearch after filter
+     * @author	Benker
+     * @param	items the list of items to be tested
+     * @param	k the keyword that to be filter
+     * @return	the size of currSearch after filter
      */
     public int testRefineSearch(List<Item> items, String k) {
     	
-//    	currSearch = items;
-//    	textFieldKeyword.setText(k);
-//    	refineSearch();
-//    	return currSearch.size();
-    	
-    	return 0;
+    	refineSearch(items, k);
+    	return items.size();
+
     }
 	
 	// hyperlink helper function
