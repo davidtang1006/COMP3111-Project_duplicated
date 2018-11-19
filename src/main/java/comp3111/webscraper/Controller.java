@@ -550,48 +550,56 @@ public class Controller extends WebScraperApplication {
     // end by Calvin, task 6
     
     /**
-     *	This function is to filter the results searched
-     *	
+     * 	This function is to handle button click, called by clicking the button "refine"
+     * 
      * @author Benker
-     * @param none
-     * @return void
      */
     @FXML
-    private void refineSearch() {
+    private void refineButtonClick() {
+    	
     	// if currSearch is null, return
     	if(currSearch == null) {
     		refineButton.setDisable(true);
     		return;
     	}
-    	
-    	// the word to filter
-    	final String filter = textFieldKeyword.getText();
-    	// handle to conditions
-    	Predicate<Item> pred = p-> p.getTitle().indexOf(filter) == -1;
-    	// remove if condition meet
-    	currSearch.removeIf(pred);
+    	// refine the currSearch list with keyword in text field
+    	refineSearch(currSearch, textFieldKeyword.getText().trim());
     	// update the UI with new items list
     	updateUI(currSearch);
     	// set the button disable
     	refineButton.setDisable(true);
+    	
+    }
+    
+    /**
+     *	This function is to filter the items in list
+     *	
+     * @author Benker
+     * @param target the list of items
+     * @param filter keep the Item if contains the filter
+     */
+    private void refineSearch(List<Item> target, String filter) {
+    	
+    	// help to remove the items in the list
+    	Predicate<Item> pred = p-> p.getTitle().indexOf(filter) == -1;
+    	// remove if condition meet
+    	target.removeIf(pred);
+    	
     }
     
     /**
      * 	This function is helper function to test refineSearch
      * 
-     * 	@author Benker
-     * 	@param	items the list of items to be tested
-     * 	@param	k the keyword that to be filter
-     * 	@return	the size of currSearch after filter
+     * @author	Benker
+     * @param	items the list of items to be tested
+     * @param	k the keyword that to be filter
+     * @return	the size of currSearch after filter
      */
     public int testRefineSearch(List<Item> items, String k) {
     	
-//    	currSearch = items;
-//    	textFieldKeyword.setText(k);
-//    	refineSearch();
-//    	return currSearch.size();
-    	
-    	return 0;
+    	refineSearch(items, k);
+    	return items.size();
+
     }
 	
 	// hyperlink helper function
