@@ -15,11 +15,25 @@ public class WebScraperTestTask3 {
 	/**
 	 *	Test the method "getPagesCraigslist"
 	 * @author Benker
+	 * @throws Exception 
 	 */
 	@Test
-	public void testGetPagesCraigslist() {
+	public void testGetPagesCraigslist() throws Exception {
 		WebScraper s = new WebScraper();
 
+		// 2 pages
+		String path = new File("").getAbsolutePath().toString() + "\\src\\main\\resources\\craigslistPages_Task3\\craigslistTest1.html";
+		String fileUrl = new File(path).toURI().toURL().toString();
+		List<String> pages = s.getPagesCraigslist(fileUrl);
+		System.out.println(pages.size());
+		assertEquals(2, pages.size());
+		
+		// 1 page
+		path = path.substring(0, path.lastIndexOf('\\')) + "\\craigslistTest2.html";
+		fileUrl = new File(path).toURI().toURL().toString();
+		pages = s.getPagesCraigslist(fileUrl);
+		System.out.println(pages.size());
+		assertEquals(1, pages.size());
 	}
 	
 	/**

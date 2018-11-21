@@ -119,7 +119,7 @@ public class WebScraper {
 	public List<Item> scrapeAll(String keyword){
 		Vector<Item> result = new Vector<Item>();
 		try {
-			// prepare the url
+			// prepare the url for craigslist
 			String defaultUrl = DEFAULT_URL + "/search/sss?sort=rel&query=" + URLEncoder.encode(keyword, "UTF-8");
 			String searchUrl = defaultUrl;
 			List<String> pages = getPagesCraigslist(searchUrl);		
@@ -136,7 +136,7 @@ public class WebScraper {
 			}
 			
 			
-			// prepare the url
+			// prepare the url for amazon
 			defaultUrl = ANOTHER_URL + "/s/ref=sr_st_date-desc-rank?keywords="
 			+ URLEncoder.encode(keyword, "UTF-8") + "&sort=date-desc-rank";
 			searchUrl = defaultUrl;
