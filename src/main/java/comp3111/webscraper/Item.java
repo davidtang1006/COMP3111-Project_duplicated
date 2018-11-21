@@ -3,7 +3,9 @@ package comp3111.webscraper;
 // New imports, by ckchuad
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * This class stores the details for scraped items
@@ -124,7 +126,7 @@ public class Item {
 	 */
 	public String getDate() {
 		if(date != null) {
-			return format.format(date);
+			return new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US).format(date);
 		}
 		return "No Date";
 	}
