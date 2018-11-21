@@ -16,6 +16,9 @@ import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Locale;
 
+//testing
+import java.io.File;
+//end testing
 /**
  * WebScraper provide a sample code that scrape web content. After it is constructed, you can call the method scrape with a keyword, 
  * the client will go to the default url and parse the page by looking at the HTML DOM.
@@ -109,30 +112,39 @@ public class WebScraper {
 	 * Scrape the items from multiple pages on Amazon and Craigslist. 
 	 * Methods from task 2 and task 3 are used.
 	 * 
-	 * @author awtang, lyleungad
+	 * @author awtang, Benker
 	 * @param keyword the string to lookup online
 	 * @return a list of items
 	 */
 	public List<Item> scrapeAll(String keyword){
 		Vector<Item> result = new Vector<Item>();
 		try {
-			List<String> pages = getPagesCraigslist(keyword);
+			// prepare the url for craigslist
+			String defaultUrl = DEFAULT_URL + "/search/sss?sort=rel&query=" + URLEncoder.encode(keyword, "UTF-8");
+			String searchUrl = defaultUrl;
+			List<String> pages = getPagesCraigslist(searchUrl);		
+
 			
 			int pageCount = 0;
 			
 			// go through the urls and scrape the items
-			for (String searchUrl : pages) {
-				result.addAll(scrapeCraigslist(searchUrl));
+			for (String page : pages) {
+				result.addAll(scrapeCraigslist(page));
 				
 				// notify the user after one page is scraped
 				System.out.println("Scraped pages: " + (++pageCount) + " from Craigslist");
 			}
 			
+			
+			// prepare the url for amazon
+			defaultUrl = ANOTHER_URL + "/s/ref=sr_st_date-desc-rank?keywords="
+			+ URLEncoder.encode(keyword, "UTF-8") + "&sort=date-desc-rank";
+			searchUrl = defaultUrl;
 			pageCount = 0;
-			pages = getPagesAmazon(keyword);
+			pages = getPagesAmazon(searchUrl);
 			// loop the urls and scrape item for this page
-			for (String searchUrl : pages) {
-				result.addAll(scrapeAmazon(searchUrl));
+			for (String page : pages) {
+				result.addAll(scrapeAmazon(page));
 				
 				// notify user got one pages
 				System.out.println("Scraped pages: " + (++pageCount) + " from Amazon");
@@ -286,24 +298,23 @@ public class WebScraper {
 	/**
 	 * This function is supposed to return lists of URLs
 	 * 
-	 * @author lyleungad
-	 * @param keyword the string to lookup online
+	 * @author Benker
+	 * @param searchUrl the first page
 	 * @return A list of string starting with the first page
 	 */
-	public List<String> getPagesCraigslist(String keyword)
+	public List<String> getPagesCraigslist(String searchUrl)
 	{
 		List<String> pages = new ArrayList<String>();
-		try {
-			String defaultUrl = DEFAULT_URL + "/search/sss?sort=rel&query=" + URLEncoder.encode(keyword, "UTF-8");
-			String baseURL = "https://newyork.craigslist.org";
-			String searchUrl = defaultUrl;
-			HtmlPage page = client.getPage(defaultUrl);
+		try {			
+			String baseURL = searchUrl.substring(0, searchUrl.lastIndexOf('/'));
+			
+			HtmlPage page = client.getPage(searchUrl);
 			
 			// print msg that show application still running
-			System.out.println("Start getting urls");
+			System.out.println("Start getting urls from craigslist");
 			
 			// add the default to pages
-			pages.add(defaultUrl);
+			pages.add(searchUrl);
 			while(true) {
 				// get href in html
 				HtmlAnchor nextUrlObject = ((HtmlAnchor) page.getFirstByXPath(".//span/a[@class='button next']"));
@@ -314,7 +325,7 @@ public class WebScraper {
 					searchUrl = baseURL + nextUrl;
 					page = client.getPage(searchUrl);
 					pages.add(searchUrl);
-					System.out.println("Got " + pages.size() + " urls");
+					System.out.println("Got " + pages.size() + " urls from craigslist");
 				}
 				else {
 					return pages;
@@ -329,26 +340,24 @@ public class WebScraper {
 	/**
 	 * This function is supposed to return lists of URLs
 	 * 
-	 * @author lyleungad
-	 * @param keyword the string to lookup online
+	 * @author Benker
+	 * @param searchUrl the first page
 	 * @return A list of string starting with the first page
 	 */
-	public List<String> getPagesAmazon(String keyword)
+	public List<String> getPagesAmazon(String searchUrl)
 	{
 		List<String> pages = new ArrayList<String>();
 		
 		try {
-			String defaultUrl = ANOTHER_URL + "/s/ref=sr_st_date-desc-rank?keywords="
-				+ URLEncoder.encode(keyword, "UTF-8") + "&sort=date-desc-rank";
-			String baseURL = "https://www.amazon.com";
-			String searchUrl = defaultUrl;
-			HtmlPage page = client.getPage(defaultUrl);
+			String baseURL = searchUrl.substring(0, searchUrl.lastIndexOf('/'));
+			
+			HtmlPage page = client.getPage(searchUrl);
 			
 			// print msg that show application still running
-			System.out.println("Start getting urls");
+			System.out.println("Start getting urls from amazon");
 			
 			// add the default to pages
-			pages.add(defaultUrl);
+			pages.add(searchUrl);
 			while(true) {
 				// get href in html
 				HtmlAnchor nextUrlObject = ((HtmlAnchor) page.getFirstByXPath(".//span/a[@class='pagnNext']"));
@@ -359,7 +368,7 @@ public class WebScraper {
 					searchUrl = baseURL + nextUrl;
 					page = client.getPage(searchUrl);
 					pages.add(searchUrl);
-					System.out.println("Got " + pages.size() + " urls");
+					System.out.println("Got " + pages.size() + " urls from amazon");
 				}
 				else {
 					return pages;

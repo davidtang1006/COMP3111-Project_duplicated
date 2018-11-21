@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import javafx.stage.Stage;
+
 public class ControllerTestTask5 {
 	/**
 	 * 	Test the method "refineSearch"
 	 * 
-	 *	@author Benker
-	 */
+	 * @author Benker
+	 */	
 	@Test
 	public void testRefineSearch() {
 		// prepare the test param
@@ -25,10 +27,9 @@ public class ControllerTestTask5 {
     	currSearch.add(a);
     	
     	Controller c = new Controller();
-//    	c.currSearch = currSearch;
     	String filter = "IphoneX";
-    	// after filtering, item size should be 1
     	
-//    	assertEquals(currSearch.size(), c.testRefineSearch(currSearch, filter));
+    	// after filtering, item size should be 1
+    	assertEquals(1, c.testRefineSearch(currSearch, filter));
 	}
 }

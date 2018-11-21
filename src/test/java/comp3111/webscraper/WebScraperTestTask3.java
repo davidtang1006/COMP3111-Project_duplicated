@@ -1,5 +1,7 @@
 package comp3111.webscraper;
 
+import java.io.File;
+import java.net.MalformedURLException;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -12,52 +14,50 @@ public class WebScraperTestTask3 {
 	
 	/**
 	 *	Test the method "getPagesCraigslist"
-	 *	@author lyleungad
+	 * @author Benker
+	 * @throws Exception 
 	 */
 	@Test
-	public void testGetPagesCraigslist() {
+	public void testGetPagesCraigslist() throws Exception {
 		WebScraper s = new WebScraper();
+
+		// 2 pages
+		String path = new File("").getAbsolutePath().toString() + "\\src\\main\\resources\\craigslistPages_Task3\\craigslistTest1.html";
+		String fileUrl = new File(path).toURI().toURL().toString();
+		List<String> pages = s.getPagesCraigslist(fileUrl);
+		System.out.println(pages.size());
+		assertEquals(2, pages.size());
 		
-		// one page url
-		String one_url = "https://newyork.craigslist.org/search/sss?query=whatisthisthingshouldbenothing&sort=rel";
-		// 8 page url
-		String more_url = "https://newyork.craigslist.org/search/sss?query=galaxy%20s9&sort=rel";
-		List<String> ls = s.getPagesCraigslist(one_url);
-		
-		// test one page, including no page
-		assertEquals(1, ls.size());
-		
-		// test two page
-		ls = s.getPagesCraigslist(more_url);
-		assertEquals(2, ls.size());
+		// 1 page
+		path = path.substring(0, path.lastIndexOf('\\')) + "\\craigslistTest2.html";
+		fileUrl = new File(path).toURI().toURL().toString();
+		pages = s.getPagesCraigslist(fileUrl);
+		System.out.println(pages.size());
+		assertEquals(1, pages.size());
 	}
 	
 	/**
 	 *	Test the method "getPagesAmazon"
-	 *	@author lyleungad
+	 * @author Benker
+	 * @throws Exception
 	 */
 	@Test
-	public void testGetPagesAmazon() {
-		WebScraper s = new WebScraper();
+	public void testGetPagesAmazon() throws Exception {
+		WebScraper s = new WebScraper();	
+		// 3 pages
+		String path = new File("").getAbsolutePath().toString() + "\\src\\main\\resources\\amazonPages_Task3\\amazonTest1.html";
+		String fileUrl = new File(path).toURI().toURL().toString();
+		List<String> pages = s.getPagesAmazon(fileUrl);
+		System.out.println(pages.size());
+		assertEquals(pages.size(), 3);
 		
-		// one page url
-		String one_url = "https://www.amazon.com/s/ref=sr_st_date-desc-rank?keywords=whatisthisthisisnothing&sort=date-desc-rank";
-		// 20 page url
-		String more_url = "https://www.amazon.com/s/ref=sr_st_date-desc-rank?keywords=haha&sort=date-desc-rank";
-		List<String> ls = s.getPagesAmazon(one_url);
+		// 1 page
+		path = path.substring(0, path.lastIndexOf('\\')) + "\\amazonTest3.html";
+		fileUrl = new File(path).toURI().toURL().toString();
+		pages = s.getPagesAmazon(fileUrl);
+		System.out.println(pages.size());
+		assertEquals(pages.size(), 1);
 		
-		// exception one page
-		String exc_url = "https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=whatisthisar&rh=i%3Aaps%2Ck%3Awhatisthisar";
 		
-		// test one page, including no page
-		assertEquals(1, ls.size());
-		
-		// test two pages
-		ls = s.getPagesAmazon(more_url);
-		assertEquals(20, ls.size());
-		
-		// test one page, exception
-		ls = s.getPagesAmazon(exc_url);
-		assertEquals(1, ls.size());
 	}
 }
