@@ -50,8 +50,8 @@ public class ItemTest {
 	@Test
 	public void testSetDate1() {
 		Item i = new Item();
-		i.setDate("Nov 8", new SimpleDateFormat("MMM dd", Locale.ENGLISH));
-		assertEquals("Nov 08", i.getDate());
+		i.setDate("2018 Nov 8", new SimpleDateFormat("yyyy MMM dd", Locale.ENGLISH));
+		assertEquals("2018-11-08 00:00", i.getDate());
 	}
 	
 	/**

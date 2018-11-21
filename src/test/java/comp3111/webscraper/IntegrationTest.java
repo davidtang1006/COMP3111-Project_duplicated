@@ -26,7 +26,6 @@ public class IntegrationTest {
 	@Test
 	public void testInitGUIObjs() {
 		Controller c = new Controller();
-		c.initGUIObjs();
 		assertTrue(true);
 	}
 	/**
@@ -36,7 +35,6 @@ public class IntegrationTest {
 	@Test
 	public void testOpenDocNotEmpty() {
 		Controller c = new Controller();
-		c.initGUIObjs();
 		c.openDoc("https://www.google.com.hk/");
 	}
 	
@@ -47,7 +45,6 @@ public class IntegrationTest {
 	@Test
 	public void testOpenDocEmpty() {
 		Controller c = new Controller();
-		c.initGUIObjs();
 		c.openDoc("");
 	}
 	
@@ -58,7 +55,6 @@ public class IntegrationTest {
 	@Test
 	public void testScraperNotEmpty() {
 		Controller c = new Controller();
-		c.initGUIObjs();
 		List<Item> list = c.getScraper().scrape("galaxy s10 r3");
 		assertNotNull(list);
 	}
@@ -70,24 +66,8 @@ public class IntegrationTest {
 	@Test
 	public void testScraperEmpty() {
 		Controller c = new Controller();
-		c.initGUIObjs();
 		List<Item> list = c.getScraper().scrape("galaxy s10 1 fl 4 v");
 		assertTrue(list.isEmpty());
 	}
 	
-	@Test
-	public void testActionSearchNotEmpty() {
-		Controller c = new Controller();
-		c.initGUIObjs();
-		List<Item> list = c.actionSearchTest("galaxy s10 r3");
-		assertTrue(!list.isEmpty());
-	}
-	
-	@Test
-	public void testActionSearchEmpty() {
-		Controller c = new Controller();
-		c.initGUIObjs();
-		List<Item> list = c.actionSearchTest("");
-		assertTrue(list.isEmpty());
-	}
 }
