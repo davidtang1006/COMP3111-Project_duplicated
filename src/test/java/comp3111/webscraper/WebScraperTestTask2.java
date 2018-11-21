@@ -1,6 +1,7 @@
 package comp3111.webscraper;
 
 // New imports by awtang
+import java.io.File;
 import java.net.URLEncoder;
 import static org.junit.Assert.*;
 import org.junit.Test;
@@ -66,6 +67,14 @@ public class WebScraperTestTask2 {
 		
 		assertTrue(ws.scrapeAmazon(url_string_2 + URLEncoder.encode("cwLfnfzoBcCGlGdZneyP", "UTF-8") + url_string_3).isEmpty()); // There should be no results
 		assertTrue(ws.scrapeAmazon(url_string_2 + URLEncoder.encode("LCPKqiZqgIBAISHncpPC", "UTF-8") + url_string_3).isEmpty()); // There should be no results
+		
+		String path = new File("").getAbsolutePath().toString() + "\\src\\main\\resources\\amazonPages_Task2\\amazonTest1.html";
+		String fileUrl = new File(path).toURI().toURL().toString();
+		assertEquals(ws.scrapeAmazon(fileUrl).size(), 17);
+		
+		path = new File("").getAbsolutePath().toString() + "\\src\\main\\resources\\amazonPages_Task2\\amazonTest2.html";
+		fileUrl = new File(path).toURI().toURL().toString();
+		assertEquals(ws.scrapeAmazon(fileUrl).size(), 0);
 		}
 		catch (Exception e) {
 			System.out.println(e);
