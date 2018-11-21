@@ -1,7 +1,6 @@
 package comp3111.webscraper;
 
 import java.io.File;
-import java.net.MalformedURLException;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -11,16 +10,15 @@ import static org.junit.Assert.*;
  * @author lyleungad
  */
 public class WebScraperTestTask3 {
-	
 	/**
-	 *	Test the method "getPagesCraigslist"
-	 * @author Benker
-	 * @throws Exception 
+	 * Test the method "getPagesCraigslist"
+	 * @author lyleungad
+	 * @exception Exception
 	 */
 	@Test
 	public void testGetPagesCraigslist() throws Exception {
 		WebScraper s = new WebScraper();
-
+		
 		// 2 pages
 		String path = new File("").getAbsolutePath().toString() + "\\src\\main\\resources\\craigslistPages_Task3\\craigslistTest1.html";
 		String fileUrl = new File(path).toURI().toURL().toString();
@@ -37,9 +35,9 @@ public class WebScraperTestTask3 {
 	}
 	
 	/**
-	 *	Test the method "getPagesAmazon"
-	 * @author Benker
-	 * @throws Exception
+	 * Test the method "getPagesAmazon"
+	 * @author lyleungad
+	 * @exception Exception
 	 */
 	@Test
 	public void testGetPagesAmazon() throws Exception {
@@ -57,7 +55,5 @@ public class WebScraperTestTask3 {
 		pages = s.getPagesAmazon(fileUrl);
 		System.out.println(pages.size());
 		assertEquals(pages.size(), 1);
-		
-		
 	}
 }

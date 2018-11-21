@@ -9,9 +9,9 @@ import org.junit.Test;
 
 public class ControllerTestTask6 {
 	/**
-	 * test update search list method
+	 * test update search list method<br>
 	 * a list should be assigned to currSearch
-	 * @author imc4kmacpro
+	 * @author ckchuad
 	 */
 	@Test
 	public void testUpdateSearchListsFirstAdd() {
@@ -29,12 +29,11 @@ public class ControllerTestTask6 {
 	}
 	
 	/**
-	 * test update search list method
-	 * after updating twice, the original currSearch should go to lastSearch
-	 * currSearch should store the new list
-	 * 
+	 * test update search list method<br>
+	 * after updating twice, the original currSearch should go to lastSearch<br>
+	 * currSearch should store the new list<br>
 	 * this method tests the currSearch
-	 * @author imc4kmacpro
+	 * @author ckchuad
 	 */
 	@Test
 	public void testUpdateSearchListsCurrSearch() {
@@ -61,12 +60,11 @@ public class ControllerTestTask6 {
 	}
 	
 	/**
-	 * test update search list method
-	 * after updating twice, the original currSearch should go to lastSearch
-	 * currSearch should store the new list
-	 * 
+	 * test update search list method<br>
+	 * after updating twice, the original currSearch should go to lastSearch<br>
+	 * currSearch should store the new list<br>
 	 * this method tests the lastSearch
-	 * @author imc4kmacpro
+	 * @author ckchuad
 	 */
 	@Test
 	public void testUpdateSearchListsLastSearch() {
@@ -95,7 +93,7 @@ public class ControllerTestTask6 {
 	
 	/**
 	 * tests terminate window
-	 * @author imc4kmacpro
+	 * @author ckchuad
 	 */
 	@Test
 	public void testTerminateWindow() {

@@ -5,13 +5,11 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import javafx.stage.Stage;
-
 public class ControllerTestTask5 {
 	/**
 	 * 	Test the method "refineSearch"
 	 * 
-	 * @author Benker
+	 * @author lyleungad
 	 */	
 	@Test
 	public void testRefineSearch() {

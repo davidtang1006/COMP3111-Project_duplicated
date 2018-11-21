@@ -21,8 +21,8 @@ import javafx.scene.Scene;
  * entire package and you are always allowed to change the base code to suit what you need. 
  * 
  * Your GUI is described in the file ui.fxml which is located in src/main/java/ui.fxml . To edit your GUI go straight to edit the ui.fxml.
- * I generate this ui.fxml by javafx builder (http://gluonhq.com/products/scene-builder/). You can learn how to use it with tips from 
- * this youtube video for a real fast bootstrap (https://www.youtube.com/watch?v=Z1W4E2d4Yxo). Or, alternatively try to understand the ui.fxml
+ * I generate this ui.fxml by JavaFX builder (http://gluonhq.com/products/scene-builder/). You can learn how to use it with tips from 
+ * this YouTube video for a real fast bootstrap (https://www.youtube.com/watch?v=Z1W4E2d4Yxo). Or, alternatively try to understand the ui.fxml
  * and edit it with some try and error and google! 
  *
  * Entry Point
@@ -50,7 +50,7 @@ public class WebScraperApplication extends Application {
 		stage.setTitle("WebScraper");
 		stage.show();
 	}
-
+	
 	/**
 	 * Entry point of the program. No argument should be supplied
 	 * @param args not used

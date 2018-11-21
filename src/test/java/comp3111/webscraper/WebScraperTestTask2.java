@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- * This class is for testing the class "WebScraper"
+ * This class is for testing parts in the the class "WebScraper" that are related to task 2
  * @author awtang
  */
 public class WebScraperTestTask2 {

@@ -8,7 +8,7 @@ import javafx.scene.control.Hyperlink;
 import java.util.List;
 import java.util.Vector;
 
-//by Calvin, task 6
+//by ckchuad, task 6
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -16,25 +16,25 @@ import javafx.scene.control.MenuItem;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-//end by Calvin, task 6
+//end by ckchuad, task 6
 
-//by Calvin, for task 4
+//by ckchuad, for task 4
 import javafx.application.HostServices;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.Date;
-//end by Calvin for task 4
+//end by ckchuad for task 4
 
-//added by Benker for task5
+//added by lyleungad for task5
 import java.util.function.Predicate;
 import javafx.scene.control.Button;
-// end by Benker for task5
+// end by lyleungad for task5
 
 /**
  * This class manages GUI interaction
- * @author awtang, kevinw
+ * @author awtang, kevinw, ckchuad, lyleungad
  */
 
 // Controller class that manage GUI interaction. Please see document about JavaFX for details.
@@ -59,7 +59,7 @@ public class Controller extends WebScraperApplication {
 	
 	private WebScraper scraper;
 	
-    // by Calvin, task 4
+    // by ckchuad, task 4
     @FXML
     private TableView<Item> table;
     
@@ -76,14 +76,14 @@ public class Controller extends WebScraperApplication {
     private TableColumn<Item, String> labelTableDate;
     
     private final HostServices host;
-    // end by Calvin, task 4
+    // end by ckchuad, task 4
     
-    // by Benker, task 5
+    // by lyleungad, task 5
     @FXML
     private Button refineButton;
-    // end by Benker, task 5
+    // end by lyleungad, task 5
     
-    // by Calvin, task 6
+    // by ckchuad, task 6
     @FXML
     private MenuItem labelMenuLastSearch;
     
@@ -93,7 +93,7 @@ public class Controller extends WebScraperApplication {
     private List<Item> currSearch;
     
     private List<Item> lastSearch;
-    // end by Calvin, task 6
+    // end by ckchuad, task 6
     
 	/**
 	 * The number of event handlers for opening URLs in the summary tab. It should be at most 1.
@@ -145,15 +145,16 @@ public class Controller extends WebScraperApplication {
 	 * @author awtang
 	 */
 	public int test_exit_value = 0;
-
+	
 	/**
-	 * Default controller
+	 * Default Controller constructor
+	 * @author ckchuad
 	 */
 	public Controller() {
 		scraper = new WebScraper();
-		// by Calvin, task 6
+		// by ckchuad, task 6
 		labelMenuLastSearch = new MenuItem();
-		// end by Calvin, task 6
+		// end by ckchuad, task 6
 		
 		// by ckchuad, task 4
 		host = this.getHostServices();
@@ -162,22 +163,22 @@ public class Controller extends WebScraperApplication {
 		currSearch = new Vector<Item>();
 	}
 	
-    
 	/**
-	 * Default initializer. It is empty.
+	 * Default initializer
+	 * @author lyleungad, ckchuad
 	 */
 	@FXML
 	private void initialize() {
-		// added by Benker for task5
+		// added by lyleungad for task 5
 		refineButton.setDisable(true);
-		// ended task5
 		
+		// added by ckchuad for task 6
 		labelMenuLastSearch.setDisable(true);
 	}
 	
 	/**
 	 * Called when the search button is pressed. Used in task 1.
-	 * @author awtang
+	 * @author awtang, ckchuad
 	 */
 	
 	// (There is no @param, @return, @exception)
@@ -192,15 +193,15 @@ public class Controller extends WebScraperApplication {
 		List<Item> result = scraper.scrape(textFieldKeyword.getText());		
 		updateUI(result);
 		
-		// by Calvin, task 6
+		// by ckchuad, task 6
 		updateSearchLists(result);
-		// end by Calvin, task 6
+		// end by ckchuad, task 6
 	}
 	
 	/**
 	 * Used to update the UIs all at once. Used in task 2.
 	 * 
-	 * @author imc4kmacpro
+	 * @author ckchuad, lyleungad
 	 * @param list the list of items to be shown in console, summary and table
 	 */
 	private void updateUI(List<Item> list) {
@@ -211,22 +212,21 @@ public class Controller extends WebScraperApplication {
 		textAreaConsole.setText(output);
 		getItemsAndDisplay(false, list);
 		
-		// added by Benker for task5
+		// by lyleungad for task 5
 		// set refine button disable to false after search		
     	if(list.size()>0) {
     		refineButton.setDisable(false);
     	}
-		// end task5
+		// end lyleungad for task 5
     	
-		// by Calvin, task 4
+		// by ckchuad, task 4
 		createTable(list);
-		// end by Calvin, task 4
+		// end by ckchuad, task 4
 	}
-
 	
 	/**
 	 * test method for getting scraper object
-	 * @author imc4kmacpro
+	 * @author ckchuad
 	 * @return scraper
 	 */
 	public WebScraper getScraper() {
@@ -315,10 +315,10 @@ public class Controller extends WebScraperApplication {
 		}
 	}
 	
-	// by Calvin, task 4
+	// by ckchuad, task 4
 	/**
 	 * this function is for creating a list to be added into the table for task 4
-	 * @author imc4kmacpro
+	 * @author ckchuad
 	 * @param items
 	 * @return a list that can be put into a table view
 	 */
@@ -332,7 +332,7 @@ public class Controller extends WebScraperApplication {
 	
     /**
      * public test method for getList()
-     * @author imc4kmacpro
+     * @author ckchuad
      * @param items the list of items to display
      * @return list the list of items inside ObservableList
      */
@@ -341,9 +341,9 @@ public class Controller extends WebScraperApplication {
     }
     
     /**
-     * this function puts everything in items into the table view
+     * this function puts everything in items into the table view<br>
      * requires function getList(), openDoc()
-     * @author imc4kmacpro
+     * @author ckchuad
      * @param items the list of items to display in table view
      */
     public void createTable(List<Item> items) {
@@ -368,14 +368,14 @@ public class Controller extends WebScraperApplication {
     	labelTableDate.setCellValueFactory(new PropertyValueFactory<Item, String>("date"));
     	table.setItems(tableList);
     }
-    // end by Calvin, task 4
+    // end by ckchuad, task 4
     
-    // by Calvin, task 6
+    // by ckchuad, task 6
     /**
-     * task 6, update the searched lists upon new searches
-     * if it is the first search, then assign the list to currSearch
+     * task 6, update the searched lists upon new searches<br>
+     * if it is the first search, then assign the list to currSearch<br>
      * otherwise, enable ReloadLastSearch button, assign currSearch to lastSearch, assign new list to currSearch
-     * @author imc4kmacpro
+     * @author ckchuad
      * @param items the list of item to be updated to currSearch
      */
     private void updateSearchLists(List<Item> items) {
@@ -391,7 +391,7 @@ public class Controller extends WebScraperApplication {
     
     /**
      * for testing
-     * @author imc4kmacpro
+     * @author ckchuad
      * @param items the list of items to be updated to currSearch
      */
     public void updateSearchListsTest(List<Item> items) {
@@ -400,7 +400,7 @@ public class Controller extends WebScraperApplication {
     
     /**
      * for testing
-     * @author imc4kmacpro
+     * @author ckchuad
      * @return currSearch
      */
     public List<Item> getCurrSearch() {
@@ -409,7 +409,7 @@ public class Controller extends WebScraperApplication {
     
     /**
      * for testing
-     * @author imc4kmacpro
+     * @author ckchuad
      * @return lastSearch
      */
     public List<Item> getLastSearch() {
@@ -418,8 +418,8 @@ public class Controller extends WebScraperApplication {
     
     /**
      * task 6, show about team
-     * @author imc4kmacpro
-     * @param event eg onClick
+     * @author ckchuad
+     * @param event, e.g. onClick
      */
     @FXML
     public void showAboutTeam(ActionEvent event) {
@@ -435,8 +435,8 @@ public class Controller extends WebScraperApplication {
     
     /**
      * task 6, quit button
-     * @author imc4kmacpro
-     * @param event eg onClick
+     * @author ckchuad
+     * @param event, e.g. onClick
      * @return true if successful termination
      */
     @FXML
@@ -447,10 +447,7 @@ public class Controller extends WebScraperApplication {
     
     /**
      * task 6, close button
-     * @author imc4kmacpro
-     * @param null
-     * @return void
-     * @exception none
+     * @author ckchuad
      */
     @FXML
     void closeWindow() {
@@ -463,14 +460,14 @@ public class Controller extends WebScraperApplication {
     	
     	// Console tab
     	textAreaConsole.setText(""); // resets console
-
+    	
     	// Summary tab
     	labelPrice.setText("<AvgPrice>");
     	labelMin.setText("<Lowest>");
     	labelMin.setVisited(false);
     	labelLatest.setText("<Latest>");
     	labelLatest.setVisited(false);
-
+    	
     	// Table tab
     	Vector<Item> items = new Vector<Item>();
 		List<Item> items_list = items;
@@ -480,10 +477,7 @@ public class Controller extends WebScraperApplication {
     
     /**
      * task 6, reload previous search state
-     * @author imc4kmacpro
-     * @param null
-     * @return void
-     * @exception none
+     * @author ckchuad
      */
     @FXML
     private void reloadLastSearch() {
@@ -502,7 +496,7 @@ public class Controller extends WebScraperApplication {
     
     /**
      * test method, call reloadLastSearch()
-     * @author imc4kmacpro
+     * @author ckchuad
      */
     public void testReloadLastSearch() {
     	reloadLastSearch();
@@ -510,18 +504,18 @@ public class Controller extends WebScraperApplication {
     
     /**
      * get texts from textFieldConsole
-     * @author imc4kmacpro
+     * @author ckchuad
      * @return output
      */
     public String getConsoleText() {
     	return textAreaConsole.getText();
     }
-    // end by Calvin, task 6
+    // end by ckchuad, task 6
     
     /**
      * 	This function is to handle button click, called by clicking the button "refine"
      * 
-     * @author Benker
+     * @author lyleungad
      */
     @FXML
     private void refineButtonClick() {
@@ -543,7 +537,7 @@ public class Controller extends WebScraperApplication {
     /**
      *	This function is to filter the items in list
      *	
-     * @author Benker
+     * @author lyleungad
      * @param target the list of items
      * @param filter keep the Item if contains the filter
      */
@@ -559,16 +553,15 @@ public class Controller extends WebScraperApplication {
     /**
      * 	This function is helper function to test refineSearch
      * 
-     * @author	Benker
+     * @author	lyleungad
      * @param	items the list of items to be tested
-     * @param	k the keyword that to be filter
-     * @return	the size of currSearch after filter
+     * @param	k the keyword to be filtered
+     * @return	the size of currSearch after filtering
      */
     public int testRefineSearch(List<Item> items, String k) {
     	
     	refineSearch(items, k);
     	return items.size();
-
     }
 	
 	// hyperlink helper function

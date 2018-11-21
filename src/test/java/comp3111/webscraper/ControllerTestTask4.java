@@ -11,8 +11,8 @@ import org.junit.Test;
 public class ControllerTestTask4 {
 	
 	/**
-	 * create an observable list for a not null list
-	 * @author imc4kmacpro
+	 * create an observable list for a non-null list
+	 * @author ckchuad
 	 */
 	@Test
 	public void testGetList() {
@@ -22,7 +22,6 @@ public class ControllerTestTask4 {
 		item.setTitle("haha");
 		item.setPrice(3.333);
 		item.setUrl("https://google.com.hk");
-						//Nov 8 new SimpleDateFormat("MMM dd", Locale.ENGLISH)
 		item.setDate("Nov 8", new SimpleDateFormat("MMM dd", Locale.ENGLISH));
 		items.add(item);
 		List<Item> items_list = items;
@@ -32,7 +31,7 @@ public class ControllerTestTask4 {
 	
 	/**
 	 * create an observable list for a null list
-	 * @author imc4kmacpro
+	 * @author ckchuad
 	 */
 	@Test
 	public void testGetListNull() {
@@ -42,5 +41,4 @@ public class ControllerTestTask4 {
 		ObservableList<Item> oList = c.getListTest(items_list);
 		assertNotNull(oList);
 	}
-	
 }

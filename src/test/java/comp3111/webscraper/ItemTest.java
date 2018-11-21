@@ -7,12 +7,12 @@ import org.junit.Test;
 
 /**
  * This class is for testing the class "Item"
- * @author awtang
+ * @author awtang, ckchuad
  */
 public class ItemTest {
 	/**
 	 * Test initialization of Item
-	 * @author imc4kmacpro
+	 * @author ckchuad
 	 */
 	@Test
 	public void testCreation() {
@@ -33,7 +33,7 @@ public class ItemTest {
 	
 	/**
 	 * test set/get price
-	 * @author imc4kmacpro
+	 * @author ckchuad
 	 */
 	@Test
 	public void testSetPrice() {
@@ -45,7 +45,7 @@ public class ItemTest {
 	/**
 	 * test set/get date
 	 * this tests valid date
-	 * @author imc4kmacpro
+	 * @author ckchuad
 	 */
 	@Test
 	public void testSetDate1() {
@@ -57,7 +57,7 @@ public class ItemTest {
 	/**
 	 * test set/get date
 	 * this tests invalid date
-	 * @author imc4kmacpro
+	 * @author ckchuad
 	 */
 	@Test
 	public void testSetDate2() {
@@ -68,7 +68,7 @@ public class ItemTest {
 	/**
 	 * test set/get date
 	 * this tests invalid date format
-	 * @author imc4kmacpro
+	 * @author ckchuad
 	 */
 	@Test
 	public void testSetDate3() {
@@ -79,7 +79,7 @@ public class ItemTest {
 	
 	/**
 	 * test set/get url
-	 * @author imc4kmacpro
+	 * @author ckchuad
 	 */
 	@Test
 	public void testSetUrl() {

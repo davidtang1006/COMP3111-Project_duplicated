@@ -9,7 +9,7 @@ import java.util.Locale;
 
 /**
  * This class stores the details for scraped items
- * @author awtang
+ * @author awtang, ckchuad
  */
 public class Item {
 	private String title;
@@ -22,7 +22,6 @@ public class Item {
 	 */
 	private String portal;
 	private Date date; // added by ckchuad
-	private DateFormat format; // added by ckchuad
 	
 	/**
 	 * to initialize url object<br>
@@ -111,7 +110,6 @@ public class Item {
 	 */
 	public void setDate(String date, DateFormat format){
 		try{
-			this.format = format;
 			this.date = format.parse(date);
 		}catch(ParseException e) {
 			System.out.println(e.toString());

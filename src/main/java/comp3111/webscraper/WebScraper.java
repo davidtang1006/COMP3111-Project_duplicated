@@ -16,9 +16,6 @@ import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Locale;
 
-//testing
-import java.io.File;
-//end testing
 /**
  * WebScraper provide a sample code that scrape web content. After it is constructed, you can call the method scrape with a keyword, 
  * the client will go to the default url and parse the page by looking at the HTML DOM.
@@ -70,7 +67,7 @@ import java.io.File;
  * </pre>
  * extracts all result-row and stores the corresponding HTML elements to a list called items. Later in the loop it extracts the anchor tag 
  * &lsaquo; a &rsaquo; to retrieve the display text (by .asText()) and the link (by .getHrefAttribute()).
- * @author awtang
+ * @author awtang, lyleungad
  */
 public class WebScraper {
 	private static final String DEFAULT_URL = "https://newyork.craigslist.org";
@@ -80,19 +77,19 @@ public class WebScraper {
 	 */
 	private static final String ANOTHER_URL = "https://www.amazon.com";
 	private WebClient client;
-
+	
 	/**
-	 * Default Constructor 
+	 * Default Constructor
 	 */
 	public WebScraper() {
 		client = new WebClient();
 		client.getOptions().setCssEnabled(false);
 		client.getOptions().setJavaScriptEnabled(false);
 	}
-
+	
 	/**
 	 * A method implemented in this class, to scrape web content from the Craigslist and Amazon. Used in task 2.
-	 * @author awtang
+	 * @author awtang, lyleungad
 	 * @param keyword the keyword you want to search
 	 * @return A list of Item that has found. A zero size list is return if nothing is found. Null if any exception (e.g. no connectivity).
 	 */
@@ -112,7 +109,7 @@ public class WebScraper {
 	 * Scrape the items from multiple pages on Amazon and Craigslist. 
 	 * Methods from task 2 and task 3 are used.
 	 * 
-	 * @author awtang, Benker
+	 * @author lyleungad
 	 * @param keyword the string to lookup online
 	 * @return a list of items
 	 */
@@ -123,7 +120,6 @@ public class WebScraper {
 			String defaultUrl = DEFAULT_URL + "/search/sss?sort=rel&query=" + URLEncoder.encode(keyword, "UTF-8");
 			String searchUrl = defaultUrl;
 			List<String> pages = getPagesCraigslist(searchUrl);		
-
 			
 			int pageCount = 0;
 			
@@ -134,7 +130,6 @@ public class WebScraper {
 				// notify the user after one page is scraped
 				System.out.println("Scraped pages: " + (++pageCount) + " from Craigslist");
 			}
-			
 			
 			// prepare the url for amazon
 			defaultUrl = ANOTHER_URL + "/s/ref=sr_st_date-desc-rank?keywords="
@@ -298,7 +293,7 @@ public class WebScraper {
 	/**
 	 * This function is supposed to return lists of URLs
 	 * 
-	 * @author Benker
+	 * @author lyleungad
 	 * @param searchUrl the first page
 	 * @return A list of string starting with the first page
 	 */
@@ -340,7 +335,7 @@ public class WebScraper {
 	/**
 	 * This function is supposed to return lists of URLs
 	 * 
-	 * @author Benker
+	 * @author lyleungad
 	 * @param searchUrl the first page
 	 * @return A list of string starting with the first page
 	 */

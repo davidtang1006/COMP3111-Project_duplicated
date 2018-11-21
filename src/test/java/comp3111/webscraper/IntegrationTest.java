@@ -5,14 +5,14 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * this class tests the overall functionalities of controller,
- * methods that is not written by specific team mate
- * @author imc4kmacpro
+ * this class tests the overall functionalities of controller<br>
+ * methods that is not written by other teammates
+ * @author ckchuad, awtang
  */
 public class IntegrationTest {
 	/**
 	 * tests creation of controller
-	 * @author imc4kmacpro
+	 * @author ckchuad
 	 */
 	@Test
 	public void testControllerCreation() {
@@ -20,14 +20,6 @@ public class IntegrationTest {
 		assertNotNull(c);
 	}
 	
-	/**
-	 * tests initialization of GUI objects
-	 */
-	@Test
-	public void testInitGUIObjs() {
-		Controller c = new Controller();
-		assertTrue(true);
-	}
 	/**
 	 * tests opening empty string using openDoc()
 	 * @author awtang
@@ -50,7 +42,7 @@ public class IntegrationTest {
 	
 	/**
 	 * tests scraper: has result
-	 * @author imc4kmacpro
+	 * @author ckchuad
 	 */
 	@Test
 	public void testScraperNotEmpty() {
@@ -61,7 +53,7 @@ public class IntegrationTest {
 	
 	/**
 	 * tests scraper: has no result
-	 * @author imc4kmacpro
+	 * @author ckchuad
 	 */
 	@Test
 	public void testScraperEmpty() {
@@ -69,5 +61,4 @@ public class IntegrationTest {
 		List<Item> list = c.getScraper().scrape("galaxy s10 1 fl 4 v");
 		assertTrue(list.isEmpty());
 	}
-	
 }

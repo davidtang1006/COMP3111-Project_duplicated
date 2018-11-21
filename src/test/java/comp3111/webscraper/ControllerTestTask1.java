@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- * This class is for testing the class "Controller"
+ * This class is for testing parts in the class "Controller" that are related to task 1
  * @author awtang
  */
 public class ControllerTestTask1 {
