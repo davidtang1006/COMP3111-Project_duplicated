@@ -30,6 +30,6 @@ public class ControllerTestTask5 {
     	String filter = "IphoneX";
     	
     	// after filtering, item size should be 1
-    	assertEquals(c.testRefineSearch(currSearch, filter), 1);
+    	assertEquals(1, c.testRefineSearch(currSearch, filter));
 	}
 }
